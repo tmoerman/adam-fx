@@ -1,0 +1,18 @@
+@namespace("org.exascience.formats.avro")
+protocol EFFECTS {
+
+  import idl "bdg.avdl";
+
+  record SnpEffAnnotations {
+
+    union { null, org.bdgenomics.formats.avro.Variant } variant;
+
+    array<array<string>> annotations = [];
+
+    array<array<string>> lossOfFunction = [];
+
+    array<array<string>> nonsenseMediateDecay = [];
+
+  }
+
+}

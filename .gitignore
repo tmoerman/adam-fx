@@ -7,6 +7,7 @@
 
 *.class
 *.sbtserver*
+*.log
 
 # sbt specific
 .cache/
