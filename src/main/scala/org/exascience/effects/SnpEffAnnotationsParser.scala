@@ -6,9 +6,11 @@ import htsjdk.variant.variantcontext.{VariantContext}
 import htsjdk.variant.vcf.{VCFConstants, VCFHeaderLineType, VCFInfoHeaderLine}
 import org.apache.avro.Schema
 import org.apache.avro.specific.SpecificRecord
+import org.apache.commons.lang.StringUtils.{isBlank, isNotEmpty}
 import org.bdgenomics.adam.converters.AttrKey
-import org.exascience.formats.avro.{FunctionalAnnotation, NonsenseMediateDecay, LossOfFunction, SnpEffAnnotations}
+import org.exascience.formats.avro._
 import scala.collection.JavaConverters._
+import java.lang.Integer.parseInt
 
 /**
  * @author Thomas Moerman
@@ -19,16 +21,56 @@ object SnpEffAnnotationsParser extends Serializable {
 
   def removeParentheses(s: String): String = allBetweenBracketsRegex.findFirstMatchIn(s).map(_.group(1)).getOrElse(s)
 
-  def splitAtPipeSymbols(s: String): List[String] = s.split("\\|").toList.filter(! _.isEmpty)
+  def splitAtPipeSymbols(s: String): Array[String] = s"$s ".split("\\|").map(s => if (isBlank(s)) null else s.trim)
+
+  def splitAtAmpersand(s: String): List[String] = s.split("\\&").toList
 
   def cleanAndSplit = removeParentheses _ andThen splitAtPipeSymbols
 
+  def parseInt(s: String) = if (isNotEmpty(s)) Integer.valueOf(s) else null
+
+  def parseIntPair(s: String): Option[(Integer, Integer)] =
+    if (isNotEmpty(s)) {
+      s.split("/") match {
+        case Array(a, b) => Some((parseInt(a), parseInt(b)))
+      }
+    } else None
+
+  def parseRatio(s: String) = parseIntPair(s).map{ case (a, b) => new Ratio(a, b) }.orNull
+
   val ANN_COLUMNS = List("", "")
 
-  def toFunctionalAnnotation(s: String) = {
+  def toFunctionalAnnotation(s: String): FunctionalAnnotation = {
     val attributes = splitAtPipeSymbols(s)
 
-    new FunctionalAnnotation(attributes(1), attributes(4))
+    val result = attributes match {
+
+      case Array(allele,    annotation,  impact,    geneName,
+                 geneID,    featureType, featureID, transcriptBioType,
+                 rank,      hgsvC,       hgsvP,     cdnaPosLen,
+                 cdsPosLen, protPosLen,  distance,  errorsWarningsInfo
+      ) =>
+        new FunctionalAnnotation(
+        allele,
+        splitAtAmpersand(annotation).asJava,
+        Impact.valueOf(impact.toUpperCase),
+        geneName,
+        geneID,
+        featureType,
+        featureID,
+        transcriptBioType,
+        parseRatio(rank),
+        hgsvC,
+        hgsvP,
+        parseRatio(cdnaPosLen),
+        parseRatio(cdsPosLen),
+        parseRatio(protPosLen),
+        distance,
+        errorsWarningsInfo)
+        
+    }
+
+    result
   }
 
   def annParser(attr: Object): JList[FunctionalAnnotation] = attr match {
@@ -37,7 +79,7 @@ object SnpEffAnnotationsParser extends Serializable {
   }
 
   def toLossOfFunction(s: String): LossOfFunction = {
-    val attributes: List[String] = cleanAndSplit(s)
+    val attributes = cleanAndSplit(s)
 
     new LossOfFunction(
       attributes(0),
@@ -51,7 +93,7 @@ object SnpEffAnnotationsParser extends Serializable {
   }
 
   def toNonsenseMediateDecay(s: String): NonsenseMediateDecay = {
-    val attributes: List[String] = cleanAndSplit(s)
+    val attributes = cleanAndSplit(s)
 
     new NonsenseMediateDecay(
       attributes(0),

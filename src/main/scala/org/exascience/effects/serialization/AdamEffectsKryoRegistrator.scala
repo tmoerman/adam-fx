@@ -8,6 +8,7 @@ import org.exascience.formats.avro.{NonsenseMediateDecay, FunctionalAnnotation, 
  * @author Thomas Moerman
  */
 class AdamEffectsKryoRegistrator extends ADAMKryoRegistrator {
+
   override def registerClasses(kryo: Kryo): Unit = {
     super.registerClasses(kryo)
 
@@ -16,4 +17,5 @@ class AdamEffectsKryoRegistrator extends ADAMKryoRegistrator {
     kryo.register(classOf[LossOfFunction],       new AvroSerializer[LossOfFunction]())
     kryo.register(classOf[NonsenseMediateDecay], new AvroSerializer[NonsenseMediateDecay]())
   }
+
 }

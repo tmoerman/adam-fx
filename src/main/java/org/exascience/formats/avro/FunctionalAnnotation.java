@@ -7,10 +7,24 @@ package org.exascience.formats.avro;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class FunctionalAnnotation extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"FunctionalAnnotation\",\"namespace\":\"org.exascience.formats.avro\",\"fields\":[{\"name\":\"annotation\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"geneID\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"FunctionalAnnotation\",\"namespace\":\"org.exascience.formats.avro\",\"fields\":[{\"name\":\"allele\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"annotation\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}},{\"name\":\"impact\",\"type\":{\"type\":\"enum\",\"name\":\"Impact\",\"symbols\":[\"HIGH\",\"MODERATE\",\"LOW\",\"MODIFIER\"]}},{\"name\":\"geneName\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"geneID\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"featureType\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"featureID\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"transcriptBiotype\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"rankTotal\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Ratio\",\"fields\":[{\"name\":\"rank\",\"type\":\"int\"},{\"name\":\"total\",\"type\":\"int\"}]}]},{\"name\":\"HGSV_c\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"HGSV_p\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"cDNAPositionToLength\",\"type\":[\"null\",\"Ratio\"]},{\"name\":\"CDSPositionToLength\",\"type\":[\"null\",\"Ratio\"]},{\"name\":\"proteinPositionToLength\",\"type\":[\"null\",\"Ratio\"]},{\"name\":\"distanceToFeature\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"errorsWarningsInfo\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
-  @Deprecated public java.lang.String annotation;
+  @Deprecated public java.lang.String allele;
+  @Deprecated public java.util.List<java.lang.String> annotation;
+  @Deprecated public org.exascience.formats.avro.Impact impact;
+  @Deprecated public java.lang.String geneName;
   @Deprecated public java.lang.String geneID;
+  @Deprecated public java.lang.String featureType;
+  @Deprecated public java.lang.String featureID;
+  @Deprecated public java.lang.String transcriptBiotype;
+  @Deprecated public org.exascience.formats.avro.Ratio rankTotal;
+  @Deprecated public java.lang.String HGSV_c;
+  @Deprecated public java.lang.String HGSV_p;
+  @Deprecated public org.exascience.formats.avro.Ratio cDNAPositionToLength;
+  @Deprecated public org.exascience.formats.avro.Ratio CDSPositionToLength;
+  @Deprecated public org.exascience.formats.avro.Ratio proteinPositionToLength;
+  @Deprecated public java.lang.String distanceToFeature;
+  @Deprecated public java.lang.String errorsWarningsInfo;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -22,17 +36,45 @@ public class FunctionalAnnotation extends org.apache.avro.specific.SpecificRecor
   /**
    * All-args constructor.
    */
-  public FunctionalAnnotation(java.lang.String annotation, java.lang.String geneID) {
+  public FunctionalAnnotation(java.lang.String allele, java.util.List<java.lang.String> annotation, org.exascience.formats.avro.Impact impact, java.lang.String geneName, java.lang.String geneID, java.lang.String featureType, java.lang.String featureID, java.lang.String transcriptBiotype, org.exascience.formats.avro.Ratio rankTotal, java.lang.String HGSV_c, java.lang.String HGSV_p, org.exascience.formats.avro.Ratio cDNAPositionToLength, org.exascience.formats.avro.Ratio CDSPositionToLength, org.exascience.formats.avro.Ratio proteinPositionToLength, java.lang.String distanceToFeature, java.lang.String errorsWarningsInfo) {
+    this.allele = allele;
     this.annotation = annotation;
+    this.impact = impact;
+    this.geneName = geneName;
     this.geneID = geneID;
+    this.featureType = featureType;
+    this.featureID = featureID;
+    this.transcriptBiotype = transcriptBiotype;
+    this.rankTotal = rankTotal;
+    this.HGSV_c = HGSV_c;
+    this.HGSV_p = HGSV_p;
+    this.cDNAPositionToLength = cDNAPositionToLength;
+    this.CDSPositionToLength = CDSPositionToLength;
+    this.proteinPositionToLength = proteinPositionToLength;
+    this.distanceToFeature = distanceToFeature;
+    this.errorsWarningsInfo = errorsWarningsInfo;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
   // Used by DatumWriter.  Applications should not call. 
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return annotation;
-    case 1: return geneID;
+    case 0: return allele;
+    case 1: return annotation;
+    case 2: return impact;
+    case 3: return geneName;
+    case 4: return geneID;
+    case 5: return featureType;
+    case 6: return featureID;
+    case 7: return transcriptBiotype;
+    case 8: return rankTotal;
+    case 9: return HGSV_c;
+    case 10: return HGSV_p;
+    case 11: return cDNAPositionToLength;
+    case 12: return CDSPositionToLength;
+    case 13: return proteinPositionToLength;
+    case 14: return distanceToFeature;
+    case 15: return errorsWarningsInfo;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -40,16 +82,45 @@ public class FunctionalAnnotation extends org.apache.avro.specific.SpecificRecor
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: annotation = (java.lang.String)value$; break;
-    case 1: geneID = (java.lang.String)value$; break;
+    case 0: allele = (java.lang.String)value$; break;
+    case 1: annotation = (java.util.List<java.lang.String>)value$; break;
+    case 2: impact = (org.exascience.formats.avro.Impact)value$; break;
+    case 3: geneName = (java.lang.String)value$; break;
+    case 4: geneID = (java.lang.String)value$; break;
+    case 5: featureType = (java.lang.String)value$; break;
+    case 6: featureID = (java.lang.String)value$; break;
+    case 7: transcriptBiotype = (java.lang.String)value$; break;
+    case 8: rankTotal = (org.exascience.formats.avro.Ratio)value$; break;
+    case 9: HGSV_c = (java.lang.String)value$; break;
+    case 10: HGSV_p = (java.lang.String)value$; break;
+    case 11: cDNAPositionToLength = (org.exascience.formats.avro.Ratio)value$; break;
+    case 12: CDSPositionToLength = (org.exascience.formats.avro.Ratio)value$; break;
+    case 13: proteinPositionToLength = (org.exascience.formats.avro.Ratio)value$; break;
+    case 14: distanceToFeature = (java.lang.String)value$; break;
+    case 15: errorsWarningsInfo = (java.lang.String)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
 
   /**
+   * Gets the value of the 'allele' field.
+   */
+  public java.lang.String getAllele() {
+    return allele;
+  }
+
+  /**
+   * Sets the value of the 'allele' field.
+   * @param value the value to set.
+   */
+  public void setAllele(java.lang.String value) {
+    this.allele = value;
+  }
+
+  /**
    * Gets the value of the 'annotation' field.
    */
-  public java.lang.String getAnnotation() {
+  public java.util.List<java.lang.String> getAnnotation() {
     return annotation;
   }
 
@@ -57,8 +128,38 @@ public class FunctionalAnnotation extends org.apache.avro.specific.SpecificRecor
    * Sets the value of the 'annotation' field.
    * @param value the value to set.
    */
-  public void setAnnotation(java.lang.String value) {
+  public void setAnnotation(java.util.List<java.lang.String> value) {
     this.annotation = value;
+  }
+
+  /**
+   * Gets the value of the 'impact' field.
+   */
+  public org.exascience.formats.avro.Impact getImpact() {
+    return impact;
+  }
+
+  /**
+   * Sets the value of the 'impact' field.
+   * @param value the value to set.
+   */
+  public void setImpact(org.exascience.formats.avro.Impact value) {
+    this.impact = value;
+  }
+
+  /**
+   * Gets the value of the 'geneName' field.
+   */
+  public java.lang.String getGeneName() {
+    return geneName;
+  }
+
+  /**
+   * Sets the value of the 'geneName' field.
+   * @param value the value to set.
+   */
+  public void setGeneName(java.lang.String value) {
+    this.geneName = value;
   }
 
   /**
@@ -74,6 +175,171 @@ public class FunctionalAnnotation extends org.apache.avro.specific.SpecificRecor
    */
   public void setGeneID(java.lang.String value) {
     this.geneID = value;
+  }
+
+  /**
+   * Gets the value of the 'featureType' field.
+   */
+  public java.lang.String getFeatureType() {
+    return featureType;
+  }
+
+  /**
+   * Sets the value of the 'featureType' field.
+   * @param value the value to set.
+   */
+  public void setFeatureType(java.lang.String value) {
+    this.featureType = value;
+  }
+
+  /**
+   * Gets the value of the 'featureID' field.
+   */
+  public java.lang.String getFeatureID() {
+    return featureID;
+  }
+
+  /**
+   * Sets the value of the 'featureID' field.
+   * @param value the value to set.
+   */
+  public void setFeatureID(java.lang.String value) {
+    this.featureID = value;
+  }
+
+  /**
+   * Gets the value of the 'transcriptBiotype' field.
+   */
+  public java.lang.String getTranscriptBiotype() {
+    return transcriptBiotype;
+  }
+
+  /**
+   * Sets the value of the 'transcriptBiotype' field.
+   * @param value the value to set.
+   */
+  public void setTranscriptBiotype(java.lang.String value) {
+    this.transcriptBiotype = value;
+  }
+
+  /**
+   * Gets the value of the 'rankTotal' field.
+   */
+  public org.exascience.formats.avro.Ratio getRankTotal() {
+    return rankTotal;
+  }
+
+  /**
+   * Sets the value of the 'rankTotal' field.
+   * @param value the value to set.
+   */
+  public void setRankTotal(org.exascience.formats.avro.Ratio value) {
+    this.rankTotal = value;
+  }
+
+  /**
+   * Gets the value of the 'HGSV_c' field.
+   */
+  public java.lang.String getHGSVC() {
+    return HGSV_c;
+  }
+
+  /**
+   * Sets the value of the 'HGSV_c' field.
+   * @param value the value to set.
+   */
+  public void setHGSVC(java.lang.String value) {
+    this.HGSV_c = value;
+  }
+
+  /**
+   * Gets the value of the 'HGSV_p' field.
+   */
+  public java.lang.String getHGSVP() {
+    return HGSV_p;
+  }
+
+  /**
+   * Sets the value of the 'HGSV_p' field.
+   * @param value the value to set.
+   */
+  public void setHGSVP(java.lang.String value) {
+    this.HGSV_p = value;
+  }
+
+  /**
+   * Gets the value of the 'cDNAPositionToLength' field.
+   */
+  public org.exascience.formats.avro.Ratio getCDNAPositionToLength() {
+    return cDNAPositionToLength;
+  }
+
+  /**
+   * Sets the value of the 'cDNAPositionToLength' field.
+   * @param value the value to set.
+   */
+  public void setCDNAPositionToLength(org.exascience.formats.avro.Ratio value) {
+    this.cDNAPositionToLength = value;
+  }
+
+  /**
+   * Gets the value of the 'CDSPositionToLength' field.
+   */
+  public org.exascience.formats.avro.Ratio getCDSPositionToLength() {
+    return CDSPositionToLength;
+  }
+
+  /**
+   * Sets the value of the 'CDSPositionToLength' field.
+   * @param value the value to set.
+   */
+  public void setCDSPositionToLength(org.exascience.formats.avro.Ratio value) {
+    this.CDSPositionToLength = value;
+  }
+
+  /**
+   * Gets the value of the 'proteinPositionToLength' field.
+   */
+  public org.exascience.formats.avro.Ratio getProteinPositionToLength() {
+    return proteinPositionToLength;
+  }
+
+  /**
+   * Sets the value of the 'proteinPositionToLength' field.
+   * @param value the value to set.
+   */
+  public void setProteinPositionToLength(org.exascience.formats.avro.Ratio value) {
+    this.proteinPositionToLength = value;
+  }
+
+  /**
+   * Gets the value of the 'distanceToFeature' field.
+   */
+  public java.lang.String getDistanceToFeature() {
+    return distanceToFeature;
+  }
+
+  /**
+   * Sets the value of the 'distanceToFeature' field.
+   * @param value the value to set.
+   */
+  public void setDistanceToFeature(java.lang.String value) {
+    this.distanceToFeature = value;
+  }
+
+  /**
+   * Gets the value of the 'errorsWarningsInfo' field.
+   */
+  public java.lang.String getErrorsWarningsInfo() {
+    return errorsWarningsInfo;
+  }
+
+  /**
+   * Sets the value of the 'errorsWarningsInfo' field.
+   * @param value the value to set.
+   */
+  public void setErrorsWarningsInfo(java.lang.String value) {
+    this.errorsWarningsInfo = value;
   }
 
   /** Creates a new FunctionalAnnotation RecordBuilder */
@@ -97,8 +363,22 @@ public class FunctionalAnnotation extends org.apache.avro.specific.SpecificRecor
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<FunctionalAnnotation>
     implements org.apache.avro.data.RecordBuilder<FunctionalAnnotation> {
 
-    private java.lang.String annotation;
+    private java.lang.String allele;
+    private java.util.List<java.lang.String> annotation;
+    private org.exascience.formats.avro.Impact impact;
+    private java.lang.String geneName;
     private java.lang.String geneID;
+    private java.lang.String featureType;
+    private java.lang.String featureID;
+    private java.lang.String transcriptBiotype;
+    private org.exascience.formats.avro.Ratio rankTotal;
+    private java.lang.String HGSV_c;
+    private java.lang.String HGSV_p;
+    private org.exascience.formats.avro.Ratio cDNAPositionToLength;
+    private org.exascience.formats.avro.Ratio CDSPositionToLength;
+    private org.exascience.formats.avro.Ratio proteinPositionToLength;
+    private java.lang.String distanceToFeature;
+    private java.lang.String errorsWarningsInfo;
 
     /** Creates a new Builder */
     private Builder() {
@@ -108,51 +388,238 @@ public class FunctionalAnnotation extends org.apache.avro.specific.SpecificRecor
     /** Creates a Builder by copying an existing Builder */
     private Builder(org.exascience.formats.avro.FunctionalAnnotation.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.annotation)) {
-        this.annotation = data().deepCopy(fields()[0].schema(), other.annotation);
+      if (isValidValue(fields()[0], other.allele)) {
+        this.allele = data().deepCopy(fields()[0].schema(), other.allele);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.geneID)) {
-        this.geneID = data().deepCopy(fields()[1].schema(), other.geneID);
+      if (isValidValue(fields()[1], other.annotation)) {
+        this.annotation = data().deepCopy(fields()[1].schema(), other.annotation);
         fieldSetFlags()[1] = true;
+      }
+      if (isValidValue(fields()[2], other.impact)) {
+        this.impact = data().deepCopy(fields()[2].schema(), other.impact);
+        fieldSetFlags()[2] = true;
+      }
+      if (isValidValue(fields()[3], other.geneName)) {
+        this.geneName = data().deepCopy(fields()[3].schema(), other.geneName);
+        fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.geneID)) {
+        this.geneID = data().deepCopy(fields()[4].schema(), other.geneID);
+        fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.featureType)) {
+        this.featureType = data().deepCopy(fields()[5].schema(), other.featureType);
+        fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.featureID)) {
+        this.featureID = data().deepCopy(fields()[6].schema(), other.featureID);
+        fieldSetFlags()[6] = true;
+      }
+      if (isValidValue(fields()[7], other.transcriptBiotype)) {
+        this.transcriptBiotype = data().deepCopy(fields()[7].schema(), other.transcriptBiotype);
+        fieldSetFlags()[7] = true;
+      }
+      if (isValidValue(fields()[8], other.rankTotal)) {
+        this.rankTotal = data().deepCopy(fields()[8].schema(), other.rankTotal);
+        fieldSetFlags()[8] = true;
+      }
+      if (isValidValue(fields()[9], other.HGSV_c)) {
+        this.HGSV_c = data().deepCopy(fields()[9].schema(), other.HGSV_c);
+        fieldSetFlags()[9] = true;
+      }
+      if (isValidValue(fields()[10], other.HGSV_p)) {
+        this.HGSV_p = data().deepCopy(fields()[10].schema(), other.HGSV_p);
+        fieldSetFlags()[10] = true;
+      }
+      if (isValidValue(fields()[11], other.cDNAPositionToLength)) {
+        this.cDNAPositionToLength = data().deepCopy(fields()[11].schema(), other.cDNAPositionToLength);
+        fieldSetFlags()[11] = true;
+      }
+      if (isValidValue(fields()[12], other.CDSPositionToLength)) {
+        this.CDSPositionToLength = data().deepCopy(fields()[12].schema(), other.CDSPositionToLength);
+        fieldSetFlags()[12] = true;
+      }
+      if (isValidValue(fields()[13], other.proteinPositionToLength)) {
+        this.proteinPositionToLength = data().deepCopy(fields()[13].schema(), other.proteinPositionToLength);
+        fieldSetFlags()[13] = true;
+      }
+      if (isValidValue(fields()[14], other.distanceToFeature)) {
+        this.distanceToFeature = data().deepCopy(fields()[14].schema(), other.distanceToFeature);
+        fieldSetFlags()[14] = true;
+      }
+      if (isValidValue(fields()[15], other.errorsWarningsInfo)) {
+        this.errorsWarningsInfo = data().deepCopy(fields()[15].schema(), other.errorsWarningsInfo);
+        fieldSetFlags()[15] = true;
       }
     }
     
     /** Creates a Builder by copying an existing FunctionalAnnotation instance */
     private Builder(org.exascience.formats.avro.FunctionalAnnotation other) {
             super(org.exascience.formats.avro.FunctionalAnnotation.SCHEMA$);
-      if (isValidValue(fields()[0], other.annotation)) {
-        this.annotation = data().deepCopy(fields()[0].schema(), other.annotation);
+      if (isValidValue(fields()[0], other.allele)) {
+        this.allele = data().deepCopy(fields()[0].schema(), other.allele);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.geneID)) {
-        this.geneID = data().deepCopy(fields()[1].schema(), other.geneID);
+      if (isValidValue(fields()[1], other.annotation)) {
+        this.annotation = data().deepCopy(fields()[1].schema(), other.annotation);
         fieldSetFlags()[1] = true;
+      }
+      if (isValidValue(fields()[2], other.impact)) {
+        this.impact = data().deepCopy(fields()[2].schema(), other.impact);
+        fieldSetFlags()[2] = true;
+      }
+      if (isValidValue(fields()[3], other.geneName)) {
+        this.geneName = data().deepCopy(fields()[3].schema(), other.geneName);
+        fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.geneID)) {
+        this.geneID = data().deepCopy(fields()[4].schema(), other.geneID);
+        fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.featureType)) {
+        this.featureType = data().deepCopy(fields()[5].schema(), other.featureType);
+        fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.featureID)) {
+        this.featureID = data().deepCopy(fields()[6].schema(), other.featureID);
+        fieldSetFlags()[6] = true;
+      }
+      if (isValidValue(fields()[7], other.transcriptBiotype)) {
+        this.transcriptBiotype = data().deepCopy(fields()[7].schema(), other.transcriptBiotype);
+        fieldSetFlags()[7] = true;
+      }
+      if (isValidValue(fields()[8], other.rankTotal)) {
+        this.rankTotal = data().deepCopy(fields()[8].schema(), other.rankTotal);
+        fieldSetFlags()[8] = true;
+      }
+      if (isValidValue(fields()[9], other.HGSV_c)) {
+        this.HGSV_c = data().deepCopy(fields()[9].schema(), other.HGSV_c);
+        fieldSetFlags()[9] = true;
+      }
+      if (isValidValue(fields()[10], other.HGSV_p)) {
+        this.HGSV_p = data().deepCopy(fields()[10].schema(), other.HGSV_p);
+        fieldSetFlags()[10] = true;
+      }
+      if (isValidValue(fields()[11], other.cDNAPositionToLength)) {
+        this.cDNAPositionToLength = data().deepCopy(fields()[11].schema(), other.cDNAPositionToLength);
+        fieldSetFlags()[11] = true;
+      }
+      if (isValidValue(fields()[12], other.CDSPositionToLength)) {
+        this.CDSPositionToLength = data().deepCopy(fields()[12].schema(), other.CDSPositionToLength);
+        fieldSetFlags()[12] = true;
+      }
+      if (isValidValue(fields()[13], other.proteinPositionToLength)) {
+        this.proteinPositionToLength = data().deepCopy(fields()[13].schema(), other.proteinPositionToLength);
+        fieldSetFlags()[13] = true;
+      }
+      if (isValidValue(fields()[14], other.distanceToFeature)) {
+        this.distanceToFeature = data().deepCopy(fields()[14].schema(), other.distanceToFeature);
+        fieldSetFlags()[14] = true;
+      }
+      if (isValidValue(fields()[15], other.errorsWarningsInfo)) {
+        this.errorsWarningsInfo = data().deepCopy(fields()[15].schema(), other.errorsWarningsInfo);
+        fieldSetFlags()[15] = true;
       }
     }
 
+    /** Gets the value of the 'allele' field */
+    public java.lang.String getAllele() {
+      return allele;
+    }
+    
+    /** Sets the value of the 'allele' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder setAllele(java.lang.String value) {
+      validate(fields()[0], value);
+      this.allele = value;
+      fieldSetFlags()[0] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'allele' field has been set */
+    public boolean hasAllele() {
+      return fieldSetFlags()[0];
+    }
+    
+    /** Clears the value of the 'allele' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder clearAllele() {
+      allele = null;
+      fieldSetFlags()[0] = false;
+      return this;
+    }
+
     /** Gets the value of the 'annotation' field */
-    public java.lang.String getAnnotation() {
+    public java.util.List<java.lang.String> getAnnotation() {
       return annotation;
     }
     
     /** Sets the value of the 'annotation' field */
-    public org.exascience.formats.avro.FunctionalAnnotation.Builder setAnnotation(java.lang.String value) {
-      validate(fields()[0], value);
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder setAnnotation(java.util.List<java.lang.String> value) {
+      validate(fields()[1], value);
       this.annotation = value;
-      fieldSetFlags()[0] = true;
+      fieldSetFlags()[1] = true;
       return this; 
     }
     
     /** Checks whether the 'annotation' field has been set */
     public boolean hasAnnotation() {
-      return fieldSetFlags()[0];
+      return fieldSetFlags()[1];
     }
     
     /** Clears the value of the 'annotation' field */
     public org.exascience.formats.avro.FunctionalAnnotation.Builder clearAnnotation() {
       annotation = null;
-      fieldSetFlags()[0] = false;
+      fieldSetFlags()[1] = false;
+      return this;
+    }
+
+    /** Gets the value of the 'impact' field */
+    public org.exascience.formats.avro.Impact getImpact() {
+      return impact;
+    }
+    
+    /** Sets the value of the 'impact' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder setImpact(org.exascience.formats.avro.Impact value) {
+      validate(fields()[2], value);
+      this.impact = value;
+      fieldSetFlags()[2] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'impact' field has been set */
+    public boolean hasImpact() {
+      return fieldSetFlags()[2];
+    }
+    
+    /** Clears the value of the 'impact' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder clearImpact() {
+      impact = null;
+      fieldSetFlags()[2] = false;
+      return this;
+    }
+
+    /** Gets the value of the 'geneName' field */
+    public java.lang.String getGeneName() {
+      return geneName;
+    }
+    
+    /** Sets the value of the 'geneName' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder setGeneName(java.lang.String value) {
+      validate(fields()[3], value);
+      this.geneName = value;
+      fieldSetFlags()[3] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'geneName' field has been set */
+    public boolean hasGeneName() {
+      return fieldSetFlags()[3];
+    }
+    
+    /** Clears the value of the 'geneName' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder clearGeneName() {
+      geneName = null;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -163,21 +630,296 @@ public class FunctionalAnnotation extends org.apache.avro.specific.SpecificRecor
     
     /** Sets the value of the 'geneID' field */
     public org.exascience.formats.avro.FunctionalAnnotation.Builder setGeneID(java.lang.String value) {
-      validate(fields()[1], value);
+      validate(fields()[4], value);
       this.geneID = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[4] = true;
       return this; 
     }
     
     /** Checks whether the 'geneID' field has been set */
     public boolean hasGeneID() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[4];
     }
     
     /** Clears the value of the 'geneID' field */
     public org.exascience.formats.avro.FunctionalAnnotation.Builder clearGeneID() {
       geneID = null;
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[4] = false;
+      return this;
+    }
+
+    /** Gets the value of the 'featureType' field */
+    public java.lang.String getFeatureType() {
+      return featureType;
+    }
+    
+    /** Sets the value of the 'featureType' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder setFeatureType(java.lang.String value) {
+      validate(fields()[5], value);
+      this.featureType = value;
+      fieldSetFlags()[5] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'featureType' field has been set */
+    public boolean hasFeatureType() {
+      return fieldSetFlags()[5];
+    }
+    
+    /** Clears the value of the 'featureType' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder clearFeatureType() {
+      featureType = null;
+      fieldSetFlags()[5] = false;
+      return this;
+    }
+
+    /** Gets the value of the 'featureID' field */
+    public java.lang.String getFeatureID() {
+      return featureID;
+    }
+    
+    /** Sets the value of the 'featureID' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder setFeatureID(java.lang.String value) {
+      validate(fields()[6], value);
+      this.featureID = value;
+      fieldSetFlags()[6] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'featureID' field has been set */
+    public boolean hasFeatureID() {
+      return fieldSetFlags()[6];
+    }
+    
+    /** Clears the value of the 'featureID' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder clearFeatureID() {
+      featureID = null;
+      fieldSetFlags()[6] = false;
+      return this;
+    }
+
+    /** Gets the value of the 'transcriptBiotype' field */
+    public java.lang.String getTranscriptBiotype() {
+      return transcriptBiotype;
+    }
+    
+    /** Sets the value of the 'transcriptBiotype' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder setTranscriptBiotype(java.lang.String value) {
+      validate(fields()[7], value);
+      this.transcriptBiotype = value;
+      fieldSetFlags()[7] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'transcriptBiotype' field has been set */
+    public boolean hasTranscriptBiotype() {
+      return fieldSetFlags()[7];
+    }
+    
+    /** Clears the value of the 'transcriptBiotype' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder clearTranscriptBiotype() {
+      transcriptBiotype = null;
+      fieldSetFlags()[7] = false;
+      return this;
+    }
+
+    /** Gets the value of the 'rankTotal' field */
+    public org.exascience.formats.avro.Ratio getRankTotal() {
+      return rankTotal;
+    }
+    
+    /** Sets the value of the 'rankTotal' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder setRankTotal(org.exascience.formats.avro.Ratio value) {
+      validate(fields()[8], value);
+      this.rankTotal = value;
+      fieldSetFlags()[8] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'rankTotal' field has been set */
+    public boolean hasRankTotal() {
+      return fieldSetFlags()[8];
+    }
+    
+    /** Clears the value of the 'rankTotal' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder clearRankTotal() {
+      rankTotal = null;
+      fieldSetFlags()[8] = false;
+      return this;
+    }
+
+    /** Gets the value of the 'HGSV_c' field */
+    public java.lang.String getHGSVC() {
+      return HGSV_c;
+    }
+    
+    /** Sets the value of the 'HGSV_c' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder setHGSVC(java.lang.String value) {
+      validate(fields()[9], value);
+      this.HGSV_c = value;
+      fieldSetFlags()[9] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'HGSV_c' field has been set */
+    public boolean hasHGSVC() {
+      return fieldSetFlags()[9];
+    }
+    
+    /** Clears the value of the 'HGSV_c' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder clearHGSVC() {
+      HGSV_c = null;
+      fieldSetFlags()[9] = false;
+      return this;
+    }
+
+    /** Gets the value of the 'HGSV_p' field */
+    public java.lang.String getHGSVP() {
+      return HGSV_p;
+    }
+    
+    /** Sets the value of the 'HGSV_p' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder setHGSVP(java.lang.String value) {
+      validate(fields()[10], value);
+      this.HGSV_p = value;
+      fieldSetFlags()[10] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'HGSV_p' field has been set */
+    public boolean hasHGSVP() {
+      return fieldSetFlags()[10];
+    }
+    
+    /** Clears the value of the 'HGSV_p' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder clearHGSVP() {
+      HGSV_p = null;
+      fieldSetFlags()[10] = false;
+      return this;
+    }
+
+    /** Gets the value of the 'cDNAPositionToLength' field */
+    public org.exascience.formats.avro.Ratio getCDNAPositionToLength() {
+      return cDNAPositionToLength;
+    }
+    
+    /** Sets the value of the 'cDNAPositionToLength' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder setCDNAPositionToLength(org.exascience.formats.avro.Ratio value) {
+      validate(fields()[11], value);
+      this.cDNAPositionToLength = value;
+      fieldSetFlags()[11] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'cDNAPositionToLength' field has been set */
+    public boolean hasCDNAPositionToLength() {
+      return fieldSetFlags()[11];
+    }
+    
+    /** Clears the value of the 'cDNAPositionToLength' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder clearCDNAPositionToLength() {
+      cDNAPositionToLength = null;
+      fieldSetFlags()[11] = false;
+      return this;
+    }
+
+    /** Gets the value of the 'CDSPositionToLength' field */
+    public org.exascience.formats.avro.Ratio getCDSPositionToLength() {
+      return CDSPositionToLength;
+    }
+    
+    /** Sets the value of the 'CDSPositionToLength' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder setCDSPositionToLength(org.exascience.formats.avro.Ratio value) {
+      validate(fields()[12], value);
+      this.CDSPositionToLength = value;
+      fieldSetFlags()[12] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'CDSPositionToLength' field has been set */
+    public boolean hasCDSPositionToLength() {
+      return fieldSetFlags()[12];
+    }
+    
+    /** Clears the value of the 'CDSPositionToLength' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder clearCDSPositionToLength() {
+      CDSPositionToLength = null;
+      fieldSetFlags()[12] = false;
+      return this;
+    }
+
+    /** Gets the value of the 'proteinPositionToLength' field */
+    public org.exascience.formats.avro.Ratio getProteinPositionToLength() {
+      return proteinPositionToLength;
+    }
+    
+    /** Sets the value of the 'proteinPositionToLength' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder setProteinPositionToLength(org.exascience.formats.avro.Ratio value) {
+      validate(fields()[13], value);
+      this.proteinPositionToLength = value;
+      fieldSetFlags()[13] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'proteinPositionToLength' field has been set */
+    public boolean hasProteinPositionToLength() {
+      return fieldSetFlags()[13];
+    }
+    
+    /** Clears the value of the 'proteinPositionToLength' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder clearProteinPositionToLength() {
+      proteinPositionToLength = null;
+      fieldSetFlags()[13] = false;
+      return this;
+    }
+
+    /** Gets the value of the 'distanceToFeature' field */
+    public java.lang.String getDistanceToFeature() {
+      return distanceToFeature;
+    }
+    
+    /** Sets the value of the 'distanceToFeature' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder setDistanceToFeature(java.lang.String value) {
+      validate(fields()[14], value);
+      this.distanceToFeature = value;
+      fieldSetFlags()[14] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'distanceToFeature' field has been set */
+    public boolean hasDistanceToFeature() {
+      return fieldSetFlags()[14];
+    }
+    
+    /** Clears the value of the 'distanceToFeature' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder clearDistanceToFeature() {
+      distanceToFeature = null;
+      fieldSetFlags()[14] = false;
+      return this;
+    }
+
+    /** Gets the value of the 'errorsWarningsInfo' field */
+    public java.lang.String getErrorsWarningsInfo() {
+      return errorsWarningsInfo;
+    }
+    
+    /** Sets the value of the 'errorsWarningsInfo' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder setErrorsWarningsInfo(java.lang.String value) {
+      validate(fields()[15], value);
+      this.errorsWarningsInfo = value;
+      fieldSetFlags()[15] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'errorsWarningsInfo' field has been set */
+    public boolean hasErrorsWarningsInfo() {
+      return fieldSetFlags()[15];
+    }
+    
+    /** Clears the value of the 'errorsWarningsInfo' field */
+    public org.exascience.formats.avro.FunctionalAnnotation.Builder clearErrorsWarningsInfo() {
+      errorsWarningsInfo = null;
+      fieldSetFlags()[15] = false;
       return this;
     }
 
@@ -185,8 +927,22 @@ public class FunctionalAnnotation extends org.apache.avro.specific.SpecificRecor
     public FunctionalAnnotation build() {
       try {
         FunctionalAnnotation record = new FunctionalAnnotation();
-        record.annotation = fieldSetFlags()[0] ? this.annotation : (java.lang.String) defaultValue(fields()[0]);
-        record.geneID = fieldSetFlags()[1] ? this.geneID : (java.lang.String) defaultValue(fields()[1]);
+        record.allele = fieldSetFlags()[0] ? this.allele : (java.lang.String) defaultValue(fields()[0]);
+        record.annotation = fieldSetFlags()[1] ? this.annotation : (java.util.List<java.lang.String>) defaultValue(fields()[1]);
+        record.impact = fieldSetFlags()[2] ? this.impact : (org.exascience.formats.avro.Impact) defaultValue(fields()[2]);
+        record.geneName = fieldSetFlags()[3] ? this.geneName : (java.lang.String) defaultValue(fields()[3]);
+        record.geneID = fieldSetFlags()[4] ? this.geneID : (java.lang.String) defaultValue(fields()[4]);
+        record.featureType = fieldSetFlags()[5] ? this.featureType : (java.lang.String) defaultValue(fields()[5]);
+        record.featureID = fieldSetFlags()[6] ? this.featureID : (java.lang.String) defaultValue(fields()[6]);
+        record.transcriptBiotype = fieldSetFlags()[7] ? this.transcriptBiotype : (java.lang.String) defaultValue(fields()[7]);
+        record.rankTotal = fieldSetFlags()[8] ? this.rankTotal : (org.exascience.formats.avro.Ratio) defaultValue(fields()[8]);
+        record.HGSV_c = fieldSetFlags()[9] ? this.HGSV_c : (java.lang.String) defaultValue(fields()[9]);
+        record.HGSV_p = fieldSetFlags()[10] ? this.HGSV_p : (java.lang.String) defaultValue(fields()[10]);
+        record.cDNAPositionToLength = fieldSetFlags()[11] ? this.cDNAPositionToLength : (org.exascience.formats.avro.Ratio) defaultValue(fields()[11]);
+        record.CDSPositionToLength = fieldSetFlags()[12] ? this.CDSPositionToLength : (org.exascience.formats.avro.Ratio) defaultValue(fields()[12]);
+        record.proteinPositionToLength = fieldSetFlags()[13] ? this.proteinPositionToLength : (org.exascience.formats.avro.Ratio) defaultValue(fields()[13]);
+        record.distanceToFeature = fieldSetFlags()[14] ? this.distanceToFeature : (java.lang.String) defaultValue(fields()[14]);
+        record.errorsWarningsInfo = fieldSetFlags()[15] ? this.errorsWarningsInfo : (java.lang.String) defaultValue(fields()[15]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

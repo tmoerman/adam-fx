@@ -6,7 +6,7 @@ import scala.collection.JavaConverters._
 /**
  * @author Thomas Moerman
  */
-class RichSnpEffAnnotations(val inner: SnpEffAnnotations) extends Serializable {
+class RichSnpEffAnnotations(private[this] val inner: SnpEffAnnotations) extends Serializable with ReflectToString {
 
   val functionalAnnotations: List[FunctionalAnnotation] = inner.getFunctionalAnnotations.asScala.toList
 
@@ -14,10 +14,10 @@ class RichSnpEffAnnotations(val inner: SnpEffAnnotations) extends Serializable {
 
   val nonsenseMediateDecay: Option[NonsenseMediateDecay] = Option(inner.getNonsenseMediateDecay)
 
-  lazy val isEmpty = functionalAnnotations.isEmpty &&
-                     lossOfFunction.isEmpty        &&
-                     nonsenseMediateDecay.isEmpty
+  def isEmpty() = functionalAnnotations.isEmpty &&
+                  lossOfFunction.isEmpty        &&
+                  nonsenseMediateDecay.isEmpty
 
-  lazy val asOption = if (isEmpty) None else Option(this)
+  def asOption() = if (isEmpty()) None else Option(this)
 
 }

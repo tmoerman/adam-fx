@@ -3,11 +3,51 @@ protocol EFFECTS {
 
   import idl "bdg.avdl";
 
+  enum Impact {
+    HIGH, MODERATE, LOW, MODIFIER
+  }
+
+  record Ratio {
+
+    int rank;
+
+    int total;
+
+  }
+
   record FunctionalAnnotation {
 
-    string annotation;
+    string allele;
 
-    string geneID;
+    array<string> annotation;
+
+    Impact impact;
+
+    union { null, string } geneName;
+
+    union { null, string } geneID;
+
+    union { null, string } featureType;
+
+    union { null, string } featureID;
+
+    union { null, string } transcriptBiotype;
+
+    union { null, Ratio} rankTotal;
+
+    union { null, string } HGSV_c;
+
+    union { null, string } HGSV_p;
+
+    union { null, Ratio } cDNAPositionToLength;
+
+    union { null, Ratio } CDSPositionToLength;
+
+    union { null, Ratio } proteinPositionToLength;
+
+    union { null, string } distanceToFeature;
+
+    union { null, string } errorsWarningsInfo;
 
   }
 

@@ -18,7 +18,7 @@ object VariantContextWithSnpEffAnnotations {
       variantContext.variant,
       variantContext.genotypes,
       variantContext.databases,
-      new RichSnpEffAnnotations(snpEffAnnotations).asOption)
+      new RichSnpEffAnnotations(snpEffAnnotations).asOption())
 
 }
 
@@ -27,4 +27,4 @@ class VariantContextWithSnpEffAnnotations(position: ReferencePosition,
                                           genotypes: Iterable[Genotype],
                                           databases: Option[DatabaseVariantAnnotation] = None,
                                           val snpEffAnnotations: Option[RichSnpEffAnnotations] = None)
-  extends VariantContext(position, variant, genotypes, databases) {}
+  extends VariantContext(position, variant, genotypes, databases) with ReflectToString {}
