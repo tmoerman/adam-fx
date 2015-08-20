@@ -3,15 +3,47 @@ protocol EFFECTS {
 
   import idl "bdg.avdl";
 
+  record FunctionalAnnotation {
+
+    string annotation;
+
+    string geneID;
+
+  }
+
+  record LossOfFunction {
+
+    string gene;
+
+    string ID;
+
+    int numTranscripts;
+
+    float percentAffected;
+
+  }
+
+  record NonsenseMediateDecay {
+
+    string gene;
+
+    string ID;
+
+    int numTranscripts;
+
+    float percentAffected;
+
+  }
+
   record SnpEffAnnotations {
 
     union { null, org.bdgenomics.formats.avro.Variant } variant;
 
-    array<array<string>> annotations = [];
+    array<FunctionalAnnotation> functionalAnnotations = [];
 
-    array<array<string>> lossOfFunction = [];
+    union { null, LossOfFunction } lossOfFunction = null;
 
-    array<array<string>> nonsenseMediateDecay = [];
+    union { null, NonsenseMediateDecay } nonsenseMediateDecay = null;
 
   }
 
