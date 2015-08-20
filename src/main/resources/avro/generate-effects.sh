@@ -17,7 +17,7 @@ fi
 java -jar $AVRO_TOOLS idl snpEffAnnotations.avdl snpEffAnnotations.avpr
 
 # Generate the protocol classes
-java -jar $AVRO_TOOLS compile protocol snpEffAnnotations.avpr ./../../java/
+java -jar $AVRO_TOOLS compile -string protocol snpEffAnnotations.avpr ./../../java/
 
 # Remove the bdgenomics generated classes, we don't need those because we specify the dependency on bdg-formats in SBT.
 rm -rf ./../../java/org/bdgenomics/
