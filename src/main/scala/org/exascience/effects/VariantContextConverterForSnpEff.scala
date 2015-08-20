@@ -1,27 +1,31 @@
 package org.exascience.effects
 
+import java.util
+
 import org.apache.spark.Logging
-import org.bdgenomics.adam.models.SequenceDictionary
+import org.bdgenomics.adam.converters.VariantContextConverter
+import org.bdgenomics.adam.models.{VariantContext, SequenceDictionary}
 import org.bdgenomics.formats.avro.{Contig, Variant}
 import htsjdk.variant.variantcontext.{
 Allele,
 VariantContext => BroadVariantContext
 }
+import org.exascience.effects.models.VariantContextWithSnpEffAnnotations
 import scala.collection.JavaConversions._
-import org.exascience.formats.avro.SnpEffAnnotations
+import org.exascience.formats.avro.{FunctionalAnnotation, SnpEffAnnotations}
 
 
 /**
  * @author Thomas Moerman
  */
-object VariantContextConverterForEffects {
+object VariantContextConverterForSnpEff {
 
   private val NON_REF_ALLELE = Allele.create("<NON_REF>", false /* !Reference */ )
 
 }
 
-class VariantContextConverterForEffects(dict: Option[SequenceDictionary] = None) extends Serializable with Logging {
-  import VariantContextConverterForEffects._
+class VariantContextConverterForSnpEff(val vcc: VariantContextConverter, val dict: Option[SequenceDictionary] = None) extends Serializable with Logging {
+  import VariantContextConverterForSnpEff._
 
   private lazy val contigToRefSeq: Map[String, String] = dict match {
     case Some(d) => d.records.filter(_.refseq.isDefined).map(r => r.name -> r.refseq.get).toMap
@@ -47,7 +51,7 @@ class VariantContextConverterForEffects(dict: Option[SequenceDictionary] = None)
     builder.build
   }
 
-  private def getVariant(vc: BroadVariantContext): Variant = {
+  private def toAdamVariant(vc: BroadVariantContext): Variant = {
     vc.getAlternateAlleles.toList match {
       case List(NON_REF_ALLELE) => {
         createADAMVariant(vc, None /* No alternate allele */)
@@ -77,13 +81,19 @@ class VariantContextConverterForEffects(dict: Option[SequenceDictionary] = None)
       .setVariant(variant)
       .build
 
-    SnpEffAnnotationConverter.convert(vc, annotation)
+    SnpEffAnnotationsParser.convert(vc, annotation)
   }
 
   def convertToSnpEffAnnotations(vc: BroadVariantContext): SnpEffAnnotations = {
-    val variant = getVariant(vc)
+    val variant = toAdamVariant(vc)
 
     extractSnpEffAnnotations(variant, vc)
+  }
+
+  def convertToVariantsWithSnpEffAnnotations(bvc: BroadVariantContext): Seq[VariantContextWithSnpEffAnnotations] = {
+    val variantContexts: Seq[VariantContext] = vcc.convert(bvc)
+
+    variantContexts.map(v => VariantContextWithSnpEffAnnotations(v, extractSnpEffAnnotations(v.variant, bvc)))
   }
 
 }

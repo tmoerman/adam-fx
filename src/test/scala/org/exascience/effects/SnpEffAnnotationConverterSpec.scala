@@ -1,7 +1,7 @@
 package org.exascience.effects
 
 import org.scalatest.{Matchers, FlatSpec}
-import SnpEffAnnotationConverter._
+import SnpEffAnnotationsParser._
 
 /**
  * @author Thomas Moerman

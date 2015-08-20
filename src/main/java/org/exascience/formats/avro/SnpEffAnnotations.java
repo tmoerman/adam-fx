@@ -7,12 +7,12 @@ package org.exascience.formats.avro;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"SnpEffAnnotations\",\"namespace\":\"org.exascience.formats.avro\",\"fields\":[{\"name\":\"variant\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Variant\",\"namespace\":\"org.bdgenomics.formats.avro\",\"fields\":[{\"name\":\"contig\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Contig\",\"doc\":\"Record for describing a reference assembly. Not used for storing the contents\\n of said assembly.\\n\\n @see NucleotideContigFragment\",\"fields\":[{\"name\":\"contigName\",\"type\":[\"null\",\"string\"],\"doc\":\"The name of this contig in the assembly (e.g., \\\"chr1\\\").\",\"default\":null},{\"name\":\"contigLength\",\"type\":[\"null\",\"long\"],\"doc\":\"The length of this contig.\",\"default\":null},{\"name\":\"contigMD5\",\"type\":[\"null\",\"string\"],\"doc\":\"The MD5 checksum of the assembly for this contig.\",\"default\":null},{\"name\":\"referenceURL\",\"type\":[\"null\",\"string\"],\"doc\":\"The URL at which this reference assembly can be found.\",\"default\":null},{\"name\":\"assembly\",\"type\":[\"null\",\"string\"],\"doc\":\"The name of this assembly (e.g., \\\"hg19\\\").\",\"default\":null},{\"name\":\"species\",\"type\":[\"null\",\"string\"],\"doc\":\"The species that this assembly is for.\",\"default\":null}]}],\"doc\":\"The reference contig that this variant exists on.\",\"default\":null},{\"name\":\"start\",\"type\":[\"null\",\"long\"],\"doc\":\"The 0-based start position of this variant on the reference contig.\",\"default\":null},{\"name\":\"end\",\"type\":[\"null\",\"long\"],\"doc\":\"The 0-based, exclusive end position of this variant on the reference contig.\",\"default\":null},{\"name\":\"referenceAllele\",\"type\":[\"null\",\"string\"],\"doc\":\"A string describing the reference allele at this site.\",\"default\":null},{\"name\":\"alternateAllele\",\"type\":[\"null\",\"string\"],\"doc\":\"A string describing the variant allele at this site. Should be left null if\\n   the site is a structural variant.\",\"default\":null},{\"name\":\"svAllele\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"StructuralVariant\",\"fields\":[{\"name\":\"type\",\"type\":[\"null\",{\"type\":\"enum\",\"name\":\"StructuralVariantType\",\"doc\":\"Descriptors for the type of a structural variant. The most specific descriptor\\n should be used, if possible. E.g., duplication should be used instead of\\n insertion if the inserted sequence is not novel. Tandem duplication should\\n be used instead of duplication if the duplication is known to follow the\\n duplicated sequence.\",\"symbols\":[\"DELETION\",\"INSERTION\",\"INVERSION\",\"MOBILE_INSERTION\",\"MOBILE_DELETION\",\"DUPLICATION\",\"TANDEM_DUPLICATION\"]}],\"doc\":\"The type of this structural variant.\",\"default\":null},{\"name\":\"assembly\",\"type\":[\"null\",\"string\"],\"doc\":\"The URL of the FASTA/NucleotideContig assembly for this structural variant,\\n   if one is available.\",\"default\":null},{\"name\":\"precise\",\"type\":[\"boolean\",\"null\"],\"doc\":\"Whether this structural variant call has precise breakpoints or not. Default\\n   value is true. If the call is imprecise, confidence intervals should be provided.\",\"default\":true},{\"name\":\"startWindow\",\"type\":[\"null\",\"int\"],\"doc\":\"The size of the confidence window around the start of the structural variant.\",\"default\":null},{\"name\":\"endWindow\",\"type\":[\"null\",\"int\"],\"doc\":\"The size of the confidence window around the end of the structural variant.\",\"default\":null}]}],\"doc\":\"The structural variant at this site, if the alternate allele is a structural\\n   variant. If the site is not a structural variant, this field should be left \\n   null.\",\"default\":null}]}]},{\"name\":\"annotations\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"array\",\"items\":\"string\"}},\"default\":[]},{\"name\":\"lossOfFunction\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"array\",\"items\":\"string\"}},\"default\":[]},{\"name\":\"nonsenseMediateDecay\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"array\",\"items\":\"string\"}},\"default\":[]}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"SnpEffAnnotations\",\"namespace\":\"org.exascience.formats.avro\",\"fields\":[{\"name\":\"variant\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Variant\",\"namespace\":\"org.bdgenomics.formats.avro\",\"fields\":[{\"name\":\"contig\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Contig\",\"doc\":\"Record for describing a reference assembly. Not used for storing the contents\\n of said assembly.\\n\\n @see NucleotideContigFragment\",\"fields\":[{\"name\":\"contigName\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"doc\":\"The name of this contig in the assembly (e.g., \\\"chr1\\\").\",\"default\":null},{\"name\":\"contigLength\",\"type\":[\"null\",\"long\"],\"doc\":\"The length of this contig.\",\"default\":null},{\"name\":\"contigMD5\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"doc\":\"The MD5 checksum of the assembly for this contig.\",\"default\":null},{\"name\":\"referenceURL\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"doc\":\"The URL at which this reference assembly can be found.\",\"default\":null},{\"name\":\"assembly\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"doc\":\"The name of this assembly (e.g., \\\"hg19\\\").\",\"default\":null},{\"name\":\"species\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"doc\":\"The species that this assembly is for.\",\"default\":null}]}],\"doc\":\"The reference contig that this variant exists on.\",\"default\":null},{\"name\":\"start\",\"type\":[\"null\",\"long\"],\"doc\":\"The 0-based start position of this variant on the reference contig.\",\"default\":null},{\"name\":\"end\",\"type\":[\"null\",\"long\"],\"doc\":\"The 0-based, exclusive end position of this variant on the reference contig.\",\"default\":null},{\"name\":\"referenceAllele\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"doc\":\"A string describing the reference allele at this site.\",\"default\":null},{\"name\":\"alternateAllele\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"doc\":\"A string describing the variant allele at this site. Should be left null if\\n   the site is a structural variant.\",\"default\":null},{\"name\":\"svAllele\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"StructuralVariant\",\"fields\":[{\"name\":\"type\",\"type\":[\"null\",{\"type\":\"enum\",\"name\":\"StructuralVariantType\",\"doc\":\"Descriptors for the type of a structural variant. The most specific descriptor\\n should be used, if possible. E.g., duplication should be used instead of\\n insertion if the inserted sequence is not novel. Tandem duplication should\\n be used instead of duplication if the duplication is known to follow the\\n duplicated sequence.\",\"symbols\":[\"DELETION\",\"INSERTION\",\"INVERSION\",\"MOBILE_INSERTION\",\"MOBILE_DELETION\",\"DUPLICATION\",\"TANDEM_DUPLICATION\"]}],\"doc\":\"The type of this structural variant.\",\"default\":null},{\"name\":\"assembly\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"doc\":\"The URL of the FASTA/NucleotideContig assembly for this structural variant,\\n   if one is available.\",\"default\":null},{\"name\":\"precise\",\"type\":[\"boolean\",\"null\"],\"doc\":\"Whether this structural variant call has precise breakpoints or not. Default\\n   value is true. If the call is imprecise, confidence intervals should be provided.\",\"default\":true},{\"name\":\"startWindow\",\"type\":[\"null\",\"int\"],\"doc\":\"The size of the confidence window around the start of the structural variant.\",\"default\":null},{\"name\":\"endWindow\",\"type\":[\"null\",\"int\"],\"doc\":\"The size of the confidence window around the end of the structural variant.\",\"default\":null}]}],\"doc\":\"The structural variant at this site, if the alternate allele is a structural\\n   variant. If the site is not a structural variant, this field should be left \\n   null.\",\"default\":null}]}]},{\"name\":\"functionalAnnotations\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"FunctionalAnnotation\",\"fields\":[{\"name\":\"annotation\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"geneID\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}},\"default\":[]},{\"name\":\"lossOfFunction\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"LossOfFunction\",\"fields\":[{\"name\":\"gene\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"ID\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"numTranscripts\",\"type\":\"int\"},{\"name\":\"percentAffected\",\"type\":\"float\"}]}],\"default\":null},{\"name\":\"nonsenseMediateDecay\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"NonsenseMediateDecay\",\"fields\":[{\"name\":\"gene\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"ID\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"numTranscripts\",\"type\":\"int\"},{\"name\":\"percentAffected\",\"type\":\"float\"}]}],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public org.bdgenomics.formats.avro.Variant variant;
-  @Deprecated public java.util.List<java.util.List<java.lang.CharSequence>> annotations;
-  @Deprecated public java.util.List<java.util.List<java.lang.CharSequence>> lossOfFunction;
-  @Deprecated public java.util.List<java.util.List<java.lang.CharSequence>> nonsenseMediateDecay;
+  @Deprecated public java.util.List<org.exascience.formats.avro.FunctionalAnnotation> functionalAnnotations;
+  @Deprecated public org.exascience.formats.avro.LossOfFunction lossOfFunction;
+  @Deprecated public org.exascience.formats.avro.NonsenseMediateDecay nonsenseMediateDecay;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -24,9 +24,9 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
   /**
    * All-args constructor.
    */
-  public SnpEffAnnotations(org.bdgenomics.formats.avro.Variant variant, java.util.List<java.util.List<java.lang.CharSequence>> annotations, java.util.List<java.util.List<java.lang.CharSequence>> lossOfFunction, java.util.List<java.util.List<java.lang.CharSequence>> nonsenseMediateDecay) {
+  public SnpEffAnnotations(org.bdgenomics.formats.avro.Variant variant, java.util.List<org.exascience.formats.avro.FunctionalAnnotation> functionalAnnotations, org.exascience.formats.avro.LossOfFunction lossOfFunction, org.exascience.formats.avro.NonsenseMediateDecay nonsenseMediateDecay) {
     this.variant = variant;
-    this.annotations = annotations;
+    this.functionalAnnotations = functionalAnnotations;
     this.lossOfFunction = lossOfFunction;
     this.nonsenseMediateDecay = nonsenseMediateDecay;
   }
@@ -36,7 +36,7 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return variant;
-    case 1: return annotations;
+    case 1: return functionalAnnotations;
     case 2: return lossOfFunction;
     case 3: return nonsenseMediateDecay;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
@@ -47,9 +47,9 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: variant = (org.bdgenomics.formats.avro.Variant)value$; break;
-    case 1: annotations = (java.util.List<java.util.List<java.lang.CharSequence>>)value$; break;
-    case 2: lossOfFunction = (java.util.List<java.util.List<java.lang.CharSequence>>)value$; break;
-    case 3: nonsenseMediateDecay = (java.util.List<java.util.List<java.lang.CharSequence>>)value$; break;
+    case 1: functionalAnnotations = (java.util.List<org.exascience.formats.avro.FunctionalAnnotation>)value$; break;
+    case 2: lossOfFunction = (org.exascience.formats.avro.LossOfFunction)value$; break;
+    case 3: nonsenseMediateDecay = (org.exascience.formats.avro.NonsenseMediateDecay)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -70,24 +70,24 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
   }
 
   /**
-   * Gets the value of the 'annotations' field.
+   * Gets the value of the 'functionalAnnotations' field.
    */
-  public java.util.List<java.util.List<java.lang.CharSequence>> getAnnotations() {
-    return annotations;
+  public java.util.List<org.exascience.formats.avro.FunctionalAnnotation> getFunctionalAnnotations() {
+    return functionalAnnotations;
   }
 
   /**
-   * Sets the value of the 'annotations' field.
+   * Sets the value of the 'functionalAnnotations' field.
    * @param value the value to set.
    */
-  public void setAnnotations(java.util.List<java.util.List<java.lang.CharSequence>> value) {
-    this.annotations = value;
+  public void setFunctionalAnnotations(java.util.List<org.exascience.formats.avro.FunctionalAnnotation> value) {
+    this.functionalAnnotations = value;
   }
 
   /**
    * Gets the value of the 'lossOfFunction' field.
    */
-  public java.util.List<java.util.List<java.lang.CharSequence>> getLossOfFunction() {
+  public org.exascience.formats.avro.LossOfFunction getLossOfFunction() {
     return lossOfFunction;
   }
 
@@ -95,14 +95,14 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
    * Sets the value of the 'lossOfFunction' field.
    * @param value the value to set.
    */
-  public void setLossOfFunction(java.util.List<java.util.List<java.lang.CharSequence>> value) {
+  public void setLossOfFunction(org.exascience.formats.avro.LossOfFunction value) {
     this.lossOfFunction = value;
   }
 
   /**
    * Gets the value of the 'nonsenseMediateDecay' field.
    */
-  public java.util.List<java.util.List<java.lang.CharSequence>> getNonsenseMediateDecay() {
+  public org.exascience.formats.avro.NonsenseMediateDecay getNonsenseMediateDecay() {
     return nonsenseMediateDecay;
   }
 
@@ -110,7 +110,7 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
    * Sets the value of the 'nonsenseMediateDecay' field.
    * @param value the value to set.
    */
-  public void setNonsenseMediateDecay(java.util.List<java.util.List<java.lang.CharSequence>> value) {
+  public void setNonsenseMediateDecay(org.exascience.formats.avro.NonsenseMediateDecay value) {
     this.nonsenseMediateDecay = value;
   }
 
@@ -136,9 +136,9 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
     implements org.apache.avro.data.RecordBuilder<SnpEffAnnotations> {
 
     private org.bdgenomics.formats.avro.Variant variant;
-    private java.util.List<java.util.List<java.lang.CharSequence>> annotations;
-    private java.util.List<java.util.List<java.lang.CharSequence>> lossOfFunction;
-    private java.util.List<java.util.List<java.lang.CharSequence>> nonsenseMediateDecay;
+    private java.util.List<org.exascience.formats.avro.FunctionalAnnotation> functionalAnnotations;
+    private org.exascience.formats.avro.LossOfFunction lossOfFunction;
+    private org.exascience.formats.avro.NonsenseMediateDecay nonsenseMediateDecay;
 
     /** Creates a new Builder */
     private Builder() {
@@ -152,8 +152,8 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
         this.variant = data().deepCopy(fields()[0].schema(), other.variant);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.annotations)) {
-        this.annotations = data().deepCopy(fields()[1].schema(), other.annotations);
+      if (isValidValue(fields()[1], other.functionalAnnotations)) {
+        this.functionalAnnotations = data().deepCopy(fields()[1].schema(), other.functionalAnnotations);
         fieldSetFlags()[1] = true;
       }
       if (isValidValue(fields()[2], other.lossOfFunction)) {
@@ -173,8 +173,8 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
         this.variant = data().deepCopy(fields()[0].schema(), other.variant);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.annotations)) {
-        this.annotations = data().deepCopy(fields()[1].schema(), other.annotations);
+      if (isValidValue(fields()[1], other.functionalAnnotations)) {
+        this.functionalAnnotations = data().deepCopy(fields()[1].schema(), other.functionalAnnotations);
         fieldSetFlags()[1] = true;
       }
       if (isValidValue(fields()[2], other.lossOfFunction)) {
@@ -212,38 +212,38 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
       return this;
     }
 
-    /** Gets the value of the 'annotations' field */
-    public java.util.List<java.util.List<java.lang.CharSequence>> getAnnotations() {
-      return annotations;
+    /** Gets the value of the 'functionalAnnotations' field */
+    public java.util.List<org.exascience.formats.avro.FunctionalAnnotation> getFunctionalAnnotations() {
+      return functionalAnnotations;
     }
     
-    /** Sets the value of the 'annotations' field */
-    public org.exascience.formats.avro.SnpEffAnnotations.Builder setAnnotations(java.util.List<java.util.List<java.lang.CharSequence>> value) {
+    /** Sets the value of the 'functionalAnnotations' field */
+    public org.exascience.formats.avro.SnpEffAnnotations.Builder setFunctionalAnnotations(java.util.List<org.exascience.formats.avro.FunctionalAnnotation> value) {
       validate(fields()[1], value);
-      this.annotations = value;
+      this.functionalAnnotations = value;
       fieldSetFlags()[1] = true;
       return this; 
     }
     
-    /** Checks whether the 'annotations' field has been set */
-    public boolean hasAnnotations() {
+    /** Checks whether the 'functionalAnnotations' field has been set */
+    public boolean hasFunctionalAnnotations() {
       return fieldSetFlags()[1];
     }
     
-    /** Clears the value of the 'annotations' field */
-    public org.exascience.formats.avro.SnpEffAnnotations.Builder clearAnnotations() {
-      annotations = null;
+    /** Clears the value of the 'functionalAnnotations' field */
+    public org.exascience.formats.avro.SnpEffAnnotations.Builder clearFunctionalAnnotations() {
+      functionalAnnotations = null;
       fieldSetFlags()[1] = false;
       return this;
     }
 
     /** Gets the value of the 'lossOfFunction' field */
-    public java.util.List<java.util.List<java.lang.CharSequence>> getLossOfFunction() {
+    public org.exascience.formats.avro.LossOfFunction getLossOfFunction() {
       return lossOfFunction;
     }
     
     /** Sets the value of the 'lossOfFunction' field */
-    public org.exascience.formats.avro.SnpEffAnnotations.Builder setLossOfFunction(java.util.List<java.util.List<java.lang.CharSequence>> value) {
+    public org.exascience.formats.avro.SnpEffAnnotations.Builder setLossOfFunction(org.exascience.formats.avro.LossOfFunction value) {
       validate(fields()[2], value);
       this.lossOfFunction = value;
       fieldSetFlags()[2] = true;
@@ -263,12 +263,12 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
     }
 
     /** Gets the value of the 'nonsenseMediateDecay' field */
-    public java.util.List<java.util.List<java.lang.CharSequence>> getNonsenseMediateDecay() {
+    public org.exascience.formats.avro.NonsenseMediateDecay getNonsenseMediateDecay() {
       return nonsenseMediateDecay;
     }
     
     /** Sets the value of the 'nonsenseMediateDecay' field */
-    public org.exascience.formats.avro.SnpEffAnnotations.Builder setNonsenseMediateDecay(java.util.List<java.util.List<java.lang.CharSequence>> value) {
+    public org.exascience.formats.avro.SnpEffAnnotations.Builder setNonsenseMediateDecay(org.exascience.formats.avro.NonsenseMediateDecay value) {
       validate(fields()[3], value);
       this.nonsenseMediateDecay = value;
       fieldSetFlags()[3] = true;
@@ -292,9 +292,9 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
       try {
         SnpEffAnnotations record = new SnpEffAnnotations();
         record.variant = fieldSetFlags()[0] ? this.variant : (org.bdgenomics.formats.avro.Variant) defaultValue(fields()[0]);
-        record.annotations = fieldSetFlags()[1] ? this.annotations : (java.util.List<java.util.List<java.lang.CharSequence>>) defaultValue(fields()[1]);
-        record.lossOfFunction = fieldSetFlags()[2] ? this.lossOfFunction : (java.util.List<java.util.List<java.lang.CharSequence>>) defaultValue(fields()[2]);
-        record.nonsenseMediateDecay = fieldSetFlags()[3] ? this.nonsenseMediateDecay : (java.util.List<java.util.List<java.lang.CharSequence>>) defaultValue(fields()[3]);
+        record.functionalAnnotations = fieldSetFlags()[1] ? this.functionalAnnotations : (java.util.List<org.exascience.formats.avro.FunctionalAnnotation>) defaultValue(fields()[1]);
+        record.lossOfFunction = fieldSetFlags()[2] ? this.lossOfFunction : (org.exascience.formats.avro.LossOfFunction) defaultValue(fields()[2]);
+        record.nonsenseMediateDecay = fieldSetFlags()[3] ? this.nonsenseMediateDecay : (org.exascience.formats.avro.NonsenseMediateDecay) defaultValue(fields()[3]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);
