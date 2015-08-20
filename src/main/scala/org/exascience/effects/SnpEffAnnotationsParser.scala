@@ -10,7 +10,6 @@ import org.apache.commons.lang.StringUtils.{isBlank, isNotEmpty}
 import org.bdgenomics.adam.converters.AttrKey
 import org.exascience.formats.avro._
 import scala.collection.JavaConverters._
-import java.lang.Integer.parseInt
 
 /**
  * @author Thomas Moerman
@@ -21,12 +20,12 @@ object SnpEffAnnotationsParser extends Serializable {
 
   def removeParentheses(s: String): String = allBetweenBracketsRegex.findFirstMatchIn(s).map(_.group(1)).getOrElse(s)
 
-  def splitAtPipeSymbols(s: String): Array[String] = s"$s ".split("\\|").map(s => if (isBlank(s)) null else s.trim)
+  def splitAtPipe(s: String): Array[String] = s"$s ".split("\\|").map(s => if (isBlank(s)) null else s.trim)
 
-  def splitAtAmpersand(s: String): List[String] = s.split("\\&").toList
+  def splitAtAmpersand(s: String): Array[String] = s.split("\\&")
 
-  def cleanAndSplit = removeParentheses _ andThen splitAtPipeSymbols
-
+  def cleanAndSplitAtPipe = removeParentheses _ andThen splitAtPipe
+  
   def parseInt(s: String) = if (isNotEmpty(s)) Integer.valueOf(s) else null
 
   def parseIntPair(s: String): Option[(Integer, Integer)] =
@@ -41,7 +40,7 @@ object SnpEffAnnotationsParser extends Serializable {
   val ANN_COLUMNS = List("", "")
 
   def toFunctionalAnnotation(s: String): FunctionalAnnotation = {
-    val attributes = splitAtPipeSymbols(s)
+    val attributes = splitAtPipe(s)
 
     val result = attributes match {
 
@@ -52,7 +51,7 @@ object SnpEffAnnotationsParser extends Serializable {
       ) =>
         new FunctionalAnnotation(
         allele,
-        splitAtAmpersand(annotation).asJava,
+        splitAtAmpersand(annotation).toList.asJava,
         Impact.valueOf(impact.toUpperCase),
         geneName,
         geneID,
@@ -79,7 +78,7 @@ object SnpEffAnnotationsParser extends Serializable {
   }
 
   def toLossOfFunction(s: String): LossOfFunction = {
-    val attributes = cleanAndSplit(s)
+    val attributes = cleanAndSplitAtPipe(s)
 
     new LossOfFunction(
       attributes(0),
@@ -93,7 +92,7 @@ object SnpEffAnnotationsParser extends Serializable {
   }
 
   def toNonsenseMediateDecay(s: String): NonsenseMediateDecay = {
-    val attributes = cleanAndSplit(s)
+    val attributes = cleanAndSplitAtPipe(s)
 
     new NonsenseMediateDecay(
       attributes(0),
