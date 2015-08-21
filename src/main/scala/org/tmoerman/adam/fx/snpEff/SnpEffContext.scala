@@ -1,4 +1,4 @@
-package org.tmoerman.adam.fx.snpEff
+package org.tmoerman.adam.fx.snpeff
 
 import org.apache.hadoop.io.LongWritable
 import org.apache.parquet.hadoop.util.ContextUtil
@@ -9,20 +9,20 @@ import org.bdgenomics.adam.converters.VariantContextConverter
 import org.bdgenomics.adam.models.SequenceDictionary
 import org.bdgenomics.utils.instrumentation.Metrics
 import org.bdgenomics.utils.misc.HadoopUtil
-import org.tmoerman.adam.fx.avro._
 import org.seqdoop.hadoop_bam.{VCFInputFormat, VariantContextWritable}
-import org.tmoerman.adam.fx.snpEff.model.VariantContextWithSnpEffAnnotations
+import org.tmoerman.adam.fx.avro._
+import org.tmoerman.adam.fx.snpeff.model.VariantContextWithSnpEffAnnotations
 
 /**
  * @author Thomas Moerman
  */
-object EffectsContext {
+object SnpEffContext {
 
-  implicit def sparkContextToEffectsContext(sc: SparkContext): EffectsContext = new EffectsContext(sc)
+  implicit def sparkContextToEffectsContext(sc: SparkContext): SnpEffContext = new SnpEffContext(sc)
 
 }
 
-class EffectsContext(val sc: SparkContext) extends Serializable with Logging {
+class SnpEffContext(val sc: SparkContext) extends Serializable with Logging {
 
   private def loadVariantsFromFile(filePath: String): RDD[(LongWritable, VariantContextWritable)] = {
     val job = HadoopUtil.newJob(sc)

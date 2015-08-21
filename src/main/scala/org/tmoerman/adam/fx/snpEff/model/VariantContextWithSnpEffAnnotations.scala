@@ -1,4 +1,4 @@
-package org.tmoerman.adam.fx.snpEff.model
+package org.tmoerman.adam.fx.snpeff.model
 
 import org.bdgenomics.adam.models.{ReferencePosition, VariantContext}
 import org.bdgenomics.adam.rich.RichVariant

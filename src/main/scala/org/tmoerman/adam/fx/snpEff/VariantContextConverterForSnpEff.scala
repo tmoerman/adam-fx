@@ -1,4 +1,4 @@
-package org.tmoerman.adam.fx.snpEff
+package org.tmoerman.adam.fx.snpeff
 
 import htsjdk.variant.variantcontext.{Allele, VariantContext => BroadVariantContext}
 import org.apache.spark.Logging
@@ -6,7 +6,7 @@ import org.bdgenomics.adam.converters.VariantContextConverter
 import org.bdgenomics.adam.models.{SequenceDictionary, VariantContext}
 import org.bdgenomics.formats.avro.{Contig, Variant}
 import org.tmoerman.adam.fx.avro.SnpEffAnnotations
-import org.tmoerman.adam.fx.snpEff.model.VariantContextWithSnpEffAnnotations
+import org.tmoerman.adam.fx.snpeff.model.VariantContextWithSnpEffAnnotations
 
 import scala.collection.JavaConversions._
 

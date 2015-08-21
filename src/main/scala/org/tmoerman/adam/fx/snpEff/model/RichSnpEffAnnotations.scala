@@ -1,4 +1,4 @@
-package org.tmoerman.adam.fx.snpEff.model
+package org.tmoerman.adam.fx.snpeff.model
 
 import org.tmoerman.adam.fx.avro.{FunctionalAnnotation, LossOfFunction, NonsenseMediateDecay, SnpEffAnnotations}
 import org.tmoerman.adam.fx.util.ReflectToString

@@ -1,8 +1,7 @@
-package org.tmoerman.adam.fx
+package org.tmoerman.adam.fx.snpeff
 
 import org.scalatest.{FlatSpec, Matchers}
-import org.tmoerman.adam.fx.snpEff.SnpEffAnnotationsParser
-import org.tmoerman.adam.fx.snpEff.SnpEffAnnotationsParser._
+import org.tmoerman.adam.fx.snpeff.SnpEffAnnotationsParser._
 
 /**
  * @author Thomas Moerman
