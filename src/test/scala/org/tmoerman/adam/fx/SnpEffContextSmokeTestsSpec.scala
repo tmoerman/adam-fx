@@ -1,14 +1,15 @@
-package org.exascience.effects
+package org.tmoerman.adam.fx
 
 import org.apache.spark.{SparkConf, SparkContext}
-import org.scalatest.{Matchers, FlatSpec}
+import org.scalatest.{FlatSpec, Matchers}
+import org.tmoerman.adam.fx.snpEff.EffectsContext
 
 class SnpEffContextSmokeTestsSpec extends FlatSpec with Matchers {
 
   val conf = new SparkConf()
     .setAppName("Test")
     .setMaster("local[*]")
-    .set("spark.kryo.registrator", "org.exascience.effects.serialization.AdamEffectsKryoRegistrator")
+    .set("spark.kryo.registrator", "org.tmoerman.adam.fx.serialization.AdamFxKryoRegistrator")
     .set("spark.kryo.referenceTracking", "true")
     .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
 

@@ -1,18 +1,14 @@
-package org.exascience.effects
+package org.tmoerman.adam.fx.snpEff
 
-import java.util
-
+import htsjdk.variant.variantcontext.{Allele, VariantContext => BroadVariantContext}
 import org.apache.spark.Logging
 import org.bdgenomics.adam.converters.VariantContextConverter
-import org.bdgenomics.adam.models.{VariantContext, SequenceDictionary}
+import org.bdgenomics.adam.models.{SequenceDictionary, VariantContext}
 import org.bdgenomics.formats.avro.{Contig, Variant}
-import htsjdk.variant.variantcontext.{
-Allele,
-VariantContext => BroadVariantContext
-}
-import org.exascience.effects.models.VariantContextWithSnpEffAnnotations
+import org.tmoerman.adam.fx.avro.SnpEffAnnotations
+import org.tmoerman.adam.fx.snpEff.model.VariantContextWithSnpEffAnnotations
+
 import scala.collection.JavaConversions._
-import org.exascience.formats.avro.{FunctionalAnnotation, SnpEffAnnotations}
 
 
 /**

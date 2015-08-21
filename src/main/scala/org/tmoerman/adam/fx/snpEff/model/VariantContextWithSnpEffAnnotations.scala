@@ -1,9 +1,10 @@
-package org.exascience.effects.models
+package org.tmoerman.adam.fx.snpEff.model
 
-import org.bdgenomics.adam.models.{VariantContext, ReferencePosition}
+import org.bdgenomics.adam.models.{ReferencePosition, VariantContext}
 import org.bdgenomics.adam.rich.RichVariant
 import org.bdgenomics.formats.avro.{DatabaseVariantAnnotation, Genotype}
-import org.exascience.formats.avro.SnpEffAnnotations
+import org.tmoerman.adam.fx.avro.SnpEffAnnotations
+import org.tmoerman.adam.fx.util.ReflectToString
 
 /**
  * Extends the Adam VariantContext type with optional SnpEffAnnotations.

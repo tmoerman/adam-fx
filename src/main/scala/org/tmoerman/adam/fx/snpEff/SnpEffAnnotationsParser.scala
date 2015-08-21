@@ -1,14 +1,15 @@
-package org.exascience.effects
+package org.tmoerman.adam.fx.snpEff
 
 import java.util.{List => JList}
 
-import htsjdk.variant.variantcontext.{VariantContext}
+import htsjdk.variant.variantcontext.VariantContext
 import htsjdk.variant.vcf.{VCFConstants, VCFHeaderLineType, VCFInfoHeaderLine}
 import org.apache.avro.Schema
 import org.apache.avro.specific.SpecificRecord
 import org.apache.commons.lang.StringUtils.{isBlank, isNotEmpty}
 import org.bdgenomics.adam.converters.AttrKey
-import org.exascience.formats.avro._
+import org.tmoerman.adam.fx.avro._
+
 import scala.collection.JavaConverters._
 
 /**
@@ -36,8 +37,6 @@ object SnpEffAnnotationsParser extends Serializable {
     } else None
 
   def parseRatio(s: String) = parseIntPair(s).map{ case (a, b) => new Ratio(a, b) }.orNull
-
-  val ANN_COLUMNS = List("", "")
 
   def toFunctionalAnnotation(s: String): FunctionalAnnotation = {
     val attributes = splitAtPipe(s)
@@ -106,9 +105,9 @@ object SnpEffAnnotationsParser extends Serializable {
   }
 
   val SNP_EFF_INFO_KEYS: Seq[AttrKey] = Seq(
-    AttrKey("functionalAnnotations", annParser _, new VCFInfoHeaderLine("ANN", 1, VCFHeaderLineType.String, "snpEff ANN INFO field: functional annotations")),
-    AttrKey("lossOfFunction",        lofParser _, new VCFInfoHeaderLine("LOF", 1, VCFHeaderLineType.String, "snpEff LOF INFO field: loss of function")),
-    AttrKey("nonsenseMediateDecay",  nmdParser _, new VCFInfoHeaderLine("NMD", 1, VCFHeaderLineType.String, "snpEff NMD INFO field: nonsense mediate decay")))
+    AttrKey("functionalAnnotations", annParser _, new VCFInfoHeaderLine("ANN", 1, VCFHeaderLineType.String, "ANN INFO field: functional annotations")),
+    AttrKey("lossOfFunction",        lofParser _, new VCFInfoHeaderLine("LOF", 1, VCFHeaderLineType.String, "LOF INFO field: loss of function")),
+    AttrKey("nonsenseMediateDecay",  nmdParser _, new VCFInfoHeaderLine("NMD", 1, VCFHeaderLineType.String, "NMD INFO field: nonsense mediate decay")))
 
   lazy val VCF2SnpEffAnnotations: Map[String, (Int, Object => Object)] =
     createFieldMap(SNP_EFF_INFO_KEYS, SnpEffAnnotations.getClassSchema)

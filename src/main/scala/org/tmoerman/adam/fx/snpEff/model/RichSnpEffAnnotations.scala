@@ -1,6 +1,8 @@
-package org.exascience.effects.models
+package org.tmoerman.adam.fx.snpEff.model
 
-import org.exascience.formats.avro.{NonsenseMediateDecay, LossOfFunction, FunctionalAnnotation, SnpEffAnnotations}
+import org.tmoerman.adam.fx.avro.{FunctionalAnnotation, LossOfFunction, NonsenseMediateDecay, SnpEffAnnotations}
+import org.tmoerman.adam.fx.util.ReflectToString
+
 import scala.collection.JavaConverters._
 
 /**

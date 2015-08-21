@@ -1,17 +1,17 @@
-package org.exascience.effects
+package org.tmoerman.adam.fx.snpEff
 
 import org.apache.hadoop.io.LongWritable
 import org.apache.parquet.hadoop.util.ContextUtil
+import org.apache.spark.rdd.MetricsContext._
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{Logging, SparkContext}
 import org.bdgenomics.adam.converters.VariantContextConverter
 import org.bdgenomics.adam.models.SequenceDictionary
 import org.bdgenomics.utils.instrumentation.Metrics
 import org.bdgenomics.utils.misc.HadoopUtil
-import org.exascience.effects.models.VariantContextWithSnpEffAnnotations
-import org.seqdoop.hadoop_bam.{VariantContextWritable, VCFInputFormat}
-import org.apache.spark.rdd.MetricsContext._
-import org.exascience.formats.avro._
+import org.tmoerman.adam.fx.avro._
+import org.seqdoop.hadoop_bam.{VCFInputFormat, VariantContextWritable}
+import org.tmoerman.adam.fx.snpEff.model.VariantContextWithSnpEffAnnotations
 
 /**
  * @author Thomas Moerman

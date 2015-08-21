@@ -1,13 +1,13 @@
-package org.exascience.effects.serialization
+package org.tmoerman.adam.fx.serialization
 
 import com.esotericsoftware.kryo.Kryo
-import org.bdgenomics.adam.serialization.{AvroSerializer, ADAMKryoRegistrator}
-import org.exascience.formats.avro.{NonsenseMediateDecay, FunctionalAnnotation, LossOfFunction, SnpEffAnnotations}
+import org.bdgenomics.adam.serialization.{ADAMKryoRegistrator, AvroSerializer}
+import org.tmoerman.adam.fx.avro.{FunctionalAnnotation, LossOfFunction, NonsenseMediateDecay, SnpEffAnnotations}
 
 /**
  * @author Thomas Moerman
  */
-class AdamEffectsKryoRegistrator extends ADAMKryoRegistrator {
+class AdamFxKryoRegistrator extends ADAMKryoRegistrator {
 
   override def registerClasses(kryo: Kryo): Unit = {
     super.registerClasses(kryo)

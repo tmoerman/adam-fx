@@ -3,11 +3,11 @@
  * 
  * DO NOT EDIT DIRECTLY
  */
-package org.exascience.formats.avro;  
+package org.tmoerman.adam.fx.avro;  
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"NonsenseMediateDecay\",\"namespace\":\"org.exascience.formats.avro\",\"fields\":[{\"name\":\"gene\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"ID\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"numTranscripts\",\"type\":\"int\"},{\"name\":\"percentAffected\",\"type\":\"float\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"NonsenseMediateDecay\",\"namespace\":\"org.tmoerman.adam.fx.avro\",\"fields\":[{\"name\":\"gene\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"ID\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"numTranscripts\",\"type\":\"int\"},{\"name\":\"percentAffected\",\"type\":\"float\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.String gene;
   @Deprecated public java.lang.String ID;
@@ -115,18 +115,18 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
   }
 
   /** Creates a new NonsenseMediateDecay RecordBuilder */
-  public static org.exascience.formats.avro.NonsenseMediateDecay.Builder newBuilder() {
-    return new org.exascience.formats.avro.NonsenseMediateDecay.Builder();
+  public static org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder newBuilder() {
+    return new org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder();
   }
   
   /** Creates a new NonsenseMediateDecay RecordBuilder by copying an existing Builder */
-  public static org.exascience.formats.avro.NonsenseMediateDecay.Builder newBuilder(org.exascience.formats.avro.NonsenseMediateDecay.Builder other) {
-    return new org.exascience.formats.avro.NonsenseMediateDecay.Builder(other);
+  public static org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder newBuilder(org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder other) {
+    return new org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder(other);
   }
   
   /** Creates a new NonsenseMediateDecay RecordBuilder by copying an existing NonsenseMediateDecay instance */
-  public static org.exascience.formats.avro.NonsenseMediateDecay.Builder newBuilder(org.exascience.formats.avro.NonsenseMediateDecay other) {
-    return new org.exascience.formats.avro.NonsenseMediateDecay.Builder(other);
+  public static org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder newBuilder(org.tmoerman.adam.fx.avro.NonsenseMediateDecay other) {
+    return new org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder(other);
   }
   
   /**
@@ -142,11 +142,11 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
 
     /** Creates a new Builder */
     private Builder() {
-      super(org.exascience.formats.avro.NonsenseMediateDecay.SCHEMA$);
+      super(org.tmoerman.adam.fx.avro.NonsenseMediateDecay.SCHEMA$);
     }
     
     /** Creates a Builder by copying an existing Builder */
-    private Builder(org.exascience.formats.avro.NonsenseMediateDecay.Builder other) {
+    private Builder(org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.gene)) {
         this.gene = data().deepCopy(fields()[0].schema(), other.gene);
@@ -167,8 +167,8 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Creates a Builder by copying an existing NonsenseMediateDecay instance */
-    private Builder(org.exascience.formats.avro.NonsenseMediateDecay other) {
-            super(org.exascience.formats.avro.NonsenseMediateDecay.SCHEMA$);
+    private Builder(org.tmoerman.adam.fx.avro.NonsenseMediateDecay other) {
+            super(org.tmoerman.adam.fx.avro.NonsenseMediateDecay.SCHEMA$);
       if (isValidValue(fields()[0], other.gene)) {
         this.gene = data().deepCopy(fields()[0].schema(), other.gene);
         fieldSetFlags()[0] = true;
@@ -193,7 +193,7 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Sets the value of the 'gene' field */
-    public org.exascience.formats.avro.NonsenseMediateDecay.Builder setGene(java.lang.String value) {
+    public org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder setGene(java.lang.String value) {
       validate(fields()[0], value);
       this.gene = value;
       fieldSetFlags()[0] = true;
@@ -206,7 +206,7 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Clears the value of the 'gene' field */
-    public org.exascience.formats.avro.NonsenseMediateDecay.Builder clearGene() {
+    public org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder clearGene() {
       gene = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -218,7 +218,7 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Sets the value of the 'ID' field */
-    public org.exascience.formats.avro.NonsenseMediateDecay.Builder setID(java.lang.String value) {
+    public org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder setID(java.lang.String value) {
       validate(fields()[1], value);
       this.ID = value;
       fieldSetFlags()[1] = true;
@@ -231,7 +231,7 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Clears the value of the 'ID' field */
-    public org.exascience.formats.avro.NonsenseMediateDecay.Builder clearID() {
+    public org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder clearID() {
       ID = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -243,7 +243,7 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Sets the value of the 'numTranscripts' field */
-    public org.exascience.formats.avro.NonsenseMediateDecay.Builder setNumTranscripts(int value) {
+    public org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder setNumTranscripts(int value) {
       validate(fields()[2], value);
       this.numTranscripts = value;
       fieldSetFlags()[2] = true;
@@ -256,7 +256,7 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Clears the value of the 'numTranscripts' field */
-    public org.exascience.formats.avro.NonsenseMediateDecay.Builder clearNumTranscripts() {
+    public org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder clearNumTranscripts() {
       fieldSetFlags()[2] = false;
       return this;
     }
@@ -267,7 +267,7 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Sets the value of the 'percentAffected' field */
-    public org.exascience.formats.avro.NonsenseMediateDecay.Builder setPercentAffected(float value) {
+    public org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder setPercentAffected(float value) {
       validate(fields()[3], value);
       this.percentAffected = value;
       fieldSetFlags()[3] = true;
@@ -280,7 +280,7 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Clears the value of the 'percentAffected' field */
-    public org.exascience.formats.avro.NonsenseMediateDecay.Builder clearPercentAffected() {
+    public org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder clearPercentAffected() {
       fieldSetFlags()[3] = false;
       return this;
     }

@@ -3,11 +3,11 @@
  * 
  * DO NOT EDIT DIRECTLY
  */
-package org.exascience.formats.avro;  
+package org.tmoerman.adam.fx.avro;  
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Ratio extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Ratio\",\"namespace\":\"org.exascience.formats.avro\",\"fields\":[{\"name\":\"rank\",\"type\":\"int\"},{\"name\":\"total\",\"type\":\"int\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Ratio\",\"namespace\":\"org.tmoerman.adam.fx.avro\",\"fields\":[{\"name\":\"rank\",\"type\":\"int\"},{\"name\":\"total\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public int rank;
   @Deprecated public int total;
@@ -77,18 +77,18 @@ public class Ratio extends org.apache.avro.specific.SpecificRecordBase implement
   }
 
   /** Creates a new Ratio RecordBuilder */
-  public static org.exascience.formats.avro.Ratio.Builder newBuilder() {
-    return new org.exascience.formats.avro.Ratio.Builder();
+  public static org.tmoerman.adam.fx.avro.Ratio.Builder newBuilder() {
+    return new org.tmoerman.adam.fx.avro.Ratio.Builder();
   }
   
   /** Creates a new Ratio RecordBuilder by copying an existing Builder */
-  public static org.exascience.formats.avro.Ratio.Builder newBuilder(org.exascience.formats.avro.Ratio.Builder other) {
-    return new org.exascience.formats.avro.Ratio.Builder(other);
+  public static org.tmoerman.adam.fx.avro.Ratio.Builder newBuilder(org.tmoerman.adam.fx.avro.Ratio.Builder other) {
+    return new org.tmoerman.adam.fx.avro.Ratio.Builder(other);
   }
   
   /** Creates a new Ratio RecordBuilder by copying an existing Ratio instance */
-  public static org.exascience.formats.avro.Ratio.Builder newBuilder(org.exascience.formats.avro.Ratio other) {
-    return new org.exascience.formats.avro.Ratio.Builder(other);
+  public static org.tmoerman.adam.fx.avro.Ratio.Builder newBuilder(org.tmoerman.adam.fx.avro.Ratio other) {
+    return new org.tmoerman.adam.fx.avro.Ratio.Builder(other);
   }
   
   /**
@@ -102,11 +102,11 @@ public class Ratio extends org.apache.avro.specific.SpecificRecordBase implement
 
     /** Creates a new Builder */
     private Builder() {
-      super(org.exascience.formats.avro.Ratio.SCHEMA$);
+      super(org.tmoerman.adam.fx.avro.Ratio.SCHEMA$);
     }
     
     /** Creates a Builder by copying an existing Builder */
-    private Builder(org.exascience.formats.avro.Ratio.Builder other) {
+    private Builder(org.tmoerman.adam.fx.avro.Ratio.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.rank)) {
         this.rank = data().deepCopy(fields()[0].schema(), other.rank);
@@ -119,8 +119,8 @@ public class Ratio extends org.apache.avro.specific.SpecificRecordBase implement
     }
     
     /** Creates a Builder by copying an existing Ratio instance */
-    private Builder(org.exascience.formats.avro.Ratio other) {
-            super(org.exascience.formats.avro.Ratio.SCHEMA$);
+    private Builder(org.tmoerman.adam.fx.avro.Ratio other) {
+            super(org.tmoerman.adam.fx.avro.Ratio.SCHEMA$);
       if (isValidValue(fields()[0], other.rank)) {
         this.rank = data().deepCopy(fields()[0].schema(), other.rank);
         fieldSetFlags()[0] = true;
@@ -137,7 +137,7 @@ public class Ratio extends org.apache.avro.specific.SpecificRecordBase implement
     }
     
     /** Sets the value of the 'rank' field */
-    public org.exascience.formats.avro.Ratio.Builder setRank(int value) {
+    public org.tmoerman.adam.fx.avro.Ratio.Builder setRank(int value) {
       validate(fields()[0], value);
       this.rank = value;
       fieldSetFlags()[0] = true;
@@ -150,7 +150,7 @@ public class Ratio extends org.apache.avro.specific.SpecificRecordBase implement
     }
     
     /** Clears the value of the 'rank' field */
-    public org.exascience.formats.avro.Ratio.Builder clearRank() {
+    public org.tmoerman.adam.fx.avro.Ratio.Builder clearRank() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -161,7 +161,7 @@ public class Ratio extends org.apache.avro.specific.SpecificRecordBase implement
     }
     
     /** Sets the value of the 'total' field */
-    public org.exascience.formats.avro.Ratio.Builder setTotal(int value) {
+    public org.tmoerman.adam.fx.avro.Ratio.Builder setTotal(int value) {
       validate(fields()[1], value);
       this.total = value;
       fieldSetFlags()[1] = true;
@@ -174,7 +174,7 @@ public class Ratio extends org.apache.avro.specific.SpecificRecordBase implement
     }
     
     /** Clears the value of the 'total' field */
-    public org.exascience.formats.avro.Ratio.Builder clearTotal() {
+    public org.tmoerman.adam.fx.avro.Ratio.Builder clearTotal() {
       fieldSetFlags()[1] = false;
       return this;
     }

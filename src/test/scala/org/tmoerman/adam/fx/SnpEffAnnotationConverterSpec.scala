@@ -1,7 +1,8 @@
-package org.exascience.effects
+package org.tmoerman.adam.fx
 
-import org.scalatest.{Matchers, FlatSpec}
-import SnpEffAnnotationsParser._
+import org.scalatest.{FlatSpec, Matchers}
+import org.tmoerman.adam.fx.snpEff.SnpEffAnnotationsParser
+import org.tmoerman.adam.fx.snpEff.SnpEffAnnotationsParser._
 
 /**
  * @author Thomas Moerman

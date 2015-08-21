@@ -1,4 +1,4 @@
-package org.exascience.effects.models
+package org.tmoerman.adam.fx.util
 
 import java.lang.reflect.Field
 

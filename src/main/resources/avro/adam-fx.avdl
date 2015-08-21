@@ -1,10 +1,12 @@
-@namespace("org.exascience.formats.avro")
+@namespace("org.tmoerman.adam.fx.avro")
 protocol EFFECTS {
 
   import idl "bdg.avdl";
 
   enum Impact {
+
     HIGH, MODERATE, LOW, MODIFIER
+
   }
 
   record Ratio {
