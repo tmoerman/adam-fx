@@ -1,12 +1,12 @@
-name := """adam-fx"""
+organization := "org.tmoerman"
 
-version := "0.1.0"
+name := "adam-fx"
+
+homepage := Some(url(s"https://github.com/tmoerman/"+name.value))
 
 scalaVersion := "2.10.4"
 
 resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
-
-publishMavenStyle := true
 
 libraryDependencies += "org.apache.hadoop" % "hadoop-mapreduce-client-common" % "2.2.0"
 
@@ -27,3 +27,29 @@ libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.4" % "test"
 libraryDependencies += "org.bdgenomics.utils" % "utils-misc_2.10" % "0.2.2" exclude("org.apache.spark", "*")
 
 fork in run := true
+
+// bintray-sbt plugin properties
+
+licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
+
+bintrayPackageLabels := Seq("scala", "adam", "genomics", "snpeff", "variants")
+
+pomExtra := (
+  <scm>
+    <url>git@github.com:tmoerman/{name.value}.git</url>
+    <connection>scm:git:git@github.com:tmoerman/{name.value}.git</connection>
+  </scm>
+  <developers>
+    <developer>
+      <id>tmoerman</id>
+      <name>tmoerman</name>
+      <url>https://github.com/tmoerman</url>
+    </developer>
+  </developers>
+  )
+
+// sbt-release properties
+
+releaseCrossBuild := false
+
+// releaseNextVersion := { ver => sbtrelease.Version(ver).map(_.bumpMinor.string).getOrElse(sbtrelease.versionFormatError) }
