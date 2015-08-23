@@ -1,10 +1,12 @@
-name := """adam-effects"""
+name := """adam-fx"""
 
-version := "1.0"
+version := "0.1.0"
 
 scalaVersion := "2.10.4"
 
 resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
+
+publishMavenStyle := true
 
 libraryDependencies += "org.apache.hadoop" % "hadoop-mapreduce-client-common" % "2.2.0"
 
