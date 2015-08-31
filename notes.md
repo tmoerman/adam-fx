@@ -11,3 +11,7 @@ Gene | ID | num_transcripts | percent_affected
 
 Interpretation of ANN field cancer sample relies on 'Allele' sub-field. Just as a reminder, ANN field has the following format:
 ANN = Allele | Annotation | Annotation_Impact | Gene_Name | Gene_ID | Feature_Type | Feature_ID | Transcript_BioType | Rank | HGVS.c | HGVS.p | cDNA.pos / cDNA.length | CDS.pos / CDS.length | AA.pos / AA.length | Distance | ERRORS_WARNINGS_INFO
+
+
+
+## release to bintray

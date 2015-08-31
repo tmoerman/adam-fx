@@ -5,7 +5,7 @@ to load .vcf files annotated with [SnpEff](http://snpeff.sourceforge.net/).
 
 ## Get the Maven artifact
 
-Artifacts are published to [Bintray](https://bintray.com/tmoerman/maven/adam-fx)
+Artifacts are published to [Bintray](https://bintray.com/tmoerman/maven/adam-fx).
 
 * SBT
 

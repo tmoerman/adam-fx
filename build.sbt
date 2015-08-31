@@ -12,9 +12,9 @@ libraryDependencies += "org.apache.hadoop" % "hadoop-mapreduce-client-common" % 
 
 libraryDependencies += "org.apache.spark" % "spark-core_2.10" % "1.3.1"
 
-libraryDependencies += "org.bdgenomics.adam" % "adam-core_2.10" % "0.17.1-SNAPSHOT"
+libraryDependencies += "org.bdgenomics.adam" % "adam-core_2.10" % "0.17.+"
 
-libraryDependencies += "org.bdgenomics.adam" % "adam-apis_2.10" % "0.17.1-SNAPSHOT"
+libraryDependencies += "org.bdgenomics.adam" % "adam-apis_2.10" % "0.17.+"
 
 libraryDependencies += "org.bdgenomics.bdg-formats" % "bdg-formats" % "0.4.0"
 
