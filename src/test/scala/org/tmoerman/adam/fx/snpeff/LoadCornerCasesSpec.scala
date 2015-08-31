@@ -3,7 +3,7 @@ package org.tmoerman.adam.fx.snpeff
 /**
  * @author Thomas Moerman
  */
-class LoadCornerCasesSpec extends SnpEffContextSpec {
+class LoadCornerCasesSpec extends BaseSnpEffContextSpec {
 
   val casesVcf = "src/test/resources/cases.snpEff.vcf"
 
