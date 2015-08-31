@@ -15,3 +15,7 @@ ANN = Allele | Annotation | Annotation_Impact | Gene_Name | Gene_ID | Feature_Ty
 
 
 ## release to bintray
+
+- change the version in versions.sbt
+- sbt publish
+
