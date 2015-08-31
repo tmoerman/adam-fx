@@ -1,17 +1,12 @@
 package org.tmoerman.adam.fx.snpeff
 
-class SnpEffContextSmokeTestsSpec extends SnpEffContextSpec {
+class SnpEffContextSmokeTestsSpec extends BaseSnpEffContextSpec {
 
   val smallVcf = "src/test/resources/small.vcf"
 
   val smallAnnotatedVcf = "src/test/resources/small.snpEff.vcf"
 
-  "Loading SnpEffAnnotations" should "pass the smoke test on an annotated file" in {
-    val annotations = ec.loadSnpEffAnnotations(smallAnnotatedVcf)
-    val all = annotations.collect()
-
-    all.exists(_.getFunctionalAnnotations.isEmpty) shouldBe false
-  }
+  val smallAnnotatedParquet = "src/test/resources/small.snpEff.adam"
 
   "Loading SnpEffAnnotations" should "pass the smoke test on a non-annotated file" in {
     val annotations = ec.loadSnpEffAnnotations(smallVcf)
@@ -20,18 +15,39 @@ class SnpEffContextSmokeTestsSpec extends SnpEffContextSpec {
     all.forall(_.getFunctionalAnnotations.isEmpty) shouldBe true
   }
 
-  "Loading VariantContextWithSnpEffAnnotations" should "pass the smoke test on an annotated file" in {
+  "Loading VariantContextWithSnpEffAnnotations" should "pass the smoke test on an non-annotated file" in {
+    val variantCtxs = ec.loadVariantsWithSnpEffAnnotations(smallVcf)
+    val all = variantCtxs.collect()
+
+    all.forall(_.snpEffAnnotations.isEmpty) shouldBe true
+  }
+
+  "Loading SnpEffAnnotations" should "pass the smoke test on an annotated .vcf file" in {
+    val annotations = ec.loadSnpEffAnnotations(smallAnnotatedVcf)
+    val all = annotations.collect()
+
+    all.exists(_.getFunctionalAnnotations.isEmpty) shouldBe false
+  }
+
+  "Loading VariantContextWithSnpEffAnnotations" should "pass the smoke test on an annotated .vcf file" in {
     val variantCtxs = ec.loadVariantsWithSnpEffAnnotations(smallAnnotatedVcf)
     val all = variantCtxs.collect()
 
     all.forall(_.snpEffAnnotations.isDefined) shouldBe true
   }
 
-  "Loading VariantContextWithSnpEffAnnotations" should "pass the smoke test on an non-annotated file" in {
-    val variantCtxs = ec.loadVariantsWithSnpEffAnnotations(smallVcf)
+  "Loading SnpEffAnnotations" should "pass the smoke test on an annotated .adam file" in {
+    val annotations = ec.loadSnpEffAnnotations(smallAnnotatedParquet)
+    val all = annotations.collect()
+
+    all.exists(_.getFunctionalAnnotations.isEmpty) shouldBe false
+  }
+
+  "Loading VariantContextWithSnpEffAnnotations" should "pass the smoke test on an annotated .adam file" in {
+    val variantCtxs = ec.loadVariantsWithSnpEffAnnotations(smallAnnotatedParquet)
     val all = variantCtxs.collect()
 
-    all.forall(_.snpEffAnnotations.isEmpty) shouldBe true
+    all.forall(_.snpEffAnnotations.isDefined) shouldBe true
   }
   
 }
