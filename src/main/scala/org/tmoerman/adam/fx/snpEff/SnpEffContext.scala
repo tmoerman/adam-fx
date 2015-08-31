@@ -1,12 +1,15 @@
 package org.tmoerman.adam.fx.snpeff
 
+import org.apache.avro.Schema
 import org.apache.hadoop.io.LongWritable
+import org.apache.parquet.filter2.predicate.FilterPredicate
 import org.apache.parquet.hadoop.util.ContextUtil
 import org.apache.spark.rdd.MetricsContext._
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{Logging, SparkContext}
 import org.bdgenomics.adam.converters.VariantContextConverter
 import org.bdgenomics.adam.models.SequenceDictionary
+import org.bdgenomics.adam.rdd.ADAMContext
 import org.bdgenomics.utils.instrumentation.Metrics
 import org.bdgenomics.utils.misc.HadoopUtil
 import org.seqdoop.hadoop_bam.{VCFInputFormat, VariantContextWritable}
@@ -24,7 +27,11 @@ object SnpEffContext {
 
 class SnpEffContext(val sc: SparkContext) extends Serializable with Logging {
 
-  private def loadVariantsFromFile(filePath: String): RDD[(LongWritable, VariantContextWritable)] = {
+  private[this] val ac = new ADAMContext(sc)
+
+  private def loadVariantContextsFromFile(
+      filePath: String): RDD[(LongWritable, VariantContextWritable)] = {
+
     val job = HadoopUtil.newJob(sc)
 
     val records = sc.newAPIHadoopFile(
@@ -37,18 +44,60 @@ class SnpEffContext(val sc: SparkContext) extends Serializable with Logging {
     records
   }
 
-  def loadVariantsWithSnpEffAnnotations(filePath: String, sd: Option[SequenceDictionary] = None): RDD[VariantContextWithSnpEffAnnotations] = {
-    val vcc    = new VariantContextConverter(sd)
-    val vcc4fx = new VariantContextConverterForSnpEff(vcc, sd)
+  private def loadParquetSnpEffAnnotations(
+      filePath: String,
+      predicate: Option[FilterPredicate] = None,
+      projection: Option[Schema] = None): RDD[SnpEffAnnotations] = {
 
-    loadVariantsFromFile(filePath).flatMap(pair => vcc4fx.convertToVariantsWithSnpEffAnnotations(pair._2.get))
+    ac.loadParquet[SnpEffAnnotations](filePath, predicate, projection)
   }
 
-  def loadSnpEffAnnotations(filePath: String, sd: Option[SequenceDictionary] = None): RDD[SnpEffAnnotations] = {
+  /**
+   * @param filePath
+   *                 Either a .vcf file or a Parquet file, for which the convention is the ".adam" suffix.
+   * @param predicate
+   * @param projection
+   * @param sd
+   * @return
+   */
+  def loadVariantsWithSnpEffAnnotations(
+      filePath: String,
+      predicate: Option[FilterPredicate] = None,
+      projection: Option[Schema] = None,
+      sd: Option[SequenceDictionary] = None): RDD[VariantContextWithSnpEffAnnotations] = {
+
     val vcc    = new VariantContextConverter(sd)
     val vcc4fx = new VariantContextConverterForSnpEff(vcc, sd)
 
-    loadVariantsFromFile(filePath).map(pair => vcc4fx.convertToSnpEffAnnotations(pair._2.get))
+    if (filePath.endsWith(".adam")) {
+      loadParquetSnpEffAnnotations(filePath, predicate, projection).map(a => VariantContextWithSnpEffAnnotations(a))
+    } else {
+      loadVariantContextsFromFile(filePath).flatMap(pair => vcc4fx.convertToVariantsWithSnpEffAnnotations(pair._2.get))
+    }
+  }
+
+  /**
+   * @param filePath
+   *                 Either a .vcf file or a Parquet file, for which the convention is the ".adam" suffix.
+   * @param predicate
+   * @param projection
+   * @param sd
+   * @return
+   */
+  def loadSnpEffAnnotations(
+      filePath: String,
+      predicate: Option[FilterPredicate] = None,
+      projection: Option[Schema] = None,
+      sd: Option[SequenceDictionary] = None): RDD[SnpEffAnnotations] = {
+
+    val vcc    = new VariantContextConverter(sd)
+    val vcc4fx = new VariantContextConverterForSnpEff(vcc, sd)
+
+    if (filePath.endsWith(".adam")) {
+      loadParquetSnpEffAnnotations(filePath, predicate, projection)
+    } else {
+      loadVariantContextsFromFile(filePath).map(pair => vcc4fx.convertToSnpEffAnnotations(pair._2.get))
+    }
   }
 
 }

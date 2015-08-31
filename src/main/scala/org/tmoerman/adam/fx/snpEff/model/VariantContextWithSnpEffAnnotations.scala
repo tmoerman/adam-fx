@@ -13,13 +13,18 @@ import org.tmoerman.adam.fx.util.ReflectToString
  */
 object VariantContextWithSnpEffAnnotations {
 
-  def apply(variantContext: VariantContext, snpEffAnnotations: SnpEffAnnotations) =
+  def apply(snpEffAnnotations: SnpEffAnnotations): VariantContextWithSnpEffAnnotations = {
+    VariantContextWithSnpEffAnnotations(VariantContext(snpEffAnnotations.getVariant), snpEffAnnotations)
+  }
+
+  def apply(variantContext: VariantContext, snpEffAnnotations: SnpEffAnnotations) = {
     new VariantContextWithSnpEffAnnotations(
       variantContext.position,
       variantContext.variant,
       variantContext.genotypes,
       variantContext.databases,
       new RichSnpEffAnnotations(snpEffAnnotations).asOption())
+  }
 
 }
 
