@@ -11,12 +11,6 @@ Artifacts are published to [Bintray](https://bintray.com/tmoerman/maven/adam-fx)
 
     `resolvers += "bintray-tmoerman" at "http://dl.bintray.com/tmoerman/maven"`
 
-    `libraryDependencies += "org.tmoerman" % "adam-fx_2.10" % "0.1"`
+    `libraryDependencies += "org.tmoerman" % "adam-fx_2.10" % "0.2.0"`
 
     (substitute version with latest)
-
-## TODO
-
-- saving to Parquet
-- loading from Parquet
-- tests on large annotated .vcf files
