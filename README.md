@@ -9,7 +9,7 @@ Artifacts are published to [Bintray](https://bintray.com/tmoerman/maven/adam-fx)
 
 ##### SBT
 
-```
+```sbt
 resolvers += "bintray-tmoerman" at "http://dl.bintray.com/tmoerman/maven"`
 
 libraryDependencies += "org.tmoerman" % "adam-fx_2.10" % "0.2.1"
@@ -67,7 +67,7 @@ val annotations: RDD[SnpEffAnnotations] = ec.loadSnpEffAnnotations(annotatedVcf)
 
 Or we can load as rich Scala-esque data types, arguably the preferable data types to work with.
 
-```
+```scala
 val variants: RDD[VariantContextWithSnpEffAnnotations] = ec.loadVariantsWithSnpEffAnnotations(annotatedVcf)
 ```
 
@@ -75,7 +75,7 @@ The methods are capable to load `SnpEffAnnotations` from Parquet storage. By con
 suffix ".adam". We can save an `RDD[SnpEffAnnotations]` to Parquet in the usual Adam way, by importing the
 ADAMContext implicit conversions and calling `adamParquetSave(fileName)` on an RDD of Avro data types:
  
-```
+```scala
 import org.bdgenomics.adam.rdd.ADAMContext._
 
 annotations.adamParquetSave("/my/data/dir/annotations.adam")
