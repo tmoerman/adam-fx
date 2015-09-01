@@ -78,5 +78,5 @@ named with suffix `.adam`. We can save an `RDD[SnpEffAnnotations]` to Parquet in
 annotations.adamParquetSave("/my/data/dir/annotations.adam")
 ```
 
-Note that if the `loadVariantsWithSnpEffAnnotations` is used to load data that was previously saved to Parquet, 
-the genotypes and databases are not loaded because that data is not part of the raw `SnpEffAnnotations` data type.
+Note that if the `loadVariantsWithSnpEffAnnotations` is used to load data from Parquet, the genotypes and databases 
+are absent because they are not part of the raw `SnpEffAnnotations` data type.
