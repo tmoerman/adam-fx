@@ -28,9 +28,9 @@ object VariantContextWithSnpEffAnnotations {
 
 }
 
-class VariantContextWithSnpEffAnnotations(position: ReferencePosition,
-                                          variant: RichVariant,
-                                          genotypes: Iterable[Genotype],
-                                          databases: Option[DatabaseVariantAnnotation] = None,
-                                          val snpEffAnnotations: Option[RichSnpEffAnnotations] = None)
+case class VariantContextWithSnpEffAnnotations(override val position: ReferencePosition,
+                                               override val variant: RichVariant,
+                                               override val genotypes: Iterable[Genotype],
+                                               override val databases: Option[DatabaseVariantAnnotation] = None,
+                                               snpEffAnnotations: Option[RichSnpEffAnnotations] = None)
   extends VariantContext(position, variant, genotypes, databases) with ReflectToString {}
