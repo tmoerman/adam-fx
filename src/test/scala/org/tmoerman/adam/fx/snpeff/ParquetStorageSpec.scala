@@ -1,10 +1,7 @@
 package org.tmoerman.adam.fx.snpeff
 
-import org.apache.spark.rdd.RDD
 import org.bdgenomics.adam.rdd.ADAMContext._
-import org.bdgenomics.formats.avro.Variant
 import org.scalatest.BeforeAndAfter
-import org.tmoerman.adam.fx.avro.SnpEffAnnotations
 import org.tmoerman.adam.fx.snpeff.model.VariantContextWithSnpEffAnnotations
 
 import scala.reflect.io.File
