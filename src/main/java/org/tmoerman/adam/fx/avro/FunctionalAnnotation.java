@@ -7,10 +7,10 @@ package org.tmoerman.adam.fx.avro;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class FunctionalAnnotation extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"FunctionalAnnotation\",\"namespace\":\"org.tmoerman.adam.fx.avro\",\"fields\":[{\"name\":\"allele\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"annotation\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}},{\"name\":\"impact\",\"type\":{\"type\":\"enum\",\"name\":\"Impact\",\"symbols\":[\"HIGH\",\"MODERATE\",\"LOW\",\"MODIFIER\"]}},{\"name\":\"geneName\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"geneID\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"featureType\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"featureID\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"transcriptBiotype\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"rankTotal\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Ratio\",\"fields\":[{\"name\":\"rank\",\"type\":\"int\"},{\"name\":\"total\",\"type\":\"int\"}]}]},{\"name\":\"HGSV_c\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"HGSV_p\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"cDNAPositionToLength\",\"type\":[\"null\",\"Ratio\"]},{\"name\":\"CDSPositionToLength\",\"type\":[\"null\",\"Ratio\"]},{\"name\":\"proteinPositionToLength\",\"type\":[\"null\",\"Ratio\"]},{\"name\":\"distanceToFeature\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"errorsWarningsInfo\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"FunctionalAnnotation\",\"namespace\":\"org.tmoerman.adam.fx.avro\",\"fields\":[{\"name\":\"allele\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"annotations\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}},{\"name\":\"impact\",\"type\":{\"type\":\"enum\",\"name\":\"Impact\",\"symbols\":[\"HIGH\",\"MODERATE\",\"LOW\",\"MODIFIER\"]}},{\"name\":\"geneName\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"geneID\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"featureType\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"featureID\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"transcriptBiotype\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"rankTotal\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Ratio\",\"fields\":[{\"name\":\"rank\",\"type\":\"int\"},{\"name\":\"total\",\"type\":\"int\"}]}]},{\"name\":\"HGSV_c\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"HGSV_p\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"cDNAPositionToLength\",\"type\":[\"null\",\"Ratio\"]},{\"name\":\"CDSPositionToLength\",\"type\":[\"null\",\"Ratio\"]},{\"name\":\"proteinPositionToLength\",\"type\":[\"null\",\"Ratio\"]},{\"name\":\"distanceToFeature\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"errorsWarningsInfo\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.String allele;
-  @Deprecated public java.util.List<java.lang.String> annotation;
+  @Deprecated public java.util.List<java.lang.String> annotations;
   @Deprecated public org.tmoerman.adam.fx.avro.Impact impact;
   @Deprecated public java.lang.String geneName;
   @Deprecated public java.lang.String geneID;
@@ -36,9 +36,9 @@ public class FunctionalAnnotation extends org.apache.avro.specific.SpecificRecor
   /**
    * All-args constructor.
    */
-  public FunctionalAnnotation(java.lang.String allele, java.util.List<java.lang.String> annotation, org.tmoerman.adam.fx.avro.Impact impact, java.lang.String geneName, java.lang.String geneID, java.lang.String featureType, java.lang.String featureID, java.lang.String transcriptBiotype, org.tmoerman.adam.fx.avro.Ratio rankTotal, java.lang.String HGSV_c, java.lang.String HGSV_p, org.tmoerman.adam.fx.avro.Ratio cDNAPositionToLength, org.tmoerman.adam.fx.avro.Ratio CDSPositionToLength, org.tmoerman.adam.fx.avro.Ratio proteinPositionToLength, java.lang.String distanceToFeature, java.lang.String errorsWarningsInfo) {
+  public FunctionalAnnotation(java.lang.String allele, java.util.List<java.lang.String> annotations, org.tmoerman.adam.fx.avro.Impact impact, java.lang.String geneName, java.lang.String geneID, java.lang.String featureType, java.lang.String featureID, java.lang.String transcriptBiotype, org.tmoerman.adam.fx.avro.Ratio rankTotal, java.lang.String HGSV_c, java.lang.String HGSV_p, org.tmoerman.adam.fx.avro.Ratio cDNAPositionToLength, org.tmoerman.adam.fx.avro.Ratio CDSPositionToLength, org.tmoerman.adam.fx.avro.Ratio proteinPositionToLength, java.lang.String distanceToFeature, java.lang.String errorsWarningsInfo) {
     this.allele = allele;
-    this.annotation = annotation;
+    this.annotations = annotations;
     this.impact = impact;
     this.geneName = geneName;
     this.geneID = geneID;
@@ -60,7 +60,7 @@ public class FunctionalAnnotation extends org.apache.avro.specific.SpecificRecor
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return allele;
-    case 1: return annotation;
+    case 1: return annotations;
     case 2: return impact;
     case 3: return geneName;
     case 4: return geneID;
@@ -83,7 +83,7 @@ public class FunctionalAnnotation extends org.apache.avro.specific.SpecificRecor
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: allele = (java.lang.String)value$; break;
-    case 1: annotation = (java.util.List<java.lang.String>)value$; break;
+    case 1: annotations = (java.util.List<java.lang.String>)value$; break;
     case 2: impact = (org.tmoerman.adam.fx.avro.Impact)value$; break;
     case 3: geneName = (java.lang.String)value$; break;
     case 4: geneID = (java.lang.String)value$; break;
@@ -118,18 +118,18 @@ public class FunctionalAnnotation extends org.apache.avro.specific.SpecificRecor
   }
 
   /**
-   * Gets the value of the 'annotation' field.
+   * Gets the value of the 'annotations' field.
    */
-  public java.util.List<java.lang.String> getAnnotation() {
-    return annotation;
+  public java.util.List<java.lang.String> getAnnotations() {
+    return annotations;
   }
 
   /**
-   * Sets the value of the 'annotation' field.
+   * Sets the value of the 'annotations' field.
    * @param value the value to set.
    */
-  public void setAnnotation(java.util.List<java.lang.String> value) {
-    this.annotation = value;
+  public void setAnnotations(java.util.List<java.lang.String> value) {
+    this.annotations = value;
   }
 
   /**
@@ -364,7 +364,7 @@ public class FunctionalAnnotation extends org.apache.avro.specific.SpecificRecor
     implements org.apache.avro.data.RecordBuilder<FunctionalAnnotation> {
 
     private java.lang.String allele;
-    private java.util.List<java.lang.String> annotation;
+    private java.util.List<java.lang.String> annotations;
     private org.tmoerman.adam.fx.avro.Impact impact;
     private java.lang.String geneName;
     private java.lang.String geneID;
@@ -392,8 +392,8 @@ public class FunctionalAnnotation extends org.apache.avro.specific.SpecificRecor
         this.allele = data().deepCopy(fields()[0].schema(), other.allele);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.annotation)) {
-        this.annotation = data().deepCopy(fields()[1].schema(), other.annotation);
+      if (isValidValue(fields()[1], other.annotations)) {
+        this.annotations = data().deepCopy(fields()[1].schema(), other.annotations);
         fieldSetFlags()[1] = true;
       }
       if (isValidValue(fields()[2], other.impact)) {
@@ -461,8 +461,8 @@ public class FunctionalAnnotation extends org.apache.avro.specific.SpecificRecor
         this.allele = data().deepCopy(fields()[0].schema(), other.allele);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.annotation)) {
-        this.annotation = data().deepCopy(fields()[1].schema(), other.annotation);
+      if (isValidValue(fields()[1], other.annotations)) {
+        this.annotations = data().deepCopy(fields()[1].schema(), other.annotations);
         fieldSetFlags()[1] = true;
       }
       if (isValidValue(fields()[2], other.impact)) {
@@ -548,27 +548,27 @@ public class FunctionalAnnotation extends org.apache.avro.specific.SpecificRecor
       return this;
     }
 
-    /** Gets the value of the 'annotation' field */
-    public java.util.List<java.lang.String> getAnnotation() {
-      return annotation;
+    /** Gets the value of the 'annotations' field */
+    public java.util.List<java.lang.String> getAnnotations() {
+      return annotations;
     }
     
-    /** Sets the value of the 'annotation' field */
-    public org.tmoerman.adam.fx.avro.FunctionalAnnotation.Builder setAnnotation(java.util.List<java.lang.String> value) {
+    /** Sets the value of the 'annotations' field */
+    public org.tmoerman.adam.fx.avro.FunctionalAnnotation.Builder setAnnotations(java.util.List<java.lang.String> value) {
       validate(fields()[1], value);
-      this.annotation = value;
+      this.annotations = value;
       fieldSetFlags()[1] = true;
       return this; 
     }
     
-    /** Checks whether the 'annotation' field has been set */
-    public boolean hasAnnotation() {
+    /** Checks whether the 'annotations' field has been set */
+    public boolean hasAnnotations() {
       return fieldSetFlags()[1];
     }
     
-    /** Clears the value of the 'annotation' field */
-    public org.tmoerman.adam.fx.avro.FunctionalAnnotation.Builder clearAnnotation() {
-      annotation = null;
+    /** Clears the value of the 'annotations' field */
+    public org.tmoerman.adam.fx.avro.FunctionalAnnotation.Builder clearAnnotations() {
+      annotations = null;
       fieldSetFlags()[1] = false;
       return this;
     }
@@ -928,7 +928,7 @@ public class FunctionalAnnotation extends org.apache.avro.specific.SpecificRecor
       try {
         FunctionalAnnotation record = new FunctionalAnnotation();
         record.allele = fieldSetFlags()[0] ? this.allele : (java.lang.String) defaultValue(fields()[0]);
-        record.annotation = fieldSetFlags()[1] ? this.annotation : (java.util.List<java.lang.String>) defaultValue(fields()[1]);
+        record.annotations = fieldSetFlags()[1] ? this.annotations : (java.util.List<java.lang.String>) defaultValue(fields()[1]);
         record.impact = fieldSetFlags()[2] ? this.impact : (org.tmoerman.adam.fx.avro.Impact) defaultValue(fields()[2]);
         record.geneName = fieldSetFlags()[3] ? this.geneName : (java.lang.String) defaultValue(fields()[3]);
         record.geneID = fieldSetFlags()[4] ? this.geneID : (java.lang.String) defaultValue(fields()[4]);

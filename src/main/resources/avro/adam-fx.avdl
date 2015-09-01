@@ -21,7 +21,7 @@ protocol EFFECTS {
 
     string allele;
 
-    array<string> annotation;
+    array<string> annotations;
 
     Impact impact;
 
