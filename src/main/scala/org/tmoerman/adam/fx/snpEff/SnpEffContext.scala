@@ -9,7 +9,7 @@ import org.apache.spark.rdd.RDD
 import org.apache.spark.{Logging, SparkContext}
 import org.bdgenomics.adam.converters.VariantContextConverter
 import org.bdgenomics.adam.models.SequenceDictionary
-import org.bdgenomics.adam.rdd.ADAMContext
+import org.bdgenomics.adam.rdd.ADAMContext._
 import org.bdgenomics.utils.instrumentation.Metrics
 import org.bdgenomics.utils.misc.HadoopUtil
 import org.seqdoop.hadoop_bam.{VCFInputFormat, VariantContextWritable}
@@ -21,14 +21,12 @@ import org.tmoerman.adam.fx.snpeff.model.VariantContextWithSnpEffAnnotations
  */
 object SnpEffContext {
 
-  implicit def sparkContextToEffectsContext(sc: SparkContext): SnpEffContext = new SnpEffContext(sc)
+  implicit def sparkContextToSnpEffContext(sc: SparkContext): SnpEffContext = new SnpEffContext(sc)
 
 }
 
 class SnpEffContext(val sc: SparkContext) extends Serializable with Logging {
-
-  private[this] val ac = new ADAMContext(sc)
-
+  
   private def loadVariantContextsFromFile(
       filePath: String): RDD[(LongWritable, VariantContextWritable)] = {
 
@@ -49,7 +47,7 @@ class SnpEffContext(val sc: SparkContext) extends Serializable with Logging {
       predicate: Option[FilterPredicate] = None,
       projection: Option[Schema] = None): RDD[SnpEffAnnotations] = {
 
-    ac.loadParquet[SnpEffAnnotations](filePath, predicate, projection)
+    sc.loadParquet[SnpEffAnnotations](filePath, predicate, projection)
   }
 
   /**
