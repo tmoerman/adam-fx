@@ -9,8 +9,19 @@ Artifacts are published to [Bintray](https://bintray.com/tmoerman/maven/adam-fx)
 
 * SBT
 
-    `resolvers += "bintray-tmoerman" at "http://dl.bintray.com/tmoerman/maven"`
+    ```
+    resolvers += "bintray-tmoerman" at "http://dl.bintray.com/tmoerman/maven"`
 
-    `libraryDependencies += "org.tmoerman" % "adam-fx_2.10" % "0.2.0"`
+    libraryDependencies += "org.tmoerman" % "adam-fx_2.10" % "0.2.1"
+    ```
 
-    (substitute version with latest)
+* Zeppelin
+
+    ```
+    %dep
+        
+    z.addRepo("bintray-tmoerman").url("http://dl.bintray.com/tmoerman/maven")
+        
+    z.load("org.tmoerman:adam-fx_2.10:0.2.1")
+       
+    ```
