@@ -71,10 +71,13 @@ Or we can load as rich Scala-esque data types, arguably the preferable data type
 val variants: RDD[VariantContextWithSnpEffAnnotations] = ec.loadVariantsWithSnpEffAnnotations(annotatedVcf)
 ```
 
-The methods are capable to load `SnpEffAnnotations` from Parquet storage. The convention is that Parquet files are 
-named with suffix `.adam`. We can save an `RDD[SnpEffAnnotations]` to Parquet in the usual Adam way:
+The methods are capable to load `SnpEffAnnotations` from Parquet storage. By convention, the Parquet file names have
+suffix ".adam". We can save an `RDD[SnpEffAnnotations]` to Parquet in the usual Adam way, by importing the
+ADAMContext implicit conversions and calling `adamParquetSave(fileName)` on an RDD of Avro data types:
  
 ```
+import org.bdgenomics.adam.rdd.ADAMContext._
+
 annotations.adamParquetSave("/my/data/dir/annotations.adam")
 ```
 
