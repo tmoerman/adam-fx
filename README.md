@@ -27,6 +27,8 @@ z.load("org.tmoerman:adam-fx_2.10:0.2.1")
 
 ## Data model
 
+Class diagram distilled from the Java classes generated from the Avro schema definition.  
+
 ![Class diagram](img/adam_fx_class_diagram.png?raw=true)
 
 ## Usage
