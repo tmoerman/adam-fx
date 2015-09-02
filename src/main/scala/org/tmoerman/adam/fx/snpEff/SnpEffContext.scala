@@ -23,6 +23,8 @@ object SnpEffContext {
 
   implicit def sparkContextToSnpEffContext(sc: SparkContext): SnpEffContext = new SnpEffContext(sc)
 
+  implicit def implicitSnpEffInspections(rdd: RDD[VariantContextWithSnpEffAnnotations]): SnpEffInspections = new SnpEffInspections(rdd)
+
 }
 
 class SnpEffContext(val sc: SparkContext) extends Serializable with Logging {
