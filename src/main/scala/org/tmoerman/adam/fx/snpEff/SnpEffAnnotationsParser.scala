@@ -4,35 +4,16 @@ import htsjdk.variant.variantcontext.VariantContext
 import htsjdk.variant.vcf.{VCFConstants, VCFHeaderLineType, VCFInfoHeaderLine}
 import org.apache.avro.Schema
 import org.apache.avro.specific.SpecificRecord
-import org.apache.commons.lang.StringUtils._
 import org.bdgenomics.adam.converters.AttrKey
 import org.tmoerman.adam.fx.avro._
 import java.util.{List => JList}
 import scala.collection.JavaConverters._
+import org.tmoerman.adam.fx.util.ParseFunctions._
 
 /**
   * @author Thomas Moerman
   */
 object SnpEffAnnotationsParser extends Serializable {
-
-   private val allBetweenBracketsRegex = "\\((.*?)\\)".r
-
-   def removeParentheses(s: String): String = allBetweenBracketsRegex.findFirstMatchIn(s).map(_.group(1)).getOrElse(s)
-
-   def splitAtPipe(s: String): Array[String] = s"$s ".split("\\|").map(s => if (isBlank(s)) null else s.trim)
-
-   def splitAtAmpersand(s: String): Array[String] = s.split("\\&")
-
-   def cleanAndSplitAtPipe = removeParentheses _ andThen splitAtPipe
-
-   def parseInt(s: String) = if (isNotEmpty(s)) Integer.valueOf(s) else null
-
-   def parseIntPair(s: String): Option[(Integer, Integer)] =
-     if (isNotEmpty(s)) {
-       s.split("/") match {
-         case Array(a, b) => Some((parseInt(a), parseInt(b)))
-       }
-     } else None
 
    def parseRatio(s: String) = parseIntPair(s).map{ case (a, b) => new Ratio(a, b) }.orNull
 
