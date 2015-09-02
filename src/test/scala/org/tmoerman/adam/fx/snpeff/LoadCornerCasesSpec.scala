@@ -1,13 +1,15 @@
 package org.tmoerman.adam.fx.snpeff
 
+import SnpEffContext._
+
 /**
  * @author Thomas Moerman
  */
-class LoadCornerCasesSpec extends BaseSnpEffContextSpec {
+class LoadCornerCasesSpec extends BaseSparkContextSpec {
 
   val casesVcf = "src/test/resources/cases.snpEff.vcf"
 
-  lazy val variantCtxs = ec.loadVariantsWithSnpEffAnnotations(casesVcf)
+  lazy val variantCtxs = sc.loadVariantsWithSnpEffAnnotations(casesVcf)
 
   lazy val all = variantCtxs.collect().toList.toArray
 
