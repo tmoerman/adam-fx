@@ -53,19 +53,7 @@ protocol EFFECTS {
 
   }
 
-  record LossOfFunction {
-
-    string gene;
-
-    string ID;
-
-    int numTranscripts;
-
-    float percentAffected;
-
-  }
-
-  record NonsenseMediateDecay {
+  record EffectPrediction {
 
     string gene;
 
@@ -81,11 +69,13 @@ protocol EFFECTS {
 
     union { null, org.bdgenomics.formats.avro.Variant } variant;
 
+    array<string> identifiers = [];
+
     array<FunctionalAnnotation> functionalAnnotations = [];
 
-    union { null, LossOfFunction } lossOfFunction = null;
+    union { null, EffectPrediction } lossOfFunction = null;
 
-    union { null, NonsenseMediateDecay } nonsenseMediateDecay = null;
+    union { null, EffectPrediction } nonsenseMediatedDecay = null;
 
   }
 

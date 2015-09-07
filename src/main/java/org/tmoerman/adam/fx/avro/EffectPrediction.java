@@ -6,8 +6,8 @@
 package org.tmoerman.adam.fx.avro;  
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
-public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"NonsenseMediateDecay\",\"namespace\":\"org.tmoerman.adam.fx.avro\",\"fields\":[{\"name\":\"gene\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"ID\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"numTranscripts\",\"type\":\"int\"},{\"name\":\"percentAffected\",\"type\":\"float\"}]}");
+public class EffectPrediction extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EffectPrediction\",\"namespace\":\"org.tmoerman.adam.fx.avro\",\"fields\":[{\"name\":\"gene\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"ID\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"numTranscripts\",\"type\":\"int\"},{\"name\":\"percentAffected\",\"type\":\"float\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.String gene;
   @Deprecated public java.lang.String ID;
@@ -19,12 +19,12 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
    * to their default values from the schema.  If that is desired then
    * one should use <code>newBuilder()</code>. 
    */
-  public NonsenseMediateDecay() {}
+  public EffectPrediction() {}
 
   /**
    * All-args constructor.
    */
-  public NonsenseMediateDecay(java.lang.String gene, java.lang.String ID, java.lang.Integer numTranscripts, java.lang.Float percentAffected) {
+  public EffectPrediction(java.lang.String gene, java.lang.String ID, java.lang.Integer numTranscripts, java.lang.Float percentAffected) {
     this.gene = gene;
     this.ID = ID;
     this.numTranscripts = numTranscripts;
@@ -114,26 +114,26 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
     this.percentAffected = value;
   }
 
-  /** Creates a new NonsenseMediateDecay RecordBuilder */
-  public static org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder newBuilder() {
-    return new org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder();
+  /** Creates a new EffectPrediction RecordBuilder */
+  public static org.tmoerman.adam.fx.avro.EffectPrediction.Builder newBuilder() {
+    return new org.tmoerman.adam.fx.avro.EffectPrediction.Builder();
   }
   
-  /** Creates a new NonsenseMediateDecay RecordBuilder by copying an existing Builder */
-  public static org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder newBuilder(org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder other) {
-    return new org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder(other);
+  /** Creates a new EffectPrediction RecordBuilder by copying an existing Builder */
+  public static org.tmoerman.adam.fx.avro.EffectPrediction.Builder newBuilder(org.tmoerman.adam.fx.avro.EffectPrediction.Builder other) {
+    return new org.tmoerman.adam.fx.avro.EffectPrediction.Builder(other);
   }
   
-  /** Creates a new NonsenseMediateDecay RecordBuilder by copying an existing NonsenseMediateDecay instance */
-  public static org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder newBuilder(org.tmoerman.adam.fx.avro.NonsenseMediateDecay other) {
-    return new org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder(other);
+  /** Creates a new EffectPrediction RecordBuilder by copying an existing EffectPrediction instance */
+  public static org.tmoerman.adam.fx.avro.EffectPrediction.Builder newBuilder(org.tmoerman.adam.fx.avro.EffectPrediction other) {
+    return new org.tmoerman.adam.fx.avro.EffectPrediction.Builder(other);
   }
   
   /**
-   * RecordBuilder for NonsenseMediateDecay instances.
+   * RecordBuilder for EffectPrediction instances.
    */
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<NonsenseMediateDecay>
-    implements org.apache.avro.data.RecordBuilder<NonsenseMediateDecay> {
+  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<EffectPrediction>
+    implements org.apache.avro.data.RecordBuilder<EffectPrediction> {
 
     private java.lang.String gene;
     private java.lang.String ID;
@@ -142,11 +142,11 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
 
     /** Creates a new Builder */
     private Builder() {
-      super(org.tmoerman.adam.fx.avro.NonsenseMediateDecay.SCHEMA$);
+      super(org.tmoerman.adam.fx.avro.EffectPrediction.SCHEMA$);
     }
     
     /** Creates a Builder by copying an existing Builder */
-    private Builder(org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder other) {
+    private Builder(org.tmoerman.adam.fx.avro.EffectPrediction.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.gene)) {
         this.gene = data().deepCopy(fields()[0].schema(), other.gene);
@@ -166,9 +166,9 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
       }
     }
     
-    /** Creates a Builder by copying an existing NonsenseMediateDecay instance */
-    private Builder(org.tmoerman.adam.fx.avro.NonsenseMediateDecay other) {
-            super(org.tmoerman.adam.fx.avro.NonsenseMediateDecay.SCHEMA$);
+    /** Creates a Builder by copying an existing EffectPrediction instance */
+    private Builder(org.tmoerman.adam.fx.avro.EffectPrediction other) {
+            super(org.tmoerman.adam.fx.avro.EffectPrediction.SCHEMA$);
       if (isValidValue(fields()[0], other.gene)) {
         this.gene = data().deepCopy(fields()[0].schema(), other.gene);
         fieldSetFlags()[0] = true;
@@ -193,7 +193,7 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Sets the value of the 'gene' field */
-    public org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder setGene(java.lang.String value) {
+    public org.tmoerman.adam.fx.avro.EffectPrediction.Builder setGene(java.lang.String value) {
       validate(fields()[0], value);
       this.gene = value;
       fieldSetFlags()[0] = true;
@@ -206,7 +206,7 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Clears the value of the 'gene' field */
-    public org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder clearGene() {
+    public org.tmoerman.adam.fx.avro.EffectPrediction.Builder clearGene() {
       gene = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -218,7 +218,7 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Sets the value of the 'ID' field */
-    public org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder setID(java.lang.String value) {
+    public org.tmoerman.adam.fx.avro.EffectPrediction.Builder setID(java.lang.String value) {
       validate(fields()[1], value);
       this.ID = value;
       fieldSetFlags()[1] = true;
@@ -231,7 +231,7 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Clears the value of the 'ID' field */
-    public org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder clearID() {
+    public org.tmoerman.adam.fx.avro.EffectPrediction.Builder clearID() {
       ID = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -243,7 +243,7 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Sets the value of the 'numTranscripts' field */
-    public org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder setNumTranscripts(int value) {
+    public org.tmoerman.adam.fx.avro.EffectPrediction.Builder setNumTranscripts(int value) {
       validate(fields()[2], value);
       this.numTranscripts = value;
       fieldSetFlags()[2] = true;
@@ -256,7 +256,7 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Clears the value of the 'numTranscripts' field */
-    public org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder clearNumTranscripts() {
+    public org.tmoerman.adam.fx.avro.EffectPrediction.Builder clearNumTranscripts() {
       fieldSetFlags()[2] = false;
       return this;
     }
@@ -267,7 +267,7 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Sets the value of the 'percentAffected' field */
-    public org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder setPercentAffected(float value) {
+    public org.tmoerman.adam.fx.avro.EffectPrediction.Builder setPercentAffected(float value) {
       validate(fields()[3], value);
       this.percentAffected = value;
       fieldSetFlags()[3] = true;
@@ -280,15 +280,15 @@ public class NonsenseMediateDecay extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Clears the value of the 'percentAffected' field */
-    public org.tmoerman.adam.fx.avro.NonsenseMediateDecay.Builder clearPercentAffected() {
+    public org.tmoerman.adam.fx.avro.EffectPrediction.Builder clearPercentAffected() {
       fieldSetFlags()[3] = false;
       return this;
     }
 
     @Override
-    public NonsenseMediateDecay build() {
+    public EffectPrediction build() {
       try {
-        NonsenseMediateDecay record = new NonsenseMediateDecay();
+        EffectPrediction record = new EffectPrediction();
         record.gene = fieldSetFlags()[0] ? this.gene : (java.lang.String) defaultValue(fields()[0]);
         record.ID = fieldSetFlags()[1] ? this.ID : (java.lang.String) defaultValue(fields()[1]);
         record.numTranscripts = fieldSetFlags()[2] ? this.numTranscripts : (java.lang.Integer) defaultValue(fields()[2]);

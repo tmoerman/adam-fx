@@ -1,6 +1,6 @@
 package org.tmoerman.adam.fx.snpeff.model
 
-import org.tmoerman.adam.fx.avro.{FunctionalAnnotation, LossOfFunction, NonsenseMediateDecay, SnpEffAnnotations}
+import org.tmoerman.adam.fx.avro._
 import org.tmoerman.adam.fx.util.ReflectToString
 
 import scala.collection.JavaConverters._
@@ -12,13 +12,13 @@ case class RichSnpEffAnnotations(inner: SnpEffAnnotations) extends Serializable 
 
   val functionalAnnotations: List[FunctionalAnnotation] = inner.getFunctionalAnnotations.asScala.toList
 
-  val lossOfFunction: Option[LossOfFunction] = Option(inner.getLossOfFunction)
+  val lossOfFunction: Option[EffectPrediction] = Option(inner.getLossOfFunction)
 
-  val nonsenseMediateDecay: Option[NonsenseMediateDecay] = Option(inner.getNonsenseMediateDecay)
+  val nonsenseMediatedDecay: Option[EffectPrediction] = Option(inner.getNonsenseMediatedDecay)
 
   lazy val isEmpty = functionalAnnotations.isEmpty &&
                      lossOfFunction.isEmpty        &&
-                     nonsenseMediateDecay.isEmpty
+                     nonsenseMediatedDecay.isEmpty
 
   def asOption() = if (isEmpty) None else Option(this)
 

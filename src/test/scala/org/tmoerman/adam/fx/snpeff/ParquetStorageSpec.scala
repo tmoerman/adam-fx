@@ -13,7 +13,7 @@ import scala.reflect.io.File
 class ParquetStorageSpec extends BaseSparkContextSpec with BeforeAndAfter {
 
   val vcf     = "src/test/resources/small.snpEff.vcf"
-  val parquet = "src/test/resources/small.snpEff.adam"
+
   val temp    = "src/test/temp/small.snpEff.adam"
 
   "SnpEffAnnotations saved to Parquet" should "match the original when loaded again" in {
@@ -27,8 +27,11 @@ class ParquetStorageSpec extends BaseSparkContextSpec with BeforeAndAfter {
   }
 
   "Rich types loaded from vcf" should "match rich types loaded from Parquet" in {
-    val fromFile    = sc.loadVariantsWithSnpEffAnnotations(vcf)
-    val fromParquet = sc.loadVariantsWithSnpEffAnnotations(parquet)
+    sc.loadSnpEffAnnotations(vcf).adamParquetSave(temp)
+
+    val fromFile = sc.loadVariantsWithSnpEffAnnotations(vcf)
+
+    val fromParquet = sc.loadVariantsWithSnpEffAnnotations(temp)
 
     val projected = (v: VariantContextWithSnpEffAnnotations) => (v.variant, v.position, v.snpEffAnnotations)
 

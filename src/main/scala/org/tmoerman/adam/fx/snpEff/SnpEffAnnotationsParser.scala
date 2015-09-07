@@ -55,38 +55,24 @@ object SnpEffAnnotationsParser extends Serializable {
      case l: JList[String] => l.asScala.map(toFunctionalAnnotation).asJava
    }
 
-   def toLossOfFunction(s: String): LossOfFunction = {
+   def toEffectPrediction(s: String): EffectPrediction = {
      val attributes = cleanAndSplitAtPipe(s)
 
-     new LossOfFunction(
+     new EffectPrediction(
        attributes(0),
        attributes(1),
        java.lang.Integer.valueOf(attributes(2)),
        java.lang.Float.valueOf(attributes(3)))
    }
 
-   def lofParser(attr: Object): LossOfFunction = attr match {
-     case s: String => toLossOfFunction(s)
+   def effectPredictionParser(attr: Object): EffectPrediction = attr match {
+     case s: String => toEffectPrediction(s)
    }
-
-   def toNonsenseMediateDecay(s: String): NonsenseMediateDecay = {
-     val attributes = cleanAndSplitAtPipe(s)
-
-     new NonsenseMediateDecay(
-       attributes(0),
-       attributes(1),
-       java.lang.Integer.valueOf(attributes(2)),
-       java.lang.Float.valueOf(attributes(3)))
-   }
-
-   def nmdParser(attr: Object): NonsenseMediateDecay = attr match {
-     case s: String => toNonsenseMediateDecay(s)
-   }
-
+  
    val SNP_EFF_INFO_KEYS: Seq[AttrKey] = Seq(
-     AttrKey("functionalAnnotations", annParser _, new VCFInfoHeaderLine("ANN", 1, VCFHeaderLineType.String, "ANN INFO field: functional annotations")),
-     AttrKey("lossOfFunction",        lofParser _, new VCFInfoHeaderLine("LOF", 1, VCFHeaderLineType.String, "LOF INFO field: loss of function")),
-     AttrKey("nonsenseMediateDecay",  nmdParser _, new VCFInfoHeaderLine("NMD", 1, VCFHeaderLineType.String, "NMD INFO field: nonsense mediate decay")))
+     AttrKey("functionalAnnotations",  annParser _, new VCFInfoHeaderLine("ANN", 1, VCFHeaderLineType.String, "ANN INFO field: functional annotations")),
+     AttrKey("lossOfFunction",         effectPredictionParser _, new VCFInfoHeaderLine("LOF", 1, VCFHeaderLineType.String, "LOF INFO field: loss of function")),
+     AttrKey("nonsenseMediatedDecay",  effectPredictionParser _, new VCFInfoHeaderLine("NMD", 1, VCFHeaderLineType.String, "NMD INFO field: nonsense mediated decay")))
 
    lazy val VCF2SnpEffAnnotations: Map[String, (Int, Object => Object)] =
      createFieldMap(SNP_EFF_INFO_KEYS, SnpEffAnnotations.getClassSchema)
