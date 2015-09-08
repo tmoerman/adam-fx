@@ -24,7 +24,7 @@ case class RichClinvarAnnotations(inner: ClinvarAnnotations) extends Serializabl
 
   def variantClinicalChannels:     List[String] = inner.getCLNSRC
 
-  def variantClinicalSignificance: List[String] = inner.getCLNSIG
+  def variantClinicalSignificance: List[Int]    = inner.getCLNSIG.map(_.intValue)
 
   def alleleOrigin:                List[String] = inner.getCLNORIGIN
 
