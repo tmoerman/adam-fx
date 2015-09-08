@@ -3,7 +3,7 @@ package org.tmoerman.adam.fx.snpeff
 import org.apache.spark.rdd.RDD
 import org.tmoerman.adam.fx.avro.FunctionalAnnotation
 import org.tmoerman.adam.fx.snpeff.model.VariantContextWithSnpEffAnnotations
-import scala.collection.JavaConverters._
+import scala.collection.JavaConversions._
 import scala.reflect.ClassTag
 
 /**
@@ -17,7 +17,7 @@ class SnpEffInspections(val rdd: RDD[VariantContextWithSnpEffAnnotations]) exten
   def distinctAnnotations(): RDD[String] = {
     rdd.flatMap(_.snpEffAnnotations
                  .map(_.functionalAnnotations
-                       .flatMap(_.getAnnotations.asScala))
+                       .flatMap(_.getAnnotations))
                  .getOrElse(Nil))
        .distinct()
        .sortBy(identity)
