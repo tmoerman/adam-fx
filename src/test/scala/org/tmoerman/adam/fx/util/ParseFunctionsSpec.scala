@@ -1,12 +1,12 @@
-package org.tmoerman.adam.fx.snpeff
+package org.tmoerman.adam.fx.util
 
 import org.scalatest.{FlatSpec, Matchers}
-import org.tmoerman.adam.fx.snpeff.SnpEffAnnotationsParser._
+import ParseFunctions._
 
 /**
  * @author Thomas Moerman
  */
-class SnpEffAnnotationConverterSpec extends FlatSpec with Matchers {
+class ParseFunctionsSpec extends FlatSpec with Matchers {
 
   "splitAtPipeSymbols" should "return a List containing a null value when the input is empty" in {
     splitAtPipe("") shouldBe List(null)

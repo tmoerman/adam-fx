@@ -53,7 +53,7 @@ protocol EFFECTS {
 
   }
 
-  record LossOfFunction {
+  record EffectPrediction {
 
     string gene;
 
@@ -65,27 +65,58 @@ protocol EFFECTS {
 
   }
 
-  record NonsenseMediateDecay {
+  // currently only a subset, http://varianttools.sourceforge.net/Annotation/DbSNP
+  record DbSnpAnnotations {
 
-    string gene;
+    array<int> RS = [];
 
-    string ID;
+    boolean VLD = false;
 
-    int numTranscripts;
+    boolean G5A = false;
 
-    float percentAffected;
+    boolean MUT = false;
+
+    boolean OM  = false;
+
+    boolean PM  = false;
+
+  }
+
+  record ClinvarAnnotations {
+
+    array<string> CLNDSDB   = []; // Variant Disease Database Name
+
+    array<string> CLNACC    = []; // Variant Accession and Versions
+
+    array<string> CLNDBN    = []; // Variant Disease Name
+
+    array<string> CLNSRC    = []; // Variant Clinical Channels
+
+    array<int> CLNSIG       = []; // Variant Clinical Significance
+
+    array<string> CLNORIGIN = []; // Allele Origin
+
+    array<string> CLNDSDBID = []; // Variant Disease Database ID
+
+    array<string> CLNHGVS   = []; // Variant Names From HGVS
+
+    array<string> CLNSRCID  = []; // Variant Clinical Channel IDs
 
   }
 
   record SnpEffAnnotations {
 
     union { null, org.bdgenomics.formats.avro.Variant } variant;
-
+    
     array<FunctionalAnnotation> functionalAnnotations = [];
 
-    union { null, LossOfFunction } lossOfFunction = null;
+    union { null, EffectPrediction } lossOfFunction = null;
 
-    union { null, NonsenseMediateDecay } nonsenseMediateDecay = null;
+    union { null, EffectPrediction } nonsenseMediatedDecay = null;
+
+    union { null, DbSnpAnnotations } dbSnpAnnotations = null;
+
+    union { null, ClinvarAnnotations } clinvarAnnotations = null;
 
   }
 

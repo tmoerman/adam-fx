@@ -6,7 +6,7 @@ import org.scalatest.{FlatSpec, Matchers}
 /**
  * @author Thomas Moerman
  */
-object BaseSnpEffContextSpec {
+object BaseSparkContextSpec {
 
   lazy val conf = new SparkConf()
     .setAppName("Test")
@@ -17,12 +17,10 @@ object BaseSnpEffContextSpec {
 
   lazy val sc = new SparkContext(conf)
 
-  lazy val ec = new SnpEffContext(sc)
-
 }
 
-trait BaseSnpEffContextSpec extends FlatSpec with Matchers {
+trait BaseSparkContextSpec extends FlatSpec with Matchers {
 
-  lazy val ec = BaseSnpEffContextSpec.ec
+  lazy val sc = BaseSparkContextSpec.sc
 
 }
