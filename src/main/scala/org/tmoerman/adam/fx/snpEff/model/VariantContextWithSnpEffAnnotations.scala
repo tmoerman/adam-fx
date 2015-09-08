@@ -23,7 +23,7 @@ object VariantContextWithSnpEffAnnotations {
       variantContext.variant,
       variantContext.genotypes,
       variantContext.databases,
-      new RichSnpEffAnnotations(snpEffAnnotations).asOption())
+      new RichSnpEffAnnotations(snpEffAnnotations).asOption)
   }
 
 }
