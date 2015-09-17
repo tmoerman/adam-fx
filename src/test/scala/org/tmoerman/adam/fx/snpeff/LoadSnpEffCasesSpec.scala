@@ -27,16 +27,16 @@ class LoadSnpEffCasesSpec extends BaseSparkContextSpec {
     ann.snpEffAnnotations.get.nonsenseMediatedDecay  shouldBe empty
 
     lof.snpEffAnnotations.get.functionalAnnotations  shouldBe empty
-    lof.snpEffAnnotations.get.lossOfFunction         shouldBe defined
+    lof.snpEffAnnotations.get.lossOfFunction         should not be empty
     lof.snpEffAnnotations.get.nonsenseMediatedDecay  shouldBe empty
 
     nmd.snpEffAnnotations.get.functionalAnnotations  shouldBe empty
     nmd.snpEffAnnotations.get.lossOfFunction         shouldBe empty
-    nmd.snpEffAnnotations.get.nonsenseMediatedDecay  shouldBe defined
+    nmd.snpEffAnnotations.get.nonsenseMediatedDecay  should not be empty
 
     lofnmd.snpEffAnnotations.get.functionalAnnotations  shouldBe empty
-    lofnmd.snpEffAnnotations.get.lossOfFunction         shouldBe defined
-    lofnmd.snpEffAnnotations.get.nonsenseMediatedDecay  shouldBe defined
+    lofnmd.snpEffAnnotations.get.lossOfFunction         should not be empty
+    lofnmd.snpEffAnnotations.get.nonsenseMediatedDecay  should not be empty
   }
 
 }

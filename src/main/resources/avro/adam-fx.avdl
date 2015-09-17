@@ -92,7 +92,7 @@ protocol EFFECTS {
 
     array<string> CLNSRC    = []; // Variant Clinical Channels
 
-    array<int> CLNSIG       = []; // Variant Clinical Significance
+    array<int>    CLNSIG    = []; // Variant Clinical Significance
 
     array<string> CLNORIGIN = []; // Allele Origin
 
@@ -110,9 +110,9 @@ protocol EFFECTS {
     
     array<FunctionalAnnotation> functionalAnnotations = [];
 
-    union { null, EffectPrediction } lossOfFunction = null;
+    array<EffectPrediction>     lossOfFunction = [];
 
-    union { null, EffectPrediction } nonsenseMediatedDecay = null;
+    array<EffectPrediction>     nonsenseMediatedDecay = [];
 
     union { null, DbSnpAnnotations } dbSnpAnnotations = null;
 

@@ -14,9 +14,9 @@ case class RichSnpEffAnnotations(inner: SnpEffAnnotations) extends Serializable 
 
   lazy val functionalAnnotations: List[FunctionalAnnotation] = inner.getFunctionalAnnotations
 
-  lazy val lossOfFunction:        Option[EffectPrediction]   = Option(inner.getLossOfFunction)
+  lazy val lossOfFunction:        List[EffectPrediction]     = inner.getLossOfFunction
 
-  lazy val nonsenseMediatedDecay: Option[EffectPrediction]   = Option(inner.getNonsenseMediatedDecay)
+  lazy val nonsenseMediatedDecay: List[EffectPrediction]     = inner.getNonsenseMediatedDecay
 
   lazy val dbSnpAnnotations:      Option[DbSnpAnnotations]   = Option(inner.getDbSnpAnnotations)
 

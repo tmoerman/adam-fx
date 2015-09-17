@@ -89,8 +89,9 @@ object SnpEffAnnotationsParser extends Serializable {
       java.lang.Float.valueOf(attributes(3)))
   }
 
-  def effectPredictionParser(attr: Object): EffectPrediction = attr match {
-    case s: String => toEffectPrediction(s)
+  def effectPredictionParser(attr: Object): JList[EffectPrediction] = attr match {
+    case s: String        => List(toEffectPrediction(s)).asJava
+    case l: JList[String] => l.map(toEffectPrediction).asJava
   }
 
   val DB_SNP_INFO_KEYS: Seq[AttrKey] = Seq(
