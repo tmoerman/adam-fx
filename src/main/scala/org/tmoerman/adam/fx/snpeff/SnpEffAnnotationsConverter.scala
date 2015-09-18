@@ -25,7 +25,7 @@ class SnpEffAnnotationsConverter(val converter: VariantContextConverter) extends
     converter
       .convert(broadVariantContext)
       .map(variantContext => {val snpEffAnnotations = newBuilder().setVariant(variantContext.variant).build()
-      SnpEffAnnotationsParser.convert(broadVariantContext, snpEffAnnotations)})
+                              SnpEffAnnotationsParser.convert(broadVariantContext, snpEffAnnotations)})
       .map(snpEffAnnotations => filterFunctionalAnnotationsByAllele(broadVariantContext, snpEffAnnotations))
   }
 

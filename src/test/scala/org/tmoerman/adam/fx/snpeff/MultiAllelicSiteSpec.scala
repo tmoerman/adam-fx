@@ -33,11 +33,22 @@ class MultiAllelicSiteSpec extends BaseSparkContextSpec {
     variants.length shouldBe 7
   }
 
-  "SnpEffAnnotations for multi-allelic variants" should "only have FunctionalAnnotations for the correct alternative allele" in {
+  "SnpEffAnnotations for multi-allelic variants" should
+    "only have FunctionalAnnotations for the correct alternative allele" in {
+
     sc.loadSnpEffAnnotations(annotated)
       .collect()
       .forall(a => a.getFunctionalAnnotations
-                    .forall(_.getAllele == a.getVariant.getAlternateAllele)) shouldBe true
+      .forall(_.getAllele == a.getVariant.getAlternateAllele)) shouldBe true
+  }
+
+  "VariantContextsWithSnpEffAnnotations for multi-allelic variants" should
+    "only have FunctionalAnnotations for the correct alternative allele" in {
+
+    sc.loadVariantsWithSnpEffAnnotations(annotated)
+      .collect()
+      .forall(v => v.snpEffAnnotations.map(a => a.functionalAnnotations
+                                                 .forall(_.getAllele == a.variant.getAlternateAllele)).get) shouldBe true
   }
 
 }
