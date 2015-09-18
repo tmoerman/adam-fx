@@ -59,7 +59,6 @@ class LoadSnpSiftCasesSpec extends BaseSparkContextSpec {
 
     clinvar.getCLNACC    shouldBe List("RCV000017599.1", "RCV000017600.1", "RCV000022558.1").asJava
     clinvar.getCLNDSDBID shouldBe List("C3150401", "CN043549", "C2751603:613060").asJava
-    //clinvarAnnotations7.getCLNDSDB shouldBe   List
   }
 
 }
