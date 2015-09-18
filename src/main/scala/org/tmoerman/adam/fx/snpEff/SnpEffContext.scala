@@ -28,6 +28,7 @@ object SnpEffContext {
 }
 
 class SnpEffContext(val sc: SparkContext) extends Serializable with Logging {
+  import SnpEffAnnotationsConverter._
   
   private def loadVariantContextsFromFile(
       filePath: String): RDD[(LongWritable, VariantContextWritable)] = {
@@ -66,13 +67,12 @@ class SnpEffContext(val sc: SparkContext) extends Serializable with Logging {
       projection: Option[Schema] = None,
       sd: Option[SequenceDictionary] = None): RDD[VariantContextWithSnpEffAnnotations] = {
 
-    val vcc    = new VariantContextConverter(sd)
-    val vcc4fx = new VariantContextConverterForSnpEff(vcc, sd)
-
     if (filePath.endsWith(".adam")) {
       loadParquetSnpEffAnnotations(filePath, predicate, projection).map(a => VariantContextWithSnpEffAnnotations(a))
     } else {
-      loadVariantContextsFromFile(filePath).flatMap(pair => vcc4fx.convertToVariantsWithSnpEffAnnotations(pair._2.get))
+      val vcc = new VariantContextConverter(sd)
+
+      loadVariantContextsFromFile(filePath).flatMap{case (_, vcw) => vcc.toVariantContextsWithSnpEffAnnotations(vcw.get())}
     }
   }
 
@@ -90,13 +90,12 @@ class SnpEffContext(val sc: SparkContext) extends Serializable with Logging {
       projection: Option[Schema] = None,
       sd: Option[SequenceDictionary] = None): RDD[SnpEffAnnotations] = {
 
-    val vcc    = new VariantContextConverter(sd)
-    val vcc4fx = new VariantContextConverterForSnpEff(vcc, sd)
-
     if (filePath.endsWith(".adam")) {
       loadParquetSnpEffAnnotations(filePath, predicate, projection)
     } else {
-      loadVariantContextsFromFile(filePath).map(pair => vcc4fx.convertToSnpEffAnnotations(pair._2.get))
+      val vcc = new VariantContextConverter(sd)
+
+      loadVariantContextsFromFile(filePath).flatMap{case (_, vcw) => vcc.toSnpEffAnnotations(vcw.get())}
     }
   }
 

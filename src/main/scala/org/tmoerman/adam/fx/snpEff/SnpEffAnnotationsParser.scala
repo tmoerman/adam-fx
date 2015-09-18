@@ -2,9 +2,8 @@ package org.tmoerman.adam.fx.snpeff
 
 import java.lang.Boolean.TRUE
 import java.util.{List => JList}
-import java.util.ArrayList
 
-import htsjdk.variant.variantcontext.VariantContext
+import htsjdk.variant.variantcontext.{VariantContext => BroadVariantContext}
 import htsjdk.variant.vcf.VCFHeaderLineCount._
 import htsjdk.variant.vcf.VCFHeaderLineType._
 import htsjdk.variant.vcf.{VCFConstants, VCFInfoHeaderLine}
@@ -134,7 +133,7 @@ object SnpEffAnnotationsParser extends Serializable {
     })(collection.breakOut)
   }
 
-  private def fillRecord[T <% SpecificRecord](fieldMap: Map[String, (Int, Object => Object)], vc: VariantContext, record: T): T = {
+  private def fillRecord[T <% SpecificRecord](fieldMap: Map[String, (Int, Object => Object)], vc: BroadVariantContext, record: T): T = {
     for ((v, a) <- fieldMap) {
       val attr = vc.getAttribute(v)
       if (attr != null && attr != VCFConstants.MISSING_VALUE_v4) {
@@ -144,28 +143,28 @@ object SnpEffAnnotationsParser extends Serializable {
     record
   }
 
-  def convert(vc: VariantContext, snpEffAnnotations: SnpEffAnnotations): SnpEffAnnotations = {
-    addDbSnpAnnotations(vc, snpEffAnnotations)
+  def convert(broadVariantContext: BroadVariantContext, snpEffAnnotations: SnpEffAnnotations): SnpEffAnnotations = {
+    addDbSnpAnnotations(broadVariantContext, snpEffAnnotations)
 
-    addClinvarAnnotations(vc, snpEffAnnotations)
+    addClinvarAnnotations(broadVariantContext, snpEffAnnotations)
 
-    fillRecord(VCF2SnpEffAnnotations, vc, snpEffAnnotations)
+    fillRecord(VCF2SnpEffAnnotations, broadVariantContext, snpEffAnnotations)
   }
 
-  def addDbSnpAnnotations(vc: VariantContext, snpEffAnnotations: SnpEffAnnotations): Unit = {
+  private def addDbSnpAnnotations(broadVariantContext: BroadVariantContext, snpEffAnnotations: SnpEffAnnotations): Unit = {
     val dbSnpAnnotations = DbSnpAnnotations.newBuilder().build()
 
-    fillRecord(VCF2DbSnpAnnotations, vc, dbSnpAnnotations)
+    fillRecord(VCF2DbSnpAnnotations, broadVariantContext, dbSnpAnnotations)
 
     if (! dbSnpAnnotations.getRS.isEmpty) {
       snpEffAnnotations.setDbSnpAnnotations(dbSnpAnnotations)
     }
   }
 
-  def addClinvarAnnotations(vc: VariantContext, snpEffAnnotations: SnpEffAnnotations): Unit = {
+  private def addClinvarAnnotations(broadVariantContext: BroadVariantContext, snpEffAnnotations: SnpEffAnnotations): Unit = {
     val clinvarAnnotations = ClinvarAnnotations.newBuilder().build()
 
-    fillRecord(VCF2ClinvarAnnotations, vc, clinvarAnnotations)
+    fillRecord(VCF2ClinvarAnnotations, broadVariantContext, clinvarAnnotations)
 
     if (!clinvarAnnotations.getCLNDSDBID.isEmpty) {
       snpEffAnnotations.setClinvarAnnotations(clinvarAnnotations)
