@@ -18,10 +18,10 @@ object SnpEffAnnotationsConverter {
 
 class SnpEffAnnotationsConverter(val converter: VariantContextConverter) extends Serializable {
 
-  def toVariantContextsWithSnpEffAnnotations(broadVariantContext: BroadVariantContext) =
+  def toVariantContextsWithSnpEffAnnotations(broadVariantContext: BroadVariantContext): Seq[VariantContextWithSnpEffAnnotations] =
     toSnpEffAnnotations(broadVariantContext).map(VariantContextWithSnpEffAnnotations(_))
 
-  def toSnpEffAnnotations(broadVariantContext: BroadVariantContext) = {
+  def toSnpEffAnnotations(broadVariantContext: BroadVariantContext): Seq[SnpEffAnnotations] = {
     converter
       .convert(broadVariantContext)
       .map(variantContext => {val snpEffAnnotations = newBuilder().setVariant(variantContext.variant).build()
