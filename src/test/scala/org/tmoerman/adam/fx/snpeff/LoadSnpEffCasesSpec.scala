@@ -9,34 +9,49 @@ class LoadSnpEffCasesSpec extends BaseSparkContextSpec {
 
   val snpEffCases = "src/test/resources/cases.snpEff.vcf"
 
-  val all = sc.loadVariantsWithSnpEffAnnotations(snpEffCases).collect().toList.toArray
+  val rdd = sc.loadAnnotatedVariants(snpEffCases).cache()
 
-  val (ann, nop, lof, nmd, lofnmd) = all match { case Array(a, b, c, d, e) => (a, b, c, d, e) }
+  val all = rdd.collect().toList.toArray
 
-  "variantContexts" should "correctly have optional snpEffAnnotations" in {
-    ann.snpEffAnnotations    shouldBe defined
-    nop.snpEffAnnotations    shouldBe empty
-    lof.snpEffAnnotations    shouldBe defined
-    nmd.snpEffAnnotations    shouldBe defined
-    lofnmd.snpEffAnnotations shouldBe defined
+  "AnnotatedVariants" should "correctly have functionalAnnotations" in {
+    val (ann, nop, lof, nmd, lofnmd) = all match { case Array(a, b, c, d, e) => (a, b, c, d, e) }
+
+    ann.getAnnotations.getFunctionalAnnotations should not be empty
+    ann.getAnnotations.getLossOfFunction        shouldBe empty
+    ann.getAnnotations.getNonsenseMediatedDecay shouldBe empty
+    ann.getAnnotations.getClinvarAnnotations    shouldBe null
+    ann.getAnnotations.getDbSnpAnnotations      shouldBe null
+
+    lof.getAnnotations.getFunctionalAnnotations shouldBe empty
+    lof.getAnnotations.getLossOfFunction        should not be empty
+    lof.getAnnotations.getNonsenseMediatedDecay shouldBe empty
+
+    nmd.getAnnotations.getFunctionalAnnotations  shouldBe empty
+    nmd.getAnnotations.getLossOfFunction         shouldBe empty
+    nmd.getAnnotations.getNonsenseMediatedDecay  should not be empty
+
+    lofnmd.getAnnotations.getFunctionalAnnotations shouldBe empty
+    lofnmd.getAnnotations.getLossOfFunction        should not be empty
+    lofnmd.getAnnotations.getNonsenseMediatedDecay should not be empty
   }
-  
-  "variantContexts" should "correctly have functionalAnnotations" in {
-    ann.snpEffAnnotations.get.functionalAnnotations  should not be empty
-    ann.snpEffAnnotations.get.lossOfFunction         shouldBe empty
-    ann.snpEffAnnotations.get.nonsenseMediatedDecay  shouldBe empty
 
-    lof.snpEffAnnotations.get.functionalAnnotations  shouldBe empty
-    lof.snpEffAnnotations.get.lossOfFunction         should not be empty
-    lof.snpEffAnnotations.get.nonsenseMediatedDecay  shouldBe empty
+  val richRDD = rdd.toRichAnnotatedVariants
 
-    nmd.snpEffAnnotations.get.functionalAnnotations  shouldBe empty
-    nmd.snpEffAnnotations.get.lossOfFunction         shouldBe empty
-    nmd.snpEffAnnotations.get.nonsenseMediatedDecay  should not be empty
+  val allRich = richRDD.collect().toList.toArray
 
-    lofnmd.snpEffAnnotations.get.functionalAnnotations  shouldBe empty
-    lofnmd.snpEffAnnotations.get.lossOfFunction         should not be empty
-    lofnmd.snpEffAnnotations.get.nonsenseMediatedDecay  should not be empty
+  "RichAnnotated Variants" should "correctly have annotations as an option" in {
+    val (ann, nop, lof, nmd, lofnmd) = allRich match { case Array(a, b, c, d, e) => (a, b, c, d, e) }
+
+    ann.annotations should not be empty
+
+    nop.annotations shouldBe empty
+
+    lof.annotations should not be empty
+
+    nmd.annotations should not be empty
+
+    lofnmd.annotations should not be empty
+
   }
 
 }

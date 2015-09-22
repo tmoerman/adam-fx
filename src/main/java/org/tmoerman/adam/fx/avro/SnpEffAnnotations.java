@@ -7,9 +7,8 @@ package org.tmoerman.adam.fx.avro;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"SnpEffAnnotations\",\"namespace\":\"org.tmoerman.adam.fx.avro\",\"fields\":[{\"name\":\"variant\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Variant\",\"namespace\":\"org.bdgenomics.formats.avro\",\"fields\":[{\"name\":\"contig\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Contig\",\"doc\":\"Record for describing a reference assembly. Not used for storing the contents\\n of said assembly.\\n\\n @see NucleotideContigFragment\",\"fields\":[{\"name\":\"contigName\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"doc\":\"The name of this contig in the assembly (e.g., \\\"chr1\\\").\",\"default\":null},{\"name\":\"contigLength\",\"type\":[\"null\",\"long\"],\"doc\":\"The length of this contig.\",\"default\":null},{\"name\":\"contigMD5\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"doc\":\"The MD5 checksum of the assembly for this contig.\",\"default\":null},{\"name\":\"referenceURL\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"doc\":\"The URL at which this reference assembly can be found.\",\"default\":null},{\"name\":\"assembly\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"doc\":\"The name of this assembly (e.g., \\\"hg19\\\").\",\"default\":null},{\"name\":\"species\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"doc\":\"The species that this assembly is for.\",\"default\":null}]}],\"doc\":\"The reference contig that this variant exists on.\",\"default\":null},{\"name\":\"start\",\"type\":[\"null\",\"long\"],\"doc\":\"The 0-based start position of this variant on the reference contig.\",\"default\":null},{\"name\":\"end\",\"type\":[\"null\",\"long\"],\"doc\":\"The 0-based, exclusive end position of this variant on the reference contig.\",\"default\":null},{\"name\":\"referenceAllele\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"doc\":\"A string describing the reference allele at this site.\",\"default\":null},{\"name\":\"alternateAllele\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"doc\":\"A string describing the variant allele at this site. Should be left null if\\n   the site is a structural variant.\",\"default\":null},{\"name\":\"svAllele\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"StructuralVariant\",\"fields\":[{\"name\":\"type\",\"type\":[\"null\",{\"type\":\"enum\",\"name\":\"StructuralVariantType\",\"doc\":\"Descriptors for the type of a structural variant. The most specific descriptor\\n should be used, if possible. E.g., duplication should be used instead of\\n insertion if the inserted sequence is not novel. Tandem duplication should\\n be used instead of duplication if the duplication is known to follow the\\n duplicated sequence.\",\"symbols\":[\"DELETION\",\"INSERTION\",\"INVERSION\",\"MOBILE_INSERTION\",\"MOBILE_DELETION\",\"DUPLICATION\",\"TANDEM_DUPLICATION\"]}],\"doc\":\"The type of this structural variant.\",\"default\":null},{\"name\":\"assembly\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"doc\":\"The URL of the FASTA/NucleotideContig assembly for this structural variant,\\n   if one is available.\",\"default\":null},{\"name\":\"precise\",\"type\":[\"boolean\",\"null\"],\"doc\":\"Whether this structural variant call has precise breakpoints or not. Default\\n   value is true. If the call is imprecise, confidence intervals should be provided.\",\"default\":true},{\"name\":\"startWindow\",\"type\":[\"null\",\"int\"],\"doc\":\"The size of the confidence window around the start of the structural variant.\",\"default\":null},{\"name\":\"endWindow\",\"type\":[\"null\",\"int\"],\"doc\":\"The size of the confidence window around the end of the structural variant.\",\"default\":null}]}],\"doc\":\"The structural variant at this site, if the alternate allele is a structural\\n   variant. If the site is not a structural variant, this field should be left \\n   null.\",\"default\":null}]}]},{\"name\":\"functionalAnnotations\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"FunctionalAnnotation\",\"fields\":[{\"name\":\"allele\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"annotations\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}},{\"name\":\"impact\",\"type\":{\"type\":\"enum\",\"name\":\"Impact\",\"symbols\":[\"HIGH\",\"MODERATE\",\"LOW\",\"MODIFIER\"]}},{\"name\":\"geneName\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"geneID\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"featureType\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"featureID\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"transcriptBiotype\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"rankTotal\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Ratio\",\"fields\":[{\"name\":\"rank\",\"type\":\"int\"},{\"name\":\"total\",\"type\":\"int\"}]}]},{\"name\":\"HGSV_c\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"HGSV_p\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"cDNAPositionToLength\",\"type\":[\"null\",\"Ratio\"]},{\"name\":\"CDSPositionToLength\",\"type\":[\"null\",\"Ratio\"]},{\"name\":\"proteinPositionToLength\",\"type\":[\"null\",\"Ratio\"]},{\"name\":\"distanceToFeature\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"errorsWarningsInfo\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]}]}},\"default\":[]},{\"name\":\"lossOfFunction\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"EffectPrediction\",\"fields\":[{\"name\":\"gene\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"ID\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"numTranscripts\",\"type\":\"int\"},{\"name\":\"percentAffected\",\"type\":\"float\"}]}},\"default\":[]},{\"name\":\"nonsenseMediatedDecay\",\"type\":{\"type\":\"array\",\"items\":\"EffectPrediction\"},\"default\":[]},{\"name\":\"dbSnpAnnotations\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"DbSnpAnnotations\",\"fields\":[{\"name\":\"RS\",\"type\":{\"type\":\"array\",\"items\":\"int\"},\"default\":[]},{\"name\":\"VLD\",\"type\":\"boolean\",\"default\":false},{\"name\":\"G5A\",\"type\":\"boolean\",\"default\":false},{\"name\":\"MUT\",\"type\":\"boolean\",\"default\":false},{\"name\":\"OM\",\"type\":\"boolean\",\"default\":false},{\"name\":\"PM\",\"type\":\"boolean\",\"default\":false}]}],\"default\":null},{\"name\":\"clinvarAnnotations\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"ClinvarAnnotations\",\"fields\":[{\"name\":\"CLNDSDB\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"CLNACC\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"CLNDBN\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"CLNSRC\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"CLNSIG\",\"type\":{\"type\":\"array\",\"items\":\"int\"},\"default\":[]},{\"name\":\"CLNORIGIN\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"CLNDSDBID\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"CLNHGVS\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"CLNSRCID\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]}]}],\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"SnpEffAnnotations\",\"namespace\":\"org.tmoerman.adam.fx.avro\",\"fields\":[{\"name\":\"functionalAnnotations\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"FunctionalAnnotation\",\"fields\":[{\"name\":\"allele\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"annotations\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}},{\"name\":\"impact\",\"type\":{\"type\":\"enum\",\"name\":\"Impact\",\"symbols\":[\"HIGH\",\"MODERATE\",\"LOW\",\"MODIFIER\"]}},{\"name\":\"geneName\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"geneID\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"featureType\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"featureID\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"transcriptBiotype\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"rankTotal\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Ratio\",\"fields\":[{\"name\":\"rank\",\"type\":\"int\"},{\"name\":\"total\",\"type\":\"int\"}]}]},{\"name\":\"HGSV_c\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"HGSV_p\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"cDNAPositionToLength\",\"type\":[\"null\",\"Ratio\"]},{\"name\":\"CDSPositionToLength\",\"type\":[\"null\",\"Ratio\"]},{\"name\":\"proteinPositionToLength\",\"type\":[\"null\",\"Ratio\"]},{\"name\":\"distanceToFeature\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"errorsWarningsInfo\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]}]}},\"default\":[]},{\"name\":\"lossOfFunction\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"EffectPrediction\",\"fields\":[{\"name\":\"gene\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"ID\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"numTranscripts\",\"type\":\"int\"},{\"name\":\"percentAffected\",\"type\":\"float\"}]}},\"default\":[]},{\"name\":\"nonsenseMediatedDecay\",\"type\":{\"type\":\"array\",\"items\":\"EffectPrediction\"},\"default\":[]},{\"name\":\"dbSnpAnnotations\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"DbSnpAnnotations\",\"fields\":[{\"name\":\"RS\",\"type\":{\"type\":\"array\",\"items\":\"int\"},\"default\":[]},{\"name\":\"VLD\",\"type\":\"boolean\",\"default\":false},{\"name\":\"G5A\",\"type\":\"boolean\",\"default\":false},{\"name\":\"MUT\",\"type\":\"boolean\",\"default\":false},{\"name\":\"OM\",\"type\":\"boolean\",\"default\":false},{\"name\":\"PM\",\"type\":\"boolean\",\"default\":false}]}],\"default\":null},{\"name\":\"clinvarAnnotations\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"ClinvarAnnotations\",\"fields\":[{\"name\":\"CLNDSDB\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"CLNACC\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"CLNDBN\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"CLNSRC\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"CLNSIG\",\"type\":{\"type\":\"array\",\"items\":\"int\"},\"default\":[]},{\"name\":\"CLNORIGIN\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"CLNDSDBID\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"CLNHGVS\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]},{\"name\":\"CLNSRCID\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"default\":[]}]}],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
-  @Deprecated public org.bdgenomics.formats.avro.Variant variant;
   @Deprecated public java.util.List<org.tmoerman.adam.fx.avro.FunctionalAnnotation> functionalAnnotations;
   @Deprecated public java.util.List<org.tmoerman.adam.fx.avro.EffectPrediction> lossOfFunction;
   @Deprecated public java.util.List<org.tmoerman.adam.fx.avro.EffectPrediction> nonsenseMediatedDecay;
@@ -26,8 +25,7 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
   /**
    * All-args constructor.
    */
-  public SnpEffAnnotations(org.bdgenomics.formats.avro.Variant variant, java.util.List<org.tmoerman.adam.fx.avro.FunctionalAnnotation> functionalAnnotations, java.util.List<org.tmoerman.adam.fx.avro.EffectPrediction> lossOfFunction, java.util.List<org.tmoerman.adam.fx.avro.EffectPrediction> nonsenseMediatedDecay, org.tmoerman.adam.fx.avro.DbSnpAnnotations dbSnpAnnotations, org.tmoerman.adam.fx.avro.ClinvarAnnotations clinvarAnnotations) {
-    this.variant = variant;
+  public SnpEffAnnotations(java.util.List<org.tmoerman.adam.fx.avro.FunctionalAnnotation> functionalAnnotations, java.util.List<org.tmoerman.adam.fx.avro.EffectPrediction> lossOfFunction, java.util.List<org.tmoerman.adam.fx.avro.EffectPrediction> nonsenseMediatedDecay, org.tmoerman.adam.fx.avro.DbSnpAnnotations dbSnpAnnotations, org.tmoerman.adam.fx.avro.ClinvarAnnotations clinvarAnnotations) {
     this.functionalAnnotations = functionalAnnotations;
     this.lossOfFunction = lossOfFunction;
     this.nonsenseMediatedDecay = nonsenseMediatedDecay;
@@ -39,12 +37,11 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
   // Used by DatumWriter.  Applications should not call. 
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return variant;
-    case 1: return functionalAnnotations;
-    case 2: return lossOfFunction;
-    case 3: return nonsenseMediatedDecay;
-    case 4: return dbSnpAnnotations;
-    case 5: return clinvarAnnotations;
+    case 0: return functionalAnnotations;
+    case 1: return lossOfFunction;
+    case 2: return nonsenseMediatedDecay;
+    case 3: return dbSnpAnnotations;
+    case 4: return clinvarAnnotations;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -52,29 +49,13 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: variant = (org.bdgenomics.formats.avro.Variant)value$; break;
-    case 1: functionalAnnotations = (java.util.List<org.tmoerman.adam.fx.avro.FunctionalAnnotation>)value$; break;
-    case 2: lossOfFunction = (java.util.List<org.tmoerman.adam.fx.avro.EffectPrediction>)value$; break;
-    case 3: nonsenseMediatedDecay = (java.util.List<org.tmoerman.adam.fx.avro.EffectPrediction>)value$; break;
-    case 4: dbSnpAnnotations = (org.tmoerman.adam.fx.avro.DbSnpAnnotations)value$; break;
-    case 5: clinvarAnnotations = (org.tmoerman.adam.fx.avro.ClinvarAnnotations)value$; break;
+    case 0: functionalAnnotations = (java.util.List<org.tmoerman.adam.fx.avro.FunctionalAnnotation>)value$; break;
+    case 1: lossOfFunction = (java.util.List<org.tmoerman.adam.fx.avro.EffectPrediction>)value$; break;
+    case 2: nonsenseMediatedDecay = (java.util.List<org.tmoerman.adam.fx.avro.EffectPrediction>)value$; break;
+    case 3: dbSnpAnnotations = (org.tmoerman.adam.fx.avro.DbSnpAnnotations)value$; break;
+    case 4: clinvarAnnotations = (org.tmoerman.adam.fx.avro.ClinvarAnnotations)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
-  }
-
-  /**
-   * Gets the value of the 'variant' field.
-   */
-  public org.bdgenomics.formats.avro.Variant getVariant() {
-    return variant;
-  }
-
-  /**
-   * Sets the value of the 'variant' field.
-   * @param value the value to set.
-   */
-  public void setVariant(org.bdgenomics.formats.avro.Variant value) {
-    this.variant = value;
   }
 
   /**
@@ -173,7 +154,6 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<SnpEffAnnotations>
     implements org.apache.avro.data.RecordBuilder<SnpEffAnnotations> {
 
-    private org.bdgenomics.formats.avro.Variant variant;
     private java.util.List<org.tmoerman.adam.fx.avro.FunctionalAnnotation> functionalAnnotations;
     private java.util.List<org.tmoerman.adam.fx.avro.EffectPrediction> lossOfFunction;
     private java.util.List<org.tmoerman.adam.fx.avro.EffectPrediction> nonsenseMediatedDecay;
@@ -188,84 +168,51 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
     /** Creates a Builder by copying an existing Builder */
     private Builder(org.tmoerman.adam.fx.avro.SnpEffAnnotations.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.variant)) {
-        this.variant = data().deepCopy(fields()[0].schema(), other.variant);
+      if (isValidValue(fields()[0], other.functionalAnnotations)) {
+        this.functionalAnnotations = data().deepCopy(fields()[0].schema(), other.functionalAnnotations);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.functionalAnnotations)) {
-        this.functionalAnnotations = data().deepCopy(fields()[1].schema(), other.functionalAnnotations);
+      if (isValidValue(fields()[1], other.lossOfFunction)) {
+        this.lossOfFunction = data().deepCopy(fields()[1].schema(), other.lossOfFunction);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.lossOfFunction)) {
-        this.lossOfFunction = data().deepCopy(fields()[2].schema(), other.lossOfFunction);
+      if (isValidValue(fields()[2], other.nonsenseMediatedDecay)) {
+        this.nonsenseMediatedDecay = data().deepCopy(fields()[2].schema(), other.nonsenseMediatedDecay);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.nonsenseMediatedDecay)) {
-        this.nonsenseMediatedDecay = data().deepCopy(fields()[3].schema(), other.nonsenseMediatedDecay);
+      if (isValidValue(fields()[3], other.dbSnpAnnotations)) {
+        this.dbSnpAnnotations = data().deepCopy(fields()[3].schema(), other.dbSnpAnnotations);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.dbSnpAnnotations)) {
-        this.dbSnpAnnotations = data().deepCopy(fields()[4].schema(), other.dbSnpAnnotations);
+      if (isValidValue(fields()[4], other.clinvarAnnotations)) {
+        this.clinvarAnnotations = data().deepCopy(fields()[4].schema(), other.clinvarAnnotations);
         fieldSetFlags()[4] = true;
-      }
-      if (isValidValue(fields()[5], other.clinvarAnnotations)) {
-        this.clinvarAnnotations = data().deepCopy(fields()[5].schema(), other.clinvarAnnotations);
-        fieldSetFlags()[5] = true;
       }
     }
     
     /** Creates a Builder by copying an existing SnpEffAnnotations instance */
     private Builder(org.tmoerman.adam.fx.avro.SnpEffAnnotations other) {
             super(org.tmoerman.adam.fx.avro.SnpEffAnnotations.SCHEMA$);
-      if (isValidValue(fields()[0], other.variant)) {
-        this.variant = data().deepCopy(fields()[0].schema(), other.variant);
+      if (isValidValue(fields()[0], other.functionalAnnotations)) {
+        this.functionalAnnotations = data().deepCopy(fields()[0].schema(), other.functionalAnnotations);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.functionalAnnotations)) {
-        this.functionalAnnotations = data().deepCopy(fields()[1].schema(), other.functionalAnnotations);
+      if (isValidValue(fields()[1], other.lossOfFunction)) {
+        this.lossOfFunction = data().deepCopy(fields()[1].schema(), other.lossOfFunction);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.lossOfFunction)) {
-        this.lossOfFunction = data().deepCopy(fields()[2].schema(), other.lossOfFunction);
+      if (isValidValue(fields()[2], other.nonsenseMediatedDecay)) {
+        this.nonsenseMediatedDecay = data().deepCopy(fields()[2].schema(), other.nonsenseMediatedDecay);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.nonsenseMediatedDecay)) {
-        this.nonsenseMediatedDecay = data().deepCopy(fields()[3].schema(), other.nonsenseMediatedDecay);
+      if (isValidValue(fields()[3], other.dbSnpAnnotations)) {
+        this.dbSnpAnnotations = data().deepCopy(fields()[3].schema(), other.dbSnpAnnotations);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.dbSnpAnnotations)) {
-        this.dbSnpAnnotations = data().deepCopy(fields()[4].schema(), other.dbSnpAnnotations);
+      if (isValidValue(fields()[4], other.clinvarAnnotations)) {
+        this.clinvarAnnotations = data().deepCopy(fields()[4].schema(), other.clinvarAnnotations);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.clinvarAnnotations)) {
-        this.clinvarAnnotations = data().deepCopy(fields()[5].schema(), other.clinvarAnnotations);
-        fieldSetFlags()[5] = true;
-      }
-    }
-
-    /** Gets the value of the 'variant' field */
-    public org.bdgenomics.formats.avro.Variant getVariant() {
-      return variant;
-    }
-    
-    /** Sets the value of the 'variant' field */
-    public org.tmoerman.adam.fx.avro.SnpEffAnnotations.Builder setVariant(org.bdgenomics.formats.avro.Variant value) {
-      validate(fields()[0], value);
-      this.variant = value;
-      fieldSetFlags()[0] = true;
-      return this; 
-    }
-    
-    /** Checks whether the 'variant' field has been set */
-    public boolean hasVariant() {
-      return fieldSetFlags()[0];
-    }
-    
-    /** Clears the value of the 'variant' field */
-    public org.tmoerman.adam.fx.avro.SnpEffAnnotations.Builder clearVariant() {
-      variant = null;
-      fieldSetFlags()[0] = false;
-      return this;
     }
 
     /** Gets the value of the 'functionalAnnotations' field */
@@ -275,21 +222,21 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
     
     /** Sets the value of the 'functionalAnnotations' field */
     public org.tmoerman.adam.fx.avro.SnpEffAnnotations.Builder setFunctionalAnnotations(java.util.List<org.tmoerman.adam.fx.avro.FunctionalAnnotation> value) {
-      validate(fields()[1], value);
+      validate(fields()[0], value);
       this.functionalAnnotations = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[0] = true;
       return this; 
     }
     
     /** Checks whether the 'functionalAnnotations' field has been set */
     public boolean hasFunctionalAnnotations() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[0];
     }
     
     /** Clears the value of the 'functionalAnnotations' field */
     public org.tmoerman.adam.fx.avro.SnpEffAnnotations.Builder clearFunctionalAnnotations() {
       functionalAnnotations = null;
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[0] = false;
       return this;
     }
 
@@ -300,21 +247,21 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
     
     /** Sets the value of the 'lossOfFunction' field */
     public org.tmoerman.adam.fx.avro.SnpEffAnnotations.Builder setLossOfFunction(java.util.List<org.tmoerman.adam.fx.avro.EffectPrediction> value) {
-      validate(fields()[2], value);
+      validate(fields()[1], value);
       this.lossOfFunction = value;
-      fieldSetFlags()[2] = true;
+      fieldSetFlags()[1] = true;
       return this; 
     }
     
     /** Checks whether the 'lossOfFunction' field has been set */
     public boolean hasLossOfFunction() {
-      return fieldSetFlags()[2];
+      return fieldSetFlags()[1];
     }
     
     /** Clears the value of the 'lossOfFunction' field */
     public org.tmoerman.adam.fx.avro.SnpEffAnnotations.Builder clearLossOfFunction() {
       lossOfFunction = null;
-      fieldSetFlags()[2] = false;
+      fieldSetFlags()[1] = false;
       return this;
     }
 
@@ -325,21 +272,21 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
     
     /** Sets the value of the 'nonsenseMediatedDecay' field */
     public org.tmoerman.adam.fx.avro.SnpEffAnnotations.Builder setNonsenseMediatedDecay(java.util.List<org.tmoerman.adam.fx.avro.EffectPrediction> value) {
-      validate(fields()[3], value);
+      validate(fields()[2], value);
       this.nonsenseMediatedDecay = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[2] = true;
       return this; 
     }
     
     /** Checks whether the 'nonsenseMediatedDecay' field has been set */
     public boolean hasNonsenseMediatedDecay() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[2];
     }
     
     /** Clears the value of the 'nonsenseMediatedDecay' field */
     public org.tmoerman.adam.fx.avro.SnpEffAnnotations.Builder clearNonsenseMediatedDecay() {
       nonsenseMediatedDecay = null;
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[2] = false;
       return this;
     }
 
@@ -350,21 +297,21 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
     
     /** Sets the value of the 'dbSnpAnnotations' field */
     public org.tmoerman.adam.fx.avro.SnpEffAnnotations.Builder setDbSnpAnnotations(org.tmoerman.adam.fx.avro.DbSnpAnnotations value) {
-      validate(fields()[4], value);
+      validate(fields()[3], value);
       this.dbSnpAnnotations = value;
-      fieldSetFlags()[4] = true;
+      fieldSetFlags()[3] = true;
       return this; 
     }
     
     /** Checks whether the 'dbSnpAnnotations' field has been set */
     public boolean hasDbSnpAnnotations() {
-      return fieldSetFlags()[4];
+      return fieldSetFlags()[3];
     }
     
     /** Clears the value of the 'dbSnpAnnotations' field */
     public org.tmoerman.adam.fx.avro.SnpEffAnnotations.Builder clearDbSnpAnnotations() {
       dbSnpAnnotations = null;
-      fieldSetFlags()[4] = false;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -375,21 +322,21 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
     
     /** Sets the value of the 'clinvarAnnotations' field */
     public org.tmoerman.adam.fx.avro.SnpEffAnnotations.Builder setClinvarAnnotations(org.tmoerman.adam.fx.avro.ClinvarAnnotations value) {
-      validate(fields()[5], value);
+      validate(fields()[4], value);
       this.clinvarAnnotations = value;
-      fieldSetFlags()[5] = true;
+      fieldSetFlags()[4] = true;
       return this; 
     }
     
     /** Checks whether the 'clinvarAnnotations' field has been set */
     public boolean hasClinvarAnnotations() {
-      return fieldSetFlags()[5];
+      return fieldSetFlags()[4];
     }
     
     /** Clears the value of the 'clinvarAnnotations' field */
     public org.tmoerman.adam.fx.avro.SnpEffAnnotations.Builder clearClinvarAnnotations() {
       clinvarAnnotations = null;
-      fieldSetFlags()[5] = false;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -397,12 +344,11 @@ public class SnpEffAnnotations extends org.apache.avro.specific.SpecificRecordBa
     public SnpEffAnnotations build() {
       try {
         SnpEffAnnotations record = new SnpEffAnnotations();
-        record.variant = fieldSetFlags()[0] ? this.variant : (org.bdgenomics.formats.avro.Variant) defaultValue(fields()[0]);
-        record.functionalAnnotations = fieldSetFlags()[1] ? this.functionalAnnotations : (java.util.List<org.tmoerman.adam.fx.avro.FunctionalAnnotation>) defaultValue(fields()[1]);
-        record.lossOfFunction = fieldSetFlags()[2] ? this.lossOfFunction : (java.util.List<org.tmoerman.adam.fx.avro.EffectPrediction>) defaultValue(fields()[2]);
-        record.nonsenseMediatedDecay = fieldSetFlags()[3] ? this.nonsenseMediatedDecay : (java.util.List<org.tmoerman.adam.fx.avro.EffectPrediction>) defaultValue(fields()[3]);
-        record.dbSnpAnnotations = fieldSetFlags()[4] ? this.dbSnpAnnotations : (org.tmoerman.adam.fx.avro.DbSnpAnnotations) defaultValue(fields()[4]);
-        record.clinvarAnnotations = fieldSetFlags()[5] ? this.clinvarAnnotations : (org.tmoerman.adam.fx.avro.ClinvarAnnotations) defaultValue(fields()[5]);
+        record.functionalAnnotations = fieldSetFlags()[0] ? this.functionalAnnotations : (java.util.List<org.tmoerman.adam.fx.avro.FunctionalAnnotation>) defaultValue(fields()[0]);
+        record.lossOfFunction = fieldSetFlags()[1] ? this.lossOfFunction : (java.util.List<org.tmoerman.adam.fx.avro.EffectPrediction>) defaultValue(fields()[1]);
+        record.nonsenseMediatedDecay = fieldSetFlags()[2] ? this.nonsenseMediatedDecay : (java.util.List<org.tmoerman.adam.fx.avro.EffectPrediction>) defaultValue(fields()[2]);
+        record.dbSnpAnnotations = fieldSetFlags()[3] ? this.dbSnpAnnotations : (org.tmoerman.adam.fx.avro.DbSnpAnnotations) defaultValue(fields()[3]);
+        record.clinvarAnnotations = fieldSetFlags()[4] ? this.clinvarAnnotations : (org.tmoerman.adam.fx.avro.ClinvarAnnotations) defaultValue(fields()[4]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

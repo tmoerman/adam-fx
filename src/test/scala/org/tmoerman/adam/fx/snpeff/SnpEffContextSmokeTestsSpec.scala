@@ -8,50 +8,32 @@ class SnpEffContextSmokeTestsSpec extends BaseSparkContextSpec {
 
   val smallAnnotatedVcf = "src/test/resources/small.snpEff.vcf"
 
-// TODO revise disarmed tests
+  "Loading AnnotatedVariants" should "pass the smoke test on a non-annotated file" in {
+    val annotatedVariants = sc.loadAnnotatedVariants(smallVcf)
+    val all = annotatedVariants.collect()
 
-//  val smallAnnotatedParquet = "src/test/resources/small.snpEff.adam"
-
-  "Loading SnpEffAnnotations" should "pass the smoke test on a non-annotated file" in {
-    val annotations = sc.loadSnpEffAnnotations(smallVcf)
-    val all = annotations.collect()
-
-    all.forall(_.getFunctionalAnnotations.isEmpty) shouldBe true
+    all.forall(_.getAnnotations.getFunctionalAnnotations.isEmpty) shouldBe true
   }
 
-  "Loading VariantContextWithSnpEffAnnotations" should "pass the smoke test on an non-annotated file" in {
-    val variantCtxs = sc.loadVariantsWithSnpEffAnnotations(smallVcf)
-    val all = variantCtxs.collect()
+  "Loading AnnotatedGenotypes" should "pass the smoke test on a non-annotated file" in {
+    val annotatedGenotypes = sc.loadAnnotatedGenotypes(smallVcf)
+    val all = annotatedGenotypes.collect()
 
-    all.forall(_.snpEffAnnotations.isEmpty) shouldBe true
+    all.forall(_.getAnnotations.getFunctionalAnnotations.isEmpty) shouldBe true
   }
 
-  "Loading SnpEffAnnotations" should "pass the smoke test on an annotated .vcf file" in {
-    val annotations = sc.loadSnpEffAnnotations(smallAnnotatedVcf)
-    val all = annotations.collect()
+  "Loading AnnotatedVariants" should "pass the smoke test on an annotated .vcf file" in {
+    val annotatedVariants = sc.loadAnnotatedVariants(smallAnnotatedVcf)
+    val all = annotatedVariants.collect()
 
-    all.exists(_.getFunctionalAnnotations.isEmpty) shouldBe false
+    all.exists(_.getAnnotations.getFunctionalAnnotations.isEmpty) shouldBe false
   }
 
-  "Loading VariantContextWithSnpEffAnnotations" should "pass the smoke test on an annotated .vcf file" in {
-    val variantCtxs = sc.loadVariantsWithSnpEffAnnotations(smallAnnotatedVcf)
-    val all = variantCtxs.collect()
+  "Loading AnnotatedGenotypes" should "pass the smoke test on an annotated .vcf file" in {
+    val annotatedGenotypes = sc.loadAnnotatedGenotypes(smallAnnotatedVcf)
+    val all = annotatedGenotypes.collect()
 
-    all.forall(_.snpEffAnnotations.isDefined) shouldBe true
+    all.exists(_.getAnnotations.getFunctionalAnnotations.isEmpty) shouldBe false
   }
 
-//  "Loading SnpEffAnnotations" should "pass the smoke test on an annotated .adam file" in {
-//    val annotations = sc.loadSnpEffAnnotations(smallAnnotatedParquet)
-//    val all = annotations.collect()
-//
-//    all.exists(_.getFunctionalAnnotations.isEmpty) shouldBe false
-//  }
-//
-//  "Loading VariantContextWithSnpEffAnnotations" should "pass the smoke test on an annotated .adam file" in {
-//    val variantCtxs = sc.loadVariantsWithSnpEffAnnotations(smallAnnotatedParquet)
-//    val all = variantCtxs.collect()
-//
-//    all.forall(_.snpEffAnnotations.isDefined) shouldBe true
-//  }
-  
 }

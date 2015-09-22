@@ -14,16 +14,20 @@ import org.bdgenomics.utils.instrumentation.Metrics
 import org.bdgenomics.utils.misc.HadoopUtil
 import org.seqdoop.hadoop_bam.{VCFInputFormat, VariantContextWritable}
 import org.tmoerman.adam.fx.avro._
-import org.tmoerman.adam.fx.snpeff.model.VariantContextWithSnpEffAnnotations
+import org.tmoerman.adam.fx.snpeff.model.{AnnotatedGenotypeRDDFunctions, AnnotatedVariantRDDFunctions}
 
 /**
  * @author Thomas Moerman
  */
 object SnpEffContext {
 
-  implicit def sparkContextToSnpEffContext(sc: SparkContext): SnpEffContext = new SnpEffContext(sc)
+  implicit def toSnpEffContext(sc: SparkContext): SnpEffContext = new SnpEffContext(sc)
 
-  implicit def implicitSnpEffInspections(rdd: RDD[VariantContextWithSnpEffAnnotations]): SnpEffInspections = new SnpEffInspections(rdd)
+  implicit def rddToAnnotatedVariantRDD(rdd: RDD[AnnotatedVariant]): AnnotatedVariantRDDFunctions =
+    new AnnotatedVariantRDDFunctions(rdd)
+
+  implicit def rddToAnnotatedGenotypesRDD(rdd: RDD[AnnotatedGenotype]): AnnotatedGenotypeRDDFunctions =
+    new AnnotatedGenotypeRDDFunctions(rdd)
 
 }
 
@@ -45,14 +49,6 @@ class SnpEffContext(val sc: SparkContext) extends Serializable with Logging {
     records
   }
 
-  private def loadParquetSnpEffAnnotations(
-      filePath: String,
-      predicate: Option[FilterPredicate] = None,
-      projection: Option[Schema] = None): RDD[SnpEffAnnotations] = {
-
-    sc.loadParquet[SnpEffAnnotations](filePath, predicate, projection)
-  }
-
   /**
    * @param filePath
    *                 Either a .vcf file or a Parquet file, for which the convention is the ".adam" suffix.
@@ -61,18 +57,18 @@ class SnpEffContext(val sc: SparkContext) extends Serializable with Logging {
    * @param sd
    * @return
    */
-  def loadVariantsWithSnpEffAnnotations(
+  def loadAnnotatedVariants(
       filePath: String,
       predicate: Option[FilterPredicate] = None,
       projection: Option[Schema] = None,
-      sd: Option[SequenceDictionary] = None): RDD[VariantContextWithSnpEffAnnotations] = {
+      sd: Option[SequenceDictionary] = None): RDD[AnnotatedVariant] = {
 
     if (filePath.endsWith(".adam")) {
-      loadParquetSnpEffAnnotations(filePath, predicate, projection).map(a => VariantContextWithSnpEffAnnotations(a))
+      sc.loadParquet[AnnotatedVariant](filePath, predicate, projection)
     } else {
       val vcc = new VariantContextConverter(sd)
 
-      loadVariantContextsFromFile(filePath).flatMap{case (_, vcw) => vcc.toVariantContextsWithSnpEffAnnotations(vcw.get())}
+      loadVariantContextsFromFile(filePath).flatMap{case (_, vcw) => vcc.toAnnotatedVariants(vcw.get())}
     }
   }
 
@@ -84,18 +80,18 @@ class SnpEffContext(val sc: SparkContext) extends Serializable with Logging {
    * @param sd
    * @return
    */
-  def loadSnpEffAnnotations(
+  def loadAnnotatedGenotypes(
       filePath: String,
       predicate: Option[FilterPredicate] = None,
       projection: Option[Schema] = None,
-      sd: Option[SequenceDictionary] = None): RDD[SnpEffAnnotations] = {
+      sd: Option[SequenceDictionary] = None): RDD[AnnotatedGenotype] = {
 
     if (filePath.endsWith(".adam")) {
-      loadParquetSnpEffAnnotations(filePath, predicate, projection)
+      sc.loadParquet[AnnotatedGenotype](filePath, predicate, projection)
     } else {
       val vcc = new VariantContextConverter(sd)
 
-      loadVariantContextsFromFile(filePath).flatMap{case (_, vcw) => vcc.toSnpEffAnnotations(vcw.get())}
+      loadVariantContextsFromFile(filePath).flatMap{case (_, vcw) => vcc.toAnnotatedGenotypes(vcw.get())}
     }
   }
 
