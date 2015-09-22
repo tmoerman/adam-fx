@@ -13,7 +13,15 @@ Artifacts are published to [Bintray](https://bintray.com/tmoerman/maven/adam-fx)
 ```sbt
 resolvers += "bintray-tmoerman" at "http://dl.bintray.com/tmoerman/maven"`
 
-libraryDependencies += "org.tmoerman" % "adam-fx_2.10" % "0.2.1"
+libraryDependencies += "org.tmoerman" % "adam-fx_2.10" % "0.5.0"
+```
+
+##### Spark Notebook
+
+```
+:remote-repo bintray-tmoerman % default % http://dl.bintray.com/tmoerman/maven % maven
+
+:dp org.tmoerman % adam-fx_2.10 % 0.5.0
 ```
 
 ##### Zeppelin
@@ -23,7 +31,7 @@ libraryDependencies += "org.tmoerman" % "adam-fx_2.10" % "0.2.1"
 
 z.addRepo("bintray-tmoerman").url("http://dl.bintray.com/tmoerman/maven")
 
-z.load("org.tmoerman:adam-fx_2.10:0.2.1")
+z.load("org.tmoerman:adam-fx_2.10:0.5.0")
 ```
 
 ## Data model
@@ -69,17 +77,23 @@ import org.tmoerman.adam.fx.snpeff.SnpEffContext
 
 @transient val ec = new SnpEffContext(sc)
 ```
+
+Or you could simply import the implicit conversions and use an (already instantiated) SparkContext reference.
+
+```scala
+import org.tmoerman.adam.fx.snpeff.SnpEffContext._
+```    
     
 ##### Loading data
 
 Loading Variants with SnpEffAnnotations:
 
 ```scala
-val annotatedVariants: RDD[AnnotatedVariant] = ec.loadAnnotatedVariants(annotatedVcf)
+val annotatedVariants: RDD[AnnotatedVariant] = sc.loadAnnotatedVariants(annotatedVcf)
 ```
 
 Or Genotypes with SnpEffAnnotations:
 
 ```scala
-val annotatedGenotypes: RDD[AnnotatedGenotype] = ec.loadAnnotatedGenotypes(annotatedVcf)
+val annotatedGenotypes: RDD[AnnotatedGenotype] = sc.loadAnnotatedGenotypes(annotatedVcf)
 ```
