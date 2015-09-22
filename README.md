@@ -27,7 +27,15 @@ z.load("org.tmoerman:adam-fx_2.10:0.2.1")
 
 ## Data model
 
-Class diagram distilled from the Java classes generated from the Avro schema definition.  
+The `AnnotatedVariant` and `AnnotatedGenotype` classes are the "connector" types between the Adam types and the SnpEffAnnotations.
+
+Class diagrams distilled from the Java classes generated from the Avro schema definition. 
+
+##### Overview:
+
+![Class diagram](img/adam_fx_small_diagram.png?raw=true)
+
+##### With properties:
 
 ![Class diagram](img/adam_fx_class_diagram.png?raw=true)
 
@@ -61,31 +69,16 @@ import org.tmoerman.adam.fx.snpeff.SnpEffContext
 @transient val ec = new SnpEffContext(sc)
 ```
     
-##### Loading the SnpEffAnnotations
+##### Loading Variants or Genotypes
 
-There are two ways to load the SnpEff annotations from an annotated .vcf file. 
-
-We can either load the raw Avro data structures:
+Variants with SnpEffAnnotations:
 
 ```scala
-val annotations: RDD[SnpEffAnnotations] = ec.loadSnpEffAnnotations(annotatedVcf)
+val annotatedVariants: RDD[AnnotatedVariant] = ec.loadAnnotatedVariants(annotatedVcf)
 ```
 
-Or we can load as rich Scala-esque data types, arguably the preferable data types to work with.
+Or Genotypes with SnpEffAnnotations
 
 ```scala
-val variants: RDD[VariantContextWithSnpEffAnnotations] = ec.loadVariantsWithSnpEffAnnotations(annotatedVcf)
+val annotatedGenotypes: RDD[AnnotatedGenotype] = ec.loadAnnotatedGenotypes(annotatedVcf)
 ```
-
-The methods are capable to load `SnpEffAnnotations` from Parquet storage. By convention, the Parquet file names have
-suffix ".adam". We can save an `RDD[SnpEffAnnotations]` to Parquet in the usual Adam way, by importing the
-ADAMContext implicit conversions and calling `adamParquetSave(fileName)` on an RDD of Avro data types:
- 
-```scala
-import org.bdgenomics.adam.rdd.ADAMContext._
-
-annotations.adamParquetSave("/my/data/dir/annotations.adam")
-```
-
-Note that if the `loadVariantsWithSnpEffAnnotations` is used to load data from Parquet, the genotypes and databases 
-are absent because they are not part of the raw `SnpEffAnnotations` data type.
