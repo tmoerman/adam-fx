@@ -106,8 +106,6 @@ protocol EFFECTS {
 
   record SnpEffAnnotations {
 
-    union { null, org.bdgenomics.formats.avro.Variant } variant;
-    
     array<FunctionalAnnotation> functionalAnnotations = [];
 
     array<EffectPrediction>     lossOfFunction = [];
@@ -117,6 +115,22 @@ protocol EFFECTS {
     union { null, DbSnpAnnotations } dbSnpAnnotations = null;
 
     union { null, ClinvarAnnotations } clinvarAnnotations = null;
+
+  }
+
+  record AnnotatedVariant {
+
+    org.bdgenomics.formats.avro.Variant variant;
+
+    union { null, SnpEffAnnotations } annotations = null;
+
+  }
+
+  record AnnotatedGenotype {
+
+    org.bdgenomics.formats.avro.Genotype genotype;
+
+    union { null, SnpEffAnnotations } annotations = null;
 
   }
 
