@@ -1,7 +1,8 @@
 # adam-fx
 
-A Scala library extending [ADAM](https://github.com/bigdatagenomics/adam) and [BDG-formats](https://github.com/bigdatagenomics/bdg-formats) 
-to load .vcf files annotated with [SnpEff](http://snpeff.sourceforge.net/). 
+A Scala library extending [ADAM](https://github.com/bigdatagenomics/adam) and [BDG-formats](https://github.com/bigdatagenomics/bdg-formats) to load .vcf files annotated with [SnpEff](http://snpeff.sourceforge.net/). 
+
+*[WARNING: this library is still under heavy development. Expect versions to break compatibility.]*
 
 ## Get the Maven artifact
 
@@ -69,15 +70,15 @@ import org.tmoerman.adam.fx.snpeff.SnpEffContext
 @transient val ec = new SnpEffContext(sc)
 ```
     
-##### Loading Variants or Genotypes
+##### Loading data
 
-Variants with SnpEffAnnotations:
+Loading Variants with SnpEffAnnotations:
 
 ```scala
 val annotatedVariants: RDD[AnnotatedVariant] = ec.loadAnnotatedVariants(annotatedVcf)
 ```
 
-Or Genotypes with SnpEffAnnotations
+Or Genotypes with SnpEffAnnotations:
 
 ```scala
 val annotatedGenotypes: RDD[AnnotatedGenotype] = ec.loadAnnotatedGenotypes(annotatedVcf)
