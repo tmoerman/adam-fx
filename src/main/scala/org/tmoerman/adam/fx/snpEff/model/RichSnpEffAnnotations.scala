@@ -6,11 +6,16 @@ import org.tmoerman.adam.fx.util.ReflectToString
 /**
  * @author Thomas Moerman
  */
+object RichSnpEffAnnotations {
+
+  implicit def pimpAnnotations(snpEffAnnotations: SnpEffAnnotations): RichSnpEffAnnotations =
+    new RichSnpEffAnnotations(snpEffAnnotations)
+
+}
+
 case class RichSnpEffAnnotations(inner: SnpEffAnnotations) extends Serializable with ReflectToString {
 
   import org.tmoerman.adam.fx.util.CollectionConversions.immutableScalaList
-
-  def variant = inner.getVariant
 
   lazy val functionalAnnotations: List[FunctionalAnnotation] = inner.getFunctionalAnnotations
 

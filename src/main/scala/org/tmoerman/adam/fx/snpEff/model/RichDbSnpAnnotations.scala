@@ -2,6 +2,7 @@ package org.tmoerman.adam.fx.snpeff.model
 
 import org.tmoerman.adam.fx.avro.DbSnpAnnotations
 import org.tmoerman.adam.fx.util.ReflectToString
+import org.tmoerman.adam.fx.util.CollectionConversions.immutableScalaList
 
 /**
  * http://varianttools.sourceforge.net/Annotation/DbSNP
@@ -10,15 +11,13 @@ import org.tmoerman.adam.fx.util.ReflectToString
  */
 object RichDbSnpAnnotations {
 
-  implicit def pimp(a: DbSnpAnnotations): RichDbSnpAnnotations = new RichDbSnpAnnotations(a)
+  implicit def pimpDbSnpAnnotations(a: DbSnpAnnotations): RichDbSnpAnnotations = new RichDbSnpAnnotations(a)
 
 }
 
 case class RichDbSnpAnnotations(inner: DbSnpAnnotations) extends Serializable with ReflectToString {
 
-  import org.tmoerman.adam.fx.util.CollectionConversions.immutableScalaList
-
-  def dbSnpIDs: List[Int] = inner.getRS.map(_.intValue)
+  def dbSnpIDs:                   List[Int] = inner.getRS.map(_.intValue)
 
   def gt5PctMinorAlleleFrequency: Boolean = inner.getG5A
 

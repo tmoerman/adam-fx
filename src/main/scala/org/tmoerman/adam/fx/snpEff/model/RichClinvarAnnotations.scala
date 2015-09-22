@@ -2,6 +2,7 @@ package org.tmoerman.adam.fx.snpeff.model
 
 import org.tmoerman.adam.fx.avro.ClinvarAnnotations
 import org.tmoerman.adam.fx.util.ReflectToString
+import org.tmoerman.adam.fx.util.CollectionConversions.immutableScalaList
 
 /**
  * @author Thomas Moerman
@@ -13,8 +14,6 @@ object RichClinvarAnnotations {
 }
 
 case class RichClinvarAnnotations(inner: ClinvarAnnotations) extends Serializable with ReflectToString {
-
-  import org.tmoerman.adam.fx.util.CollectionConversions.immutableScalaList
 
   def variantDiseaseDatabaseName:  List[String] = inner.getCLNDSDB
 
