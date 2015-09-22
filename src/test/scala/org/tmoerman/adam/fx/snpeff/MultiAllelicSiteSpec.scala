@@ -2,7 +2,6 @@ package org.tmoerman.adam.fx.snpeff
 
 import SnpEffContext._
 import org.bdgenomics.adam.rdd.ADAMContext._
-import org.tmoerman.adam.fx.snpeff.model.{RichSnpEffAnnotations, VariantContextWithSnpEffAnnotations}
 
 /**
  * @author Thomas Moerman
@@ -20,35 +19,37 @@ class MultiAllelicSiteSpec extends BaseSparkContextSpec {
   val annotated = "src/test/resources/multi_allelic.annotated.vcf"
 
   "Loading SnpEffAnnotations for multi-allelic variants" should "yield the correct number of instances" in {
-    val snpEffAnnotations = sc.loadSnpEffAnnotations(annotated).collect()
+    val annotatedVariants = sc.loadAnnotatedVariants(annotated).collect()
 
-    val richVariants = sc.loadVariantsWithSnpEffAnnotations(annotated).collect()
+    val annotatedGenotypes = sc.loadAnnotatedGenotypes(annotated).collect()
 
-    val variants = sc.loadVariants(annotated).collect()
+    annotatedVariants.length shouldBe 7
 
-    snpEffAnnotations.length shouldBe 7
-
-    richVariants.length shouldBe 7
-
-    variants.length shouldBe 7
+    annotatedGenotypes.length shouldBe 7
   }
 
-  "SnpEffAnnotations for multi-allelic variants" should
+  "AnnotatedVariants for multi-allelic variants" should
     "only have FunctionalAnnotations for the correct alternative allele" in {
 
-    sc.loadSnpEffAnnotations(annotated)
+    sc.loadAnnotatedVariants(annotated)
       .collect()
-      .forall(a => a.getFunctionalAnnotations
-      .forall(_.getAllele == a.getVariant.getAlternateAllele)) shouldBe true
+      .flatMap(a => a.getAnnotations
+                     .getFunctionalAnnotations
+                     .map(funcAnn => (funcAnn.getAllele, a.getVariant.getAlternateAllele)))
+
+      .forall{ case (allele, alternate) => allele == alternate }
   }
 
-  "VariantContextsWithSnpEffAnnotations for multi-allelic variants" should
+  "AnnotatedGenotypes for multi-allelic variants" should
     "only have FunctionalAnnotations for the correct alternative allele" in {
 
-    sc.loadVariantsWithSnpEffAnnotations(annotated)
+    sc.loadAnnotatedGenotypes(annotated)
       .collect()
-      .forall(v => v.snpEffAnnotations.map(a => a.functionalAnnotations
-                                                 .forall(_.getAllele == a.variant.getAlternateAllele)).get) shouldBe true
+      .flatMap(g => g.getAnnotations
+                     .getFunctionalAnnotations
+                     .map(funcAnn => (funcAnn.getAllele, g.getGenotype.getVariant.getAlternateAllele)))
+
+      .forall{ case (allele, alternate) => allele == alternate }
   }
 
 }

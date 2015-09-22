@@ -3,7 +3,6 @@ package org.tmoerman.adam.fx.snpeff
 import SnpEffContext._
 import org.bdgenomics.adam.rdd.ADAMContext._
 import org.scalatest.BeforeAndAfter
-import org.tmoerman.adam.fx.snpeff.model.VariantContextWithSnpEffAnnotations
 
 import scala.reflect.io.File
 
@@ -16,26 +15,24 @@ class ParquetStorageSpec extends BaseSparkContextSpec with BeforeAndAfter {
 
   val temp    = "src/test/temp/small.snpEff.adam"
 
-  "SnpEffAnnotations saved to Parquet" should "match the original when loaded again" in {
-    val fromFile = sc.loadSnpEffAnnotations(vcf)
+  "AnnotatedVariants saved to Parquet" should "match the original when loaded again" in {
+    val fromFile = sc.loadAnnotatedVariants(vcf)
 
     fromFile.adamParquetSave(temp)
 
-    val fromParquet = sc.loadSnpEffAnnotations(temp)
+    val fromParquet = sc.loadAnnotatedVariants(temp)
 
     assert(fromFile.take(10) === fromParquet.take(10))
   }
 
-  "Rich types loaded from vcf" should "match rich types loaded from Parquet" in {
-    sc.loadSnpEffAnnotations(vcf).adamParquetSave(temp)
+  "AnnotatedGenotypes saved to Parquet" should "match the original when loaded again" in {
+    val fromFile = sc.loadAnnotatedGenotypes(vcf)
 
-    val fromFile = sc.loadVariantsWithSnpEffAnnotations(vcf)
+    fromFile.adamParquetSave(temp)
 
-    val fromParquet = sc.loadVariantsWithSnpEffAnnotations(temp)
+    val fromParquet = sc.loadAnnotatedGenotypes(temp)
 
-    val projected = (v: VariantContextWithSnpEffAnnotations) => (v.variant, v.position, v.snpEffAnnotations)
-
-    assert(fromFile.map(v => projected(v)).take(10) === fromParquet.map(v => projected(v)).take(10))
+    assert(fromFile.take(10) === fromParquet.take(10))
   }
 
   def deleteParquetFile() {
