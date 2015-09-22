@@ -143,7 +143,7 @@ object SnpEffAnnotationsParser extends Serializable {
     record
   }
 
-  def convert(broadVariantContext: BroadVariantContext, snpEffAnnotations: SnpEffAnnotations): SnpEffAnnotations = {
+  def fill(broadVariantContext: BroadVariantContext, snpEffAnnotations: SnpEffAnnotations): SnpEffAnnotations = {
     addDbSnpAnnotations(broadVariantContext, snpEffAnnotations)
 
     addClinvarAnnotations(broadVariantContext, snpEffAnnotations)
