@@ -1,5 +1,6 @@
 package org.tmoerman.adam.fx.snpeff.model
 
+import org.bdgenomics.formats.avro.{Genotype, Variant}
 import org.tmoerman.adam.fx.avro.{AnnotatedGenotype, AnnotatedVariant}
 
 /**
@@ -9,18 +10,14 @@ object RichAnnotated {
 
   import RichSnpEffAnnotations._
 
-  implicit def pimpAnnotatedVariant(annotatedVariant: AnnotatedVariant): RichAnnotated[AnnotatedVariant] =
-    RichAnnotated(annotatedVariant)
+  implicit def pimpAnnotatedVariant(annotatedVariant: AnnotatedVariant): RichAnnotatedVariant =
+    new RichAnnotatedVariant(annotatedVariant.getVariant, annotatedVariant.getAnnotations.asOption)
 
-  implicit def pimpAnnotatedGenotype(annotatedGenotype: AnnotatedGenotype): RichAnnotated[AnnotatedGenotype] =
-    RichAnnotated(annotatedGenotype)
-  
-  def apply(annotatedVariant: AnnotatedVariant): RichAnnotated[AnnotatedVariant] =
-    new RichAnnotated[AnnotatedVariant](annotatedVariant, annotatedVariant.getAnnotations.asOption)
-  
-  def apply(annotatedGenotype: AnnotatedGenotype): RichAnnotated[AnnotatedGenotype] =
-    new RichAnnotated[AnnotatedGenotype](annotatedGenotype, annotatedGenotype.getAnnotations.asOption)
+  implicit def pimpAnnotatedGenotype(annotatedGenotype: AnnotatedGenotype): RichAnnotatedGenotype =
+    new RichAnnotatedGenotype(annotatedGenotype.getGenotype, annotatedGenotype.getAnnotations.asOption)
   
 }
 
-case class RichAnnotated[A](inner: A, annotations: Option[RichSnpEffAnnotations]) {}
+case class RichAnnotatedVariant(variant: Variant, annotations: Option[RichSnpEffAnnotations]) {}
+
+case class RichAnnotatedGenotype(genotype: Genotype, annotations: Option[RichSnpEffAnnotations]) {}

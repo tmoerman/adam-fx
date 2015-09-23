@@ -7,14 +7,12 @@ import RichAnnotated._
 
 class AnnotatedVariantRDDFunctions(rdd: RDD[AnnotatedVariant]) extends Serializable {
 
-  def toRichAnnotatedVariants: RDD[RichAnnotated[AnnotatedVariant]] = rdd.map(pimpAnnotatedVariant)
+  def toRichAnnotatedVariants: RDD[RichAnnotatedVariant] = rdd.map(pimpAnnotatedVariant)
 
 }
 
 class AnnotatedGenotypeRDDFunctions(rdd: RDD[AnnotatedGenotype]) extends Serializable {
 
-  def toRichAnnotatedGenotypes: RDD[RichAnnotated[AnnotatedGenotype]] = rdd.map(pimpAnnotatedGenotype)
+  def toRichAnnotatedGenotypes: RDD[RichAnnotatedGenotype] = rdd.map(pimpAnnotatedGenotype)
 
 }
-
-
