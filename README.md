@@ -13,7 +13,7 @@ Artifacts are published to [Bintray](https://bintray.com/tmoerman/maven/adam-fx)
 ```sbt
 resolvers += "bintray-tmoerman" at "http://dl.bintray.com/tmoerman/maven"`
 
-libraryDependencies += "org.tmoerman" % "adam-fx_2.10" % "0.5.0"
+libraryDependencies += "org.tmoerman" % "adam-fx_2.10" % "0.5.1"
 ```
 
 ##### Spark Notebook
@@ -21,7 +21,7 @@ libraryDependencies += "org.tmoerman" % "adam-fx_2.10" % "0.5.0"
 ```
 :remote-repo bintray-tmoerman % default % http://dl.bintray.com/tmoerman/maven % maven
 
-:dp org.tmoerman % adam-fx_2.10 % 0.5.0
+:dp org.tmoerman % adam-fx_2.10 % 0.5.1
 ```
 
 ##### Zeppelin
@@ -31,7 +31,7 @@ libraryDependencies += "org.tmoerman" % "adam-fx_2.10" % "0.5.0"
 
 z.addRepo("bintray-tmoerman").url("http://dl.bintray.com/tmoerman/maven")
 
-z.load("org.tmoerman:adam-fx_2.10:0.5.0")
+z.load("org.tmoerman:adam-fx_2.10:0.5.1")
 ```
 
 ## Data model
