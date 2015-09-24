@@ -10,7 +10,7 @@ resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repos
 
 libraryDependencies += "org.apache.spark" % "spark-core_2.10" % "1.4.1" % "provided"
 
-libraryDependencies += "org.bdgenomics.adam" % "adam-core_2.10" % "0.17.+"
+libraryDependencies += "org.bdgenomics.adam" % "adam-core_2.10" % "0.17.+" exclude("org.apache.hadoop", "*")
 
 libraryDependencies += "org.bdgenomics.adam" % "adam-apis_2.10" % "0.17.+"
 
