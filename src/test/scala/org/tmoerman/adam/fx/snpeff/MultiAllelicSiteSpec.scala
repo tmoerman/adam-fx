@@ -2,7 +2,6 @@ package org.tmoerman.adam.fx.snpeff
 
 import SnpEffContext._
 import org.bdgenomics.adam.rdd.ADAMContext._
-import org.bdgenomics.formats.avro.Genotype
 
 /**
  * @author Thomas Moerman
@@ -52,5 +51,5 @@ class MultiAllelicSiteSpec extends BaseSparkContextSpec {
 
       .forall{ case (allele, alternate) => allele == alternate }
   }
-  
+
 }
