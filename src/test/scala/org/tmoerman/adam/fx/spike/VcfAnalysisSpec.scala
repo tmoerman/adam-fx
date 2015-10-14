@@ -158,7 +158,7 @@ object VcfAnalysisSpec extends BaseSparkContextSpec {
   val rnaTmp: RDD[AnnotatedGenotype] = sc.loadAnnotatedGenotypes(rnaFile).cache()
 
 
-  // ---
+  // 5. Calculate the Coverages
 
 
   val samplesFile =  wd + "/samples.txt"
@@ -188,7 +188,7 @@ object VcfAnalysisSpec extends BaseSparkContextSpec {
       .map{ case (uvkna, (it1, it2)) => (uvkna, (it1.headOption, it2.headOption))}
 
 
-  // ---
+  // 6. Join the annotated Genotypes with RPKM values
 
 
   def withMaxVariantCallErrorProbability(
@@ -206,7 +206,7 @@ object VcfAnalysisSpec extends BaseSparkContextSpec {
       .flatMap(keyedBySampleGeneKeyWxs)
       .leftOuterJoin(sampleGeneKeyToRpkm)
       .map(dropKey)
-      .map{ case tuple@(annotatedGenotype, _) => (uniqueVariantKey(annotatedGenotype), tuple) } // TODO two complected steps: adding a new key and collapsing the tuple
+      .map{ case tuple@(annotatedGenotype, _) => (uniqueVariantKey(annotatedGenotype), tuple) }
       .reduceByKey(withMaxVariantCallErrorProbability)
 
 
@@ -219,7 +219,7 @@ object VcfAnalysisSpec extends BaseSparkContextSpec {
       .reduceByKey(withMaxVariantCallErrorProbability)
 
 
-  // ---
+  // 7. Calculate sweep step factors
 
 
   val lnOf2 = math.log(2)
@@ -234,7 +234,7 @@ object VcfAnalysisSpec extends BaseSparkContextSpec {
   val rpkmStep =  math.floor(math.log(sampleGeneKeyToRpkm.map(dropKey).max) / lnOf2)
 
 
-  // ---
+  // 8. Default filter values
 
 
   val defaultReadDepth = 10
@@ -245,57 +245,88 @@ object VcfAnalysisSpec extends BaseSparkContextSpec {
   val nrSteps = 50
 
 
-  // ---
+  // 9. Calculate the coGroup
 
 
-  def allPassReadDepth(minReadDepth: Int)(coverages: Option[(Option[Coverage], Option[Coverage])]) =
-    coverages.exists {
-      case (wxsCoverage, rnaCoverage) =>
-        wxsCoverage.exists(_ >= minReadDepth) &&
-        rnaCoverage.exists(_ >= minReadDepth) }
+  val coGroupRaw =
+    wxsMap
+      .cogroup(rnaMap)
+      .map{ case (uniqueVariantKey, (wxsGenotypes, rnaGenotypes)) =>
+        (dropAlleles(uniqueVariantKey), (wxsGenotypes.headOption, rnaGenotypes.headOption)) }
+      .leftOuterJoin(coveragesCogroup)
+      .map(dropKey)
+      .cache()
 
-  def allPassDefaultReadDepth = allPassReadDepth(defaultReadDepth) _
+  // statistics
+  val coGroupEmptyCoverages =
+    coGroupRaw
+      .filter {case (_, coverages) => coverages.isEmpty}
+      .count()
+
+  // statistics
+  val coGroupWithCoverages =
+    coGroupRaw
+      .filter {case (_, coverages) => coverages.isDefined}
+      .count()
 
   val coGroup: RDD[(Option[Coverage], Option[AnnotatedGenotypeWithRPKM],
                     Option[Coverage], Option[AnnotatedGenotypeWithRPKM])] =
-    wxsMap.cogroup(rnaMap)
-          .map{ case (uniqueVariantKey, (wxsGenotypes, rnaGenotypes)) =>
-                  (dropAlleles(uniqueVariantKey), (wxsGenotypes.headOption, rnaGenotypes.headOption)) }
-          .leftOuterJoin(coveragesCogroup)
-          .map(dropKey)
+    coGroupRaw
 
-          // only consider entries with sufficient read depth TODO here?
-          //.filter{ case (_, coverages) => allPassDefaultReadDepth(coverages) }
+      .filter { case (_, coveragesOption) => coveragesOption.isDefined }
 
-          // destructure coverage values
-          .map{ case ((wxsGenotypeOption, rnaGenotypeOption), Some((wxsCoverage, rnaCoverage))) =>
-                  (wxsCoverage, wxsGenotypeOption, rnaCoverage, rnaGenotypeOption)
+      // merge the genotype and coverage data
+      .map{ case ((wxsGenotypeOption, rnaGenotypeOption), Some((wxsCoverage, rnaCoverage))) =>
+              (wxsCoverage, wxsGenotypeOption, rnaCoverage, rnaGenotypeOption)
 
-                case _ => throw new IllegalArgumentException("wtf") }
+            // this case is WEIRD -> TODO investigate
+//            case ((wxsGenotypeOption, rnaGenotypeOption), None) =>
+//              (None, wxsGenotypeOption, None, rnaGenotypeOption)
 
-          .cache()
+            case _ => throw new IllegalArgumentException("wtf") }
+
+      .cache()
 
 
-  val CONCORDANCE = "concordance"
-  val WXS_ONLY    = "wxsOnly"
-  val RNA_ONLY    = "rnaOnly"
+  val CONCORDANCE    = "WXS RNA concordance"
+  val WXS_UNIQUE     = "WXS unique"
+  val WXS_DISCORDANT = "WXS discordant"
+  val RNA_UNIQUE     = "RNA unique"
+  val RNA_DISCORDANT = "RNA discordant"
+  val WTF            = "WTF"
 
-  def toCategory(opt1: Option[Any], opt2: Option[Any]): Category = (opt1, opt2) match {
-    case (Some(_), Some(_)) => CONCORDANCE
-    case (Some(_), None   ) => WXS_ONLY
-    case (None,    Some(_)) => RNA_ONLY
-    case (None,    None   ) => throw new IllegalArgumentException("cannot both be None")
-  }
+  val CATEGORIES = Seq(CONCORDANCE, WXS_UNIQUE, WXS_DISCORDANT, RNA_UNIQUE, RNA_DISCORDANT)
+
+  def toCategory(minReadDepth: Coverage)
+                (wxsCoverageOption: Option[Coverage],
+                 wxsGenotypeOption: Option[AnnotatedGenotypeWithRPKM],
+                 rnaCoverageOption: Option[Coverage],
+                 rnaGenotypeOption: Option[AnnotatedGenotypeWithRPKM]): Category =
+
+    (wxsCoverageOption, wxsGenotypeOption, rnaCoverageOption, rnaGenotypeOption) match {
+
+      case (_                , Some(wxsGT), _                , Some(rnaGT)) => CONCORDANCE
+
+      case (_                , Some(wxsGT), None             , None       ) => WXS_UNIQUE
+      case (_                , Some(wxsGT), Some(rnaCoverage), None       ) => if (rnaCoverage >= minReadDepth)
+                                                                                 WXS_DISCORDANT else WXS_UNIQUE
+
+      case (None             , None       , _                , Some(rnaGT)) => RNA_UNIQUE
+      case (Some(wxsCoverage), None       , _                , Some(rnaGT)) => if (wxsCoverage >= minReadDepth)
+                                                                                 RNA_DISCORDANT else RNA_UNIQUE
+
+      case _ => WTF
+    }
 
 
   def passesThresholds(depth:           Double,
                        genotypeQuality: Double,
                        quality:         Double,
                        rpkmThreshold:   Double)
-                      (coverageOption: Option[Coverage],
-                       genotypeOption: Option[AnnotatedGenotypeWithRPKM]): Boolean = {
+                      (otherCoverageOption: Option[Coverage],
+                       genotypeOption:      Option[AnnotatedGenotypeWithRPKM]): Boolean = {
 
-    lazy val genotypePasses: Boolean =
+    lazy val genotypePassesSweepPredicates: Boolean =
       genotypeOption match {
         case Some((annotatedGenotype, rpkm)) =>
           val genotype = annotatedGenotype.getGenotype
@@ -304,34 +335,36 @@ object VcfAnalysisSpec extends BaseSparkContextSpec {
           genotype.getGenotypeQuality                                          >= genotypeQuality &&
           genotype.getVariantCallingAnnotations.getVariantCallErrorProbability >= quality         &&
           rpkm.exists(_ >= rpkmThreshold)
-        case _ => false
+        case _ => throw new IllegalArgumentException("should never happen")
       }
 
-    coverageOption.exists(_ >= depth) && genotypePasses
+    val coverageSatisfiesReadDepthIfExists = otherCoverageOption.map(_ >= depth).getOrElse(true) // automatically passes if None
+
+    coverageSatisfiesReadDepthIfExists && genotypePassesSweepPredicates
   }
 
   def toCategorySweepValues(sweepPredicates: Seq[SweepValuePredicate])
-                           (wxsCoverage:       Option[Coverage],
+                           (wxsCoverageOption: Option[Coverage],
                             wxsGenotypeOption: Option[AnnotatedGenotypeWithRPKM],
-                            rnaCoverage:       Option[Coverage],
+                            rnaCoverageOption: Option[Coverage],
                             rnaGenotypeOption: Option[AnnotatedGenotypeWithRPKM]): Seq[(Category, SweepValue)] = {
 
-    val category = toCategory(wxsGenotypeOption, rnaGenotypeOption)
+    val category = toCategory(defaultReadDepth) (wxsCoverageOption, wxsGenotypeOption, rnaCoverageOption, rnaGenotypeOption)
 
     val passedPredicates = category match {
-      case CONCORDANCE =>
-        sweepPredicates
-          .takeWhile { case (v, predicate) => predicate(wxsCoverage, wxsGenotypeOption) &&
-                                              predicate(rnaCoverage, rnaGenotypeOption) }
 
-      case WXS_ONLY =>
-        sweepPredicates.takeWhile { case (v, predicate) => predicate(wxsCoverage, wxsGenotypeOption) }
+      case CONCORDANCE    => sweepPredicates.takeWhile { case (v, predicate) => predicate(None, wxsGenotypeOption) &&
+                                                                                predicate(None, rnaGenotypeOption) }
 
+      case WXS_UNIQUE     => sweepPredicates.takeWhile { case (v, predicate) => predicate(None, wxsGenotypeOption) }
+      case WXS_DISCORDANT => sweepPredicates.takeWhile { case (v, predicate) => predicate(rnaCoverageOption, wxsGenotypeOption) }
 
-      case RNA_ONLY =>
-        sweepPredicates.takeWhile { case (v, predicate) => predicate(rnaCoverage, rnaGenotypeOption) }
+      case RNA_UNIQUE     => sweepPredicates.takeWhile { case (v, predicate) => predicate(None, rnaGenotypeOption) }
+      case RNA_DISCORDANT => sweepPredicates.takeWhile { case (v, predicate) => predicate(wxsCoverageOption, rnaGenotypeOption) }
+
+      case WTF => Nil
     }
-
+    
     passedPredicates.map { case (v, _) => (category, v) }
   }
 
@@ -367,20 +400,41 @@ object VcfAnalysisSpec extends BaseSparkContextSpec {
 
 
   def toZeroCounts(sweepValues: Seq[SweepValue]): Map[(Category, SweepValue), Count] = {
-    def f(x: SweepValue) = Seq(((CONCORDANCE, x), 0l),
-                               ((WXS_ONLY,    x), 0l),
-                               ((RNA_ONLY,    x), 0l))
+    def f2(x: SweepValue) = CATEGORIES.map(category => ((category, x), 0L))
     
-    sweepValues.flatMap(f).toMap
+    sweepValues.flatMap(f2).toMap
   }
 
-  val rpkmRange =
-    toZeroCounts(rpkmSweepValues) ++
-    coGroup
+  val rpkmRange: Map[(Category, SweepValue), Count] =
+    toZeroCounts(rpkmSweepValues) ++ // generate zero count placeholders
+    coGroup                          // overwrite with actual values
       .flatMap(tupled(toCategorySweepValues(rpkmSweepPredicates)))
       .countByValue()
       .toMap
-      .map { case ((cat, v), count) => CountRepr(cat, v, count)}
+
+
+  val qRange =
+    toZeroCounts(qualitySweepValues) ++
+    coGroup
+      .flatMap(tupled(toCategorySweepValues(qualitySweepPredicates)))
+      .countByValue()
+      .toMap
+
+
+  val dpRange =
+    toZeroCounts(readDepthSweepValues) ++
+    coGroup
+      .flatMap(tupled(toCategorySweepValues(readDepthSweepPredicates)))
+      .countByValue()
+      .toMap
+
+
+  val gqRange =
+    toZeroCounts(genotypeQualitySweepValues) ++
+    coGroup
+      .flatMap(tupled(toCategorySweepValues(genotypeQualitySweepPredicates)))
+      .countByValue()
+      .toMap
 
 
   // ---
