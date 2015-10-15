@@ -273,15 +273,14 @@ object VcfAnalysisSpec extends BaseSparkContextSpec {
                     Option[Coverage], Option[AnnotatedGenotypeWithRPKM])] =
     coGroupRaw
 
-      .filter { case (_, coveragesOption) => coveragesOption.isDefined }
+      //.filter { case (_, coveragesOption) => coveragesOption.isDefined }
 
       // merge the genotype and coverage data
       .map{ case ((wxsGenotypeOption, rnaGenotypeOption), Some((wxsCoverage, rnaCoverage))) =>
               (wxsCoverage, wxsGenotypeOption, rnaCoverage, rnaGenotypeOption)
 
-            // this case is WEIRD -> TODO investigate
-//            case ((wxsGenotypeOption, rnaGenotypeOption), None) =>
-//              (None, wxsGenotypeOption, None, rnaGenotypeOption)
+            case ((wxsGenotypeOption, rnaGenotypeOption), None) =>
+              (Some(0L), wxsGenotypeOption, Some(0L), rnaGenotypeOption)
 
             case _ => throw new IllegalArgumentException("wtf") }
 
