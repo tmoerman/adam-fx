@@ -20,6 +20,8 @@ libraryDependencies += "org.apache.avro" % "avro" % "1.7.6"
 
 libraryDependencies += "com.github.samtools" % "htsjdk" % "1.133"
 
+libraryDependencies += "org.scalaz" %% "scalaz-core" % "7.1.4"
+
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.4" % "test"
 
 libraryDependencies += "org.bdgenomics.utils" % "utils-misc_2.10" % "0.2.2" exclude("org.apache.spark", "*")
@@ -32,7 +34,7 @@ licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
 
 bintrayPackageLabels := Seq("scala", "adam", "genomics", "snpeff", "variants")
 
-pomExtra := (
+pomExtra :=
   <scm>
     <url>git@github.com:tmoerman/{name.value}.git</url>
     <connection>scm:git:git@github.com:tmoerman/{name.value}.git</connection>
@@ -44,7 +46,7 @@ pomExtra := (
       <url>https://github.com/tmoerman</url>
     </developer>
   </developers>
-  )
+
 
 // sbt-release properties
 

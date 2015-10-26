@@ -1,4 +1,4 @@
-package org.tmoerman.adam.fx.snpeff
+package org.tmoerman.adam.fx
 
 import org.apache.spark.{SparkConf, SparkContext}
 import org.scalatest.{FlatSpec, Matchers}

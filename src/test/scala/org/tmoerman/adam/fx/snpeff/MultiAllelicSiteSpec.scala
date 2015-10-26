@@ -2,6 +2,7 @@ package org.tmoerman.adam.fx.snpeff
 
 import SnpEffContext._
 import org.bdgenomics.adam.rdd.ADAMContext._
+import org.tmoerman.adam.fx.BaseSparkContextSpec
 
 /**
  * @author Thomas Moerman
