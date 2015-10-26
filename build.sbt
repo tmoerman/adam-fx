@@ -32,7 +32,7 @@ licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
 
 bintrayPackageLabels := Seq("scala", "adam", "genomics", "snpeff", "variants")
 
-pomExtra := (
+pomExtra :=
   <scm>
     <url>git@github.com:tmoerman/{name.value}.git</url>
     <connection>scm:git:git@github.com:tmoerman/{name.value}.git</connection>
@@ -44,7 +44,6 @@ pomExtra := (
       <url>https://github.com/tmoerman</url>
     </developer>
   </developers>
-  )
 
 // sbt-release properties
 
