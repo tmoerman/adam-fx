@@ -1,6 +1,7 @@
 package org.tmoerman.adam.fx.snpeff
 
 import SnpEffContext._
+import org.tmoerman.adam.fx.BaseSparkContextSpec
 
 class SnpEffContextSmokeTestsSpec extends BaseSparkContextSpec {
 
