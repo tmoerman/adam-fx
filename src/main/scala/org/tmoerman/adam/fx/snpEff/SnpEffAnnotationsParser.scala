@@ -31,12 +31,12 @@ object SnpEffAnnotationsParser extends Serializable {
 
   def multiIntParser(attr: Object): Object = attr match {
     case s: String        => splitAtPipe(s).map(parseInt).toList.asJava
-    case l: JList[String] => l.map(parseInt).asJava
+    case l: JList[String] => l.flatMap(splitAtPipe).map(parseInt).asJava
   }
 
   def multiStringParser(attr: Object): Object = attr match {
     case s: String        => splitAtPipe(s).toList.asJava
-    case l: JList[String] => l
+    case l: JList[String] => l.flatMap(splitAtPipe)
   }
 
   def parseRatio(s: String): Ratio = parseIntPair(s).map{ case (a, b) => new Ratio(a, b) }.orNull
