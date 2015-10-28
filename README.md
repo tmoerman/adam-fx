@@ -21,7 +21,7 @@ libraryDependencies += "org.tmoerman" %% "adam-fx" % "0.5.5"
 ```
 :remote-repo bintray-tmoerman % default % http://dl.bintray.com/tmoerman/maven % maven
 
-:dp org.tmoerman %% adam-fx % 0.5.5
+:dp org.tmoerman % adam-fx_2.10 % 0.5.5
 ```
 
 ##### Zeppelin
