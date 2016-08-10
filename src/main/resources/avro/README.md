@@ -1,0 +1,1 @@
+bdg.avdl copied from https://github.com/bigdatagenomics/bdg-formats/releases/tag/bdg-formats-0.7.0
