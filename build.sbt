@@ -6,17 +6,19 @@ homepage := Some(url(s"https://github.com/tmoerman/"+name.value))
 
 scalaVersion := "2.10.4"
 
+val adamVersion = "0.19.0"
+
 resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
 
-libraryDependencies += "org.apache.spark" % "spark-core_2.10" % "1.4.1" % "provided"
+libraryDependencies += "org.apache.spark" % "spark-core_2.10" % "1.6.+" % "provided"
 
-libraryDependencies += "org.bdgenomics.adam" % "adam-core_2.10" % "0.17.+" exclude("org.apache.hadoop", "*")
+libraryDependencies += "org.bdgenomics.adam" % "adam-core_2.10" % adamVersion exclude("org.apache.hadoop", "*")
 
-libraryDependencies += "org.bdgenomics.adam" % "adam-apis_2.10" % "0.17.+"
+libraryDependencies += "org.bdgenomics.adam" % "adam-apis_2.10" % adamVersion
 
-libraryDependencies += "org.bdgenomics.bdg-formats" % "bdg-formats" % "0.4.0"
+libraryDependencies += "org.bdgenomics.bdg-formats" % "bdg-formats" % "0.7.0"
 
-libraryDependencies += "org.apache.avro" % "avro" % "1.7.6"
+libraryDependencies += "org.apache.avro" % "avro" % "1.7.7"
 
 libraryDependencies += "com.github.samtools" % "htsjdk" % "1.133"
 

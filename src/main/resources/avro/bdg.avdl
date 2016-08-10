@@ -1,3 +1,21 @@
+/**
+ * Licensed to Big Data Genomics (BDG) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The BDG licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 @namespace("org.bdgenomics.formats.avro")
 protocol BDG {
 
@@ -12,7 +30,7 @@ record Contig {
    The name of this contig in the assembly (e.g., "chr1").
    */
   union { null, string } contigName = null;
-  
+
   /**
    The length of this contig.
    */
@@ -37,9 +55,43 @@ record Contig {
    The species that this assembly is for.
    */
   union { null, string } species = null;
+
+  /**
+   Optional 0-based index of this contig in a SAM file header that it was read
+   from; helps output SAMs/BAMs with headers in the same order as they started
+   with, before a conversion to ADAM.
+   */
+  union { null, int } referenceIndex = null;
+}
+
+record RecordGroupMetadata {
+  /**
+   Record group identifier.
+   */
+  union { null, string } name = null;
+
+  /**
+   Name of the sample that the record group is from.
+   */
+  union { null, string } sample = null;
+
+  union { null, string } sequencingCenter = null;
+  union { null, string } description = null;
+  union { null, long } runDateEpoch = null;
+  union { null, string } flowOrder = null;
+  union { null, string } keySequence = null;
+  union { null, string } library = null;
+  union { null, int } predictedMedianInsertSize = null;
+  union { null, string } platform = null;
+  union { null, string } platformUnit = null;
 }
 
 record AlignmentRecord {
+ 
+  /**
+   Read number within the array of fragment reads.
+   */
+  union { int, null } readInFragment = 0;
 
   /**
    The reference sequence details for the reference chromosome that
@@ -96,7 +148,7 @@ record AlignmentRecord {
    The Compact Ideosyncratic Gapped Alignment Report (CIGAR) string that
    describes the local alignment of this read. Contains {length, operator}
    pairs for all contiguous alignment operations. The operators include:
-   
+
    * M, ALIGNMENT_MATCH: An alignment match indicates that a sequence can be
      aligned to the reference without evidence of an INDEL. Unlike the
      SEQUENCE_MATCH and SEQUENCE_MISMATCH operators, the ALIGNMENT_MATCH
@@ -122,7 +174,7 @@ record AlignmentRecord {
    * =, SEQUENCE_MATCH: This operator indicates that this portion of the aligned
      sequence exactly matches the reference (e.g., all bases are equal to the
      reference bases).
-   * X, SEQUENCE_MISMATCH: This operator indicates that this portion of the 
+   * X, SEQUENCE_MISMATCH: This operator indicates that this portion of the
      aligned sequence is an alignment match to the reference, but a sequence
      mismatch (e.g., the bases are not equal to the reference). This can
      indicate a SNP or a read error.
@@ -157,8 +209,6 @@ record AlignmentRecord {
   union { boolean, null } properPair = false;
   union { boolean, null } readMapped = false;
   union { boolean, null } mateMapped = false;
-  union { boolean, null } firstOfPair = false;
-  union { boolean, null } secondOfPair = false;
   union { boolean, null } failedVendorQualityChecks = false;
   union { boolean, null } duplicateRead = false;
 
@@ -206,15 +256,6 @@ record AlignmentRecord {
 
   // record group identifer from sequencing run
   union { null, string } recordGroupName = null;
-  union { null, string } recordGroupSequencingCenter = null;
-  union { null, string } recordGroupDescription = null;
-  union { null, long } recordGroupRunDateEpoch = null;
-  union { null, string } recordGroupFlowOrder = null;
-  union { null, string } recordGroupKeySequence = null;
-  union { null, string } recordGroupLibrary = null;
-  union { null, int } recordGroupPredictedMedianInsertSize = null;
-  union { null, string } recordGroupPlatform = null;
-  union { null, string } recordGroupPlatformUnit = null;
   union { null, string } recordGroupSample = null;
 
   /**
@@ -232,10 +273,39 @@ record AlignmentRecord {
    mate is unaligned, or if the mate does not exist.
    */
   union { null, Contig } mateContig = null;
+  /**
+   The distance between this read and it's mate as inferred from alignment.
+   */
+  union { null, long } inferredInsertSize = null;
 }
 
 /**
- Enumeration for DNA/RNA bases. For codes outside of ACTGU, see the IUPAC 
+   The DNA fragment that is was targeted by the sequencer, resulting in
+   one or more reads.
+*/
+record Fragment {
+  /**
+   The name of this Fragment.
+   */
+  union { null, string } readName = null;
+
+  union { null, string } instrument = null;
+  union { null, string } runId = null; 
+
+  /**
+   Fragment's insert size derived from alignment, if the reads have been
+   aligned.
+   */
+  union { null, int } fragmentSize = null;
+
+  /**
+   The sequences read from this fragment.
+   */
+  array<AlignmentRecord> alignments = [];
+}
+
+/**
+ Enumeration for DNA/RNA bases. For codes outside of ACTGU, see the IUPAC
  resolution codes (http://www.bioinformatics.org/sms/iupac.html).
  */
 enum Base {
@@ -291,55 +361,14 @@ record NucleotideContigFragment {
    */
   union { null, long } fragmentStartPosition = null;
   /**
+   The length of this fragment.
+   */
+  union { null, long } fragmentLength = null;
+  /**
    The total count of fragments that this contig has been broken into. Can be
    null if the contig is not fragmented.
    */
   union { null, int } numberOfFragmentsInContig = null; // total number of fragments in contig
-}
-
-record Pileup {
-  /**
-   The reference contig that this pileup is mapped to.
-   */
-  union { null, Contig } contig = null;
-  /**
-   The 0-based mapping position of this pileup on the reference contig.
-   */
-  union { null, long } position = null;
-
-  /**
-   The range offset and range length fields are used when an insertion or
-   deletion has occured. The range length indicates the length of the event
-   and the range offset field indicates the location of this base in the
-   insertion or deletion event.
-   */
-  union { null, int } rangeOffset = null;
-  union { null, int } rangeLength = null;
-
-  /**
-   The base in the reference at this position.
-   */
-  union { null, Base } referenceBase = null;
-  /**
-   The read base at this position.
-   */
-  union { null, Base } readBase = null;
-
-  union { null, string } sampleId = null;
-
-  /**
-   The Phred scaled base quality at this position.
-   */
-  union { null, int } sangerQuality = null;
-  /**
-   The Phred scaled mapping quality of the read this pileup came from.
-   */
-  union { null, int } mapQuality = null;
-
-  /**
-   True if this base is on the reverse strand.
-   */
-  union { boolean, null } isReverseStrand = false;
 }
 
 /**
@@ -387,6 +416,12 @@ record StructuralVariant {
 
 record Variant {
   /**
+   The Phred scaled error probability of a variant, given the probabilities of
+   the variant in a population.
+   */
+  union { null, int } variantErrorProbability = null;
+
+  /**
    The reference contig that this variant exists on.
    */
   union { null, Contig } contig = null;
@@ -410,10 +445,16 @@ record Variant {
   union { null, string } alternateAllele = null;
   /**
    The structural variant at this site, if the alternate allele is a structural
-   variant. If the site is not a structural variant, this field should be left 
+   variant. If the site is not a structural variant, this field should be left
    null.
    */
   union { null, StructuralVariant } svAllele = null;
+
+  /**
+   A boolean describing whether this variant call is somatic; in this case, the
+   `referenceAllele` will have been observed in another sample.
+   */
+  union { boolean, null } isSomatic = false;
 }
 
 /**
@@ -457,54 +498,104 @@ enum GenotypeType {
 // sample but are computed based on the samples.  For instance,  MAPQ0 is an aggregate
 // stat computed from all samples and stored inside the INFO line.
 record VariantCallingAnnotations {
-  // QUAL: Phred-scaled probability of error for this variant call.
-  union { null, float }   variantCallErrorProbability = null;
 
   // FILTER: True or false implies that filters were applied and this variant PASSed or not.
   // While 'null' implies not filters were applied.
   union { null, boolean } variantIsPassing = null;
   array <string> variantFilters = [];
 
-  union { null, int }     readDepth = null;
+  /**
+   True if the reads covering this site were randomly downsampled to reduce coverage.
+   */
   union { null, boolean } downsampled = null;
-  union { null, float }   baseQRankSum = null;
-  union { null, float }   clippingRankSum = null;
-  union { null, float }   fisherStrandBiasPValue = null; // Phred-scaled.
-  union { null, float }   haplotypeScore = null;
-  union { null, float }   inbreedingCoefficient = null;
-  union { null, float }   rmsMapQ = null;
-  union { null, int }     mapq0Reads = null;
-  union { null, float }   mqRankSum = null;
-  union { null, float }   variantQualityByDepth = null;
-  union { null, float }   readPositionRankSum = null;
 
-  // VQSR: Log-odds ratio of being a true vs false variant under trained
-  // Gaussian mixture model.
-  union { null, float }   vqslod = null;
-  union { null, string }  culprit = null;
-  union { null, boolean } usedForNegativeTrainingSet = null;
-  union { null, boolean } usedForPositiveTrainingSet = null;
-}
+  /**
+   The Wilcoxon rank-sum test statistic of the base quality scores. The base quality
+   scores are separated by whether or not the base supports the reference or the
+   alternate allele.
+   */
+  union { null, float } baseQRankSum = null;
 
-record FlatGenotype {
-  union { null, string } referenceName = null;
-  union { null, long }   position = null;
-  union { null, string } referenceAllele = null;
-  array<string> alleles = [];
+  /**
+   The Fisher's exact test score for the strand bias of the reference and alternate
+   alleles. Stored as a phred scaled probability. Thus, if:
 
-  array<int> genotypeLikelihoods = [];
-  array<int> alleleDepths = [];
-  union { null, int } readDepth = null;
-  union { null, int } genotypeQuality = null;
+   * a = The number of positive strand reads covering the reference allele
+   * b = The number of positive strand reads covering the alternate allele
+   * c = The number of negative strand reads covering the reference allele
+   * d = The number of negative strand reads covering the alternate allele
 
-  union { null, string } sampleId = null;
+   This value takes the score:
+   
+   -10 log((a + b)! * (c + d)! * (a + c)! * (b + d)! / (a! b! c! d! n!)
+
+   Where n = a + b + c + d.
+   */
+  union { null, float } fisherStrandBiasPValue = null;
+
+  /**
+   The root mean square of the mapping qualities of reads covering this site.
+   */
+  union { null, float } rmsMapQ = null;
+  
+  /**
+   The number of reads at this site with mapping quality equal to 0.
+   */
+  union { null, int } mapq0Reads = null;
+
+  /**
+   The Wilcoxon rank-sum test statistic of the mapping quality scores. The mapping
+   quality scores are separated by whether or not the read supported the reference or the
+   alternate allele.
+   */
+  union { null, float } mqRankSum = null;
+
+  /**
+   The Wilcoxon rank-sum test statistic of the position of the base in the read at this site.
+   The positions are separated by whether or not the base supports the reference or the
+   alternate allele.
+   */
+  union { null, float } readPositionRankSum = null;
+
+  /**
+   The log scale prior probabilities of the various genotype states at this site.
+   The number of elements in this array should be equal to the ploidy at this
+   site, plus 1.
+   */
+  array<float> genotypePriors = [];
+
+  /**
+   The log scaled posterior probabilities of the various genotype states at this site,
+   in this sample. The number of elements in this array should be equal to the ploidy at
+   this site, plus 1.
+   */
+  array<float> genotypePosteriors = [];
+
+  /**
+    The log-odds ratio of being a true vs. false variant under a trained statistical model.
+    This model can be a multivariate Gaussian mixture, support vector machine, etc.
+    */
+  union { null, float } vqslod = null;
+
+  /**
+   If known, the feature that contributed the most to this variant being classified as
+   a false variant.
+   */
+  union { null, string } culprit = null;
+
+  /**
+   Additional feature info that doesn't fit into the standard fields above.
+
+   They are all encoded as (string, string) key-value pairs.
+   */
+  map<string> attributes = {};
 }
 
 record Genotype {
   /**
    The variant called at this site.
    */
-  Variant variant;
+  union { null, Variant } variant = null;
 
   /**
    Statistics collected at this site, if available.
@@ -540,14 +631,14 @@ record Genotype {
 
   /**
    The number of reads that show evidence for the reference at this site.
-   
+
    @see alternateReadDepth
    @see readDepth
-   */  
+   */
   union { null, int }     referenceReadDepth = null;
   /**
    The number of reads that show evidence for this alternate allele at this site.
-   
+
    @see referenceReadDepth
    @see readDepth
    */
@@ -555,7 +646,7 @@ record Genotype {
   /**
    The total number of reads at this site. May not equal (alternateReadDepth +
    referenceReadDepth) if this site shows evidence of multiple alternate alleles.
-   
+
    @see referenceReadDepth
    @see alternateReadDepth
 
@@ -577,22 +668,23 @@ record Genotype {
   union { null, int }     genotypeQuality = null;
 
   /**
-   Phred scaled likelihoods that we have n copies of this alternate allele.
+   Log scaled likelihoods that we have n copies of this alternate allele.
    The number of elements in this array should be equal to the ploidy at this
    site, plus 1.
-   
+
    @note Analogous to VCF's PL.
    */
-  array<int> genotypeLikelihoods = [];
+  array<float> genotypeLikelihoods = [];
   /**
-   Phred scaled likelihoods that we have n non-reference alleles at this site.
+   Log scaled likelihoods that we have n non-reference alleles at this site.
    The number of elements in this array should be equal to the ploidy at this
    site, plus 1.
    */
-  array<int> nonReferenceLikelihoods = [];
+  array<float> nonReferenceLikelihoods = [];
 
   /**
    Component statistics which comprise the Fisher's Exact Test to detect strand bias.
+   If populated, this element should have length 4.
    */
   array<int> strandBiasComponents = [];
 
@@ -689,59 +781,59 @@ record Feature {
    Preferably unique ID for this Feature object
    */
   union { null, string } featureId = null;
-  
+
   /**
    The type of feature this is (aka, "track").
-   
+
    Examples are "conservation", "centipede", "gene"
    */
   union { null, string } featureType = null;
-  
+
   /**
    The original source for this feature.
-   
+
    Path/filename/URL and/or the file type (e.g., BED, GFF, etc.)
    */
   union { null, string } source = null;
-  
+
   /**
    The contig this feature is located on
    */
   union { null, Contig } contig = null;
-  
+
   /**
    Start coordinate on the contig
    */
   union { null, long } start = null;
-  
+
   /**
    End coordinate on the contig
    */
   union { null, long } end = null;
-  
+
   /**
    Strand information for this feature
    */
   union { null, Strand } strand = null;
-  
+
   /**
    The value associated with this feature (if double)
    */
   union { null, double } value = null;
-  
+
   /**
    Cross-references into other databases.
    */
   array<Dbxref> dbxrefs = [];
-  
+
   /**
    List of parent featureIds, for implementing feature hierachies/graphs.
    */
   array<string> parentIds = [];
-  
+
   /**
    Additional feature info that doesn't fit into the standard fields above.
-   
+
    They are all encoded as (string, string) key-value pairs.
    */
   map<string> attributes = {};
